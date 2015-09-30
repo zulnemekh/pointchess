@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  text_data: MyText
+  pgn_type: MyString
+  insert_admin: MyString
+
+two:
+  title: MyString
+  text_data: MyText
+  pgn_type: MyString
+  insert_admin: MyString

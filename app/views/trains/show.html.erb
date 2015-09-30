@@ -1,0 +1,108 @@
+</<!DOCTYPE html>
+<html>
+  <head>
+  <title>TRAIN</title>
+
+    <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />    
+    <script src="/assets/js/chess.min.js"></script>
+	  <script src="/assets/js/myjs/mycustomengine.js"></script>
+	  <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+	  <script src="/assets/js/chessboard-0.3.0.js"></script>
+
+  </head>
+	<body>
+
+			<p id="notice"><%= notice %></p>
+
+			<p>
+			  <strong>Title:</strong>
+			  <%= @train.title %>
+			</p>
+
+			<p>
+			  <strong>Text data:</strong>
+			  <%= @train.text_data %>
+			</p>
+
+			<p>
+			  <strong>Pgn type:</strong>
+			  <%= @train.pgn_type %>
+			</p>
+
+			<p>
+			  <strong>Insert admin:</strong>
+			  <%= @train.insert_admin %>
+			</p>
+
+			<%= link_to 'Edit', edit_train_path(@train) %> |
+			<%= link_to 'Back', trains_path %>
+
+
+	<h1>TITAN HERE</h1>
+
+</body>
+
+	</style>
+	    
+	    <div id="board" style="width: 400px"></div>
+	    <p>Status: <span id="status"></span></p>
+	    <p>nextMove: <span id="nextmovie"></span></p>
+	    <p>FEN: <span id="fen"></span></p>
+	    <p>PGN: <span id="pgn1"></span></p>
+	    <div class="form-group">
+	            <label for="showScore" class="control-label col-xs-4 col-sm-6 col-md-4">Show score</label>
+	            <div class="col-xs-4 col-sm-6 col-md-4">
+	              <input type="checkbox" class="form-control" id="showScore" checked></input>
+	            </div>
+	          </div>
+	   
+	    
+	    <input type="button" id="start_btn" value="New Game" />
+	    <input type="button" id="undo_btn" value="Undo" />
+	    <input type="button" id="flip_btn" value="Flip" />
+	    <input type="button" id="flipcolor_btn" value="FlipColor" />
+	    
+	    <!-- <label id="color-white"><input type="radio" name="color">White</label>
+	    <label id="color-black"><input type="radio" name="color">Black</label>
+	     -->
+	    <script>
+	    //engine begin
+	      var fen = '<%= @train.pgn_type %>';
+	      // var game=myEngineGame(fen, {book: '/assets/book.bin'});;
+	      function newGame() {
+	          var game = myEngineGame(fen, {book: '/assets/book.bin'});
+	          my_game=game;
+	          var baseTime = parseFloat($('#timeBase').val()) * 60;
+	          var inc = parseFloat($('#timeInc').val());
+	          var skill = parseInt($('#skillLevel').val());
+	          
+	          game.setTime(baseTime, inc);
+	          game.setSkillLevel(skill);
+	          game.setPlayerColor($('#color-white').hasClass('active') ? 'white' : 'black');
+	          game.setDisplayScore($('#showScore').is(':checked'));
+	          game.start();
+	        }
+
+	        newGame();
+
+	            $('#undo_btn').on('click', function() {          
+	              my_game.undo();
+	            });
+	             $('#start_btn').on('click', function() {          
+	              newGame();
+	            });
+
+	             $('#flip_btn').on('click', function() {          
+	              my_game.flip();
+	            });
+
+	             $('#flipcolor_btn').on('click', function() {          
+	              my_game.flipColor();
+	              
+	            });
+
+	            
+
+	    </script>
+
+</html>

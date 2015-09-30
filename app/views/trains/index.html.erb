@@ -1,0 +1,33 @@
+<h1>Listing trains</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Text data</th>
+      <th>Pgn type</th>
+      <th>Insert admin</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trains.each do |train| %>
+      <tr>
+        <td><%= train.title %></td>
+        <td><%= train.text_data %></td>
+        <td><%= train.pgn_type %></td>
+        <td><%= train.insert_admin %></td>
+        <td><%= link_to 'Show', train %></td>
+        <td><%= link_to 'Edit', edit_train_path(train) %></td>
+        <td><%= link_to 'Destroy', train, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Train', new_train_path %>

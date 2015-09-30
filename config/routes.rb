@@ -1,4 +1,6 @@
 Reddit::Application.routes.draw do
+  resources :trains
+
   resources :comments
 
   devise_for :users
