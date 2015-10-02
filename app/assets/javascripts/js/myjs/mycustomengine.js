@@ -1,6 +1,6 @@
 function myEngineGame(fen, options) {
 
-var stockfish = new Worker('/assets/stockfish.js'); 
+var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js'); 
      
        var prex = 'position fen';
        var my1_pgn = fen;
@@ -21,7 +21,7 @@ var stockfish = new Worker('/assets/stockfish.js');
         var onDragStart = function(source, piece, position, orientation) {
           var re = playerColor == 'white' ? /^b/ : /^w/
           if (game.game_over() === true ||  piece.search(re) !== -1){
-
+            // console.log("dragStart:"+playerColor);
               // (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
               // (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
             return false;
@@ -46,7 +46,7 @@ var stockfish = new Worker('/assets/stockfish.js');
         // update the board position after the piece snap 
         // for castling, en passant, pawn promotion
         var onSnapEnd = function() {
-          board.position(game.fen());
+          // board.position(game.fen());
         };
 
         var updateStatus = function() {
@@ -83,21 +83,22 @@ var stockfish = new Worker('/assets/stockfish.js');
           if(engineStatus.search) {
                 status += '<br>Search: ' + engineStatus.search;
             } 
+            board.position(game.fen());
           statusEl.html(status);
-          fenEl.html(game.fen());
-          pgnEl.html(game.pgn());
+          // fenEl.html(game.fen());
+          // pgnEl.html(game.pgn());
         };
 
         var cfg = {
           draggable: true,
-          position: 'start',
+          position: game.fen(),
           onDragStart: onDragStart,
           onDrop: onDrop,
           onSnapEnd: onSnapEnd
         };
      
       board = ChessBoard('board', cfg);
-      board.position(game.fen());
+      // board.position(game.fen());
     	var engineStatus = {};
 
       stockfish.onmessage = function(event) { console.log(event.data);
@@ -133,24 +134,26 @@ var stockfish = new Worker('/assets/stockfish.js');
    
       updateStatus();
     function uciCmd() {  
-    	stockfish.postMessage(prex+" "+game.fen());
-      stockfish.postMessage('go depth 15');
+     stockfish.postMessage(prex+" "+game.fen());
+      stockfish.postMessage('go depth 11');
     }
+
+  
 
     function prepareMove(){
 
-        board.position(game.fen());
+         board.position(game.fen());
        
         var turn = game.turn() == 'w' ? 'white' : 'black';
         if(!game.game_over()) {
-        	    console.log("playerColor:"+turn); 
+        	   console.log("prepareMove:"+playerColor);
           	if(turn != playerColor) {
-          		  var moves = '';
-                var history = game.history({verbose: true});
-                for(var i = 0; i < history.length; ++i) {
-                    var move = history[i];
-                    moves += ' ' + move.from + move.to + (move.promotion ? move.promotion : '');
-                }
+          		  // var moves = '';
+              //   var history = game.history({verbose: true});
+              //   for(var i = 0; i < history.length; ++i) {
+              //       // var move = history[i];
+              //       // moves += ' ' + move.from + move.to + (move.promotion ? move.promotion : '');
+              //   }
               uciCmd();
 
           	}
@@ -193,10 +196,15 @@ var stockfish = new Worker('/assets/stockfish.js');
            
         },
         flipColor: function() {
-        var color = game.turn() == 'b' ? 'white' : 'black';
-            playerColor = color;
-            board.flip();
-            updateStatus();
+        // var color = game.turn() == 'b' ? 'white' : 'black';
+         console.log("FLIPCOLOR:"+game.turn());
+         playerColor = 'white';
+         prepareMove();
+        //     playerColor = color;
+          board.flip();
+           
+        //     updateStatus();
+        //     game.reset();
         },
         flip: function() {
             board.flip();

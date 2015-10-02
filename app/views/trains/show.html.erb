@@ -1,50 +1,28 @@
-</<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
+   
   <title>TRAIN</title>
 
-    <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />    
-    <script src="/assets/js/chess.min.js"></script>
-	  <script src="/assets/js/myjs/mycustomengine.js"></script>
-	  <script src="/assets/js/chessboard-0.3.0.min.js"></script>
-	  <script src="/assets/js/chessboard-0.3.0.js"></script>
+    <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+	  
 
   </head>
 	<body>
-
+ 
+  
+   	<div class="jumbotron">
+   		<center>
+   		
 			<p id="notice"><%= notice %></p>
-
 			<p>
 			  <strong>Title:</strong>
 			  <%= @train.title %>
 			</p>
+	<%= link_to 'Edit', edit_train_path(@train) %> |
+	<%= link_to 'Back', trains_path %>
 
-			<p>
-			  <strong>Text data:</strong>
-			  <%= @train.text_data %>
-			</p>
-
-			<p>
-			  <strong>Pgn type:</strong>
-			  <%= @train.pgn_type %>
-			</p>
-
-			<p>
-			  <strong>Insert admin:</strong>
-			  <%= @train.insert_admin %>
-			</p>
-
-			<%= link_to 'Edit', edit_train_path(@train) %> |
-			<%= link_to 'Back', trains_path %>
-
-
-	<h1>TITAN HERE</h1>
-
-</body>
-
-	</style>
-	    
-	    <div id="board" style="width: 400px"></div>
+	    <div id="board" class="jumbotron"></div>
 	    <p>Status: <span id="status"></span></p>
 	    <p>nextMove: <span id="nextmovie"></span></p>
 	    <p>FEN: <span id="fen"></span></p>
@@ -61,13 +39,22 @@
 	    <input type="button" id="undo_btn" value="Undo" />
 	    <input type="button" id="flip_btn" value="Flip" />
 	    <input type="button" id="flipcolor_btn" value="FlipColor" />
-	    
+
 	    <!-- <label id="color-white"><input type="radio" name="color">White</label>
 	    <label id="color-black"><input type="radio" name="color">Black</label>
 	     -->
-	    <script>
+
+   		<a class="btn btn-default">Watch Now!</a>
+   		<a class="btn btn-default">Tweet it!</a></center>
+   	</div>
+   
+    <script src="/assets/js/chess.min.js"></script>
+	  <script src="/assets/js/myjs/mycustomengine.js"></script>
+	  <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+	  <script type="text/javascript">
 	    //engine begin
 	      var fen = '<%= @train.pgn_type %>';
+	      var my_game;
 	      // var game=myEngineGame(fen, {book: '/assets/book.bin'});;
 	      function newGame() {
 	          var game = myEngineGame(fen, {book: '/assets/book.bin'});
@@ -82,8 +69,12 @@
 	          game.setDisplayScore($('#showScore').is(':checked'));
 	          game.start();
 	        }
+	        
+			    $("#document").ready(function() {
+			          newGame();
+			    });
 
-	        newGame();
+	     
 
 	            $('#undo_btn').on('click', function() {          
 	              my_game.undo();
@@ -104,5 +95,7 @@
 	            
 
 	    </script>
+	    
 
+</body>
 </html>
