@@ -1,5 +1,5 @@
 function myEngineGame(fen, options) {
-
+   options = options || {}
 var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js'); 
      
        var prex = 'position fen';
@@ -83,7 +83,8 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           if(engineStatus.search) {
                 status += '<br>Search: ' + engineStatus.search;
             } 
-            board.position(game.fen());
+          status += ' Book: ' + engineStatus.book;
+          board.position(game.fen());
           statusEl.html(status);
           // fenEl.html(game.fen());
           // pgnEl.html(game.pgn());
@@ -97,6 +98,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           onSnapEnd: onSnapEnd
         };
      
+ 
       board = ChessBoard('board', cfg);
       // board.position(game.fen());
     	var engineStatus = {};
@@ -138,7 +140,6 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
       stockfish.postMessage('go depth 11');
     }
 
-  
 
     function prepareMove(){
 

@@ -1,0 +1,197 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @problem.title %>
+</p>
+
+<p>
+  <strong>Pgn data:</strong>
+  <%= @problem.pgn_data %>
+</p>
+
+<p>
+  <strong>Fen:</strong>
+  <%= @problem.fen %>
+</p>
+
+<p>
+  <strong>Insert admin:</strong>
+  <%= @problem.insert_admin %>
+</p>
+
+<p>
+  <strong>Move:</strong>
+  <%= @problem.move %>
+</p>
+
+<%= link_to 'Edit', edit_problem_path(@problem) %> |
+<%= link_to 'Back', problems_path %>
+<link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+  <script src="/assets/js/chess.min.js"></script>
+    
+    <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+
+<div class="container">
+   <div>
+
+    <div class="col-md-6">
+      <div class="jumbotron">
+         <div id="board" style="width: 400px"></div>
+      </div>
+   </div>
+      <div class="col-md-6">
+         <h2 id="one">Tutorial One</h2>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+         Nam eu sem tempor, varius quam at, luctus dui. Mauris magna 
+         metus, dapibus nec turpis vel, semper malesuada ante. 
+         Vestibulum id metus ac nisl bibendum scelerisque non non 
+         purus. Suspendisse varius nibh non aliquet sagittis. In 
+         faucibus ligula.</p>
+         <p>Vestibulum quis quam ut magna consequat faucibus. 
+         arcu. Mauris vel congue dolor. Aliquam eget mi mi. Fusce 
+         quam tortor, commodo ac dui quis, bibendum viverra erat. 
+         Maecenas mattis lectus enim, quis tincidunt dui molestie 
+         euismod. Curabitur et diam tristique, accumsan nunc eu, 
+         hendrerit tellus.</p>
+         <hr>
+       
+       
+      </div>
+   </div>
+</div>
+<script type="text/javascript">
+   $(function () {
+      $('#myNav').affix({
+         offset: {
+            top: 60  
+         }
+      });
+   });
+
+//titan begin
+// var results = pgn.match(/\S+\s*/g);
+     var board,
+     fen= 'R4rk1/5bb1/1N1Qpq1p/3pn1p1/3N4/2P2P1P/P5P1/5B1K w - - 0 1',
+     mypgn='1. Nxd5 exd5 2. Rxf8+ Bxf8 3. Qxf6 1-0',
+     pgn = ['[Event "Casual Game"]',
+       '[Site "Berlin GER"]',
+       '[Date "1852.??.??"]',
+       '[EventDate "?"]',
+       '[Round "?"]',
+       '[Result "1-0"]',
+       '[White "Adolf Anderssen"]',
+       '[Black "Jean Dufresne"]',
+       '[ECO "C52"]',
+       '[WhiteElo "?"]',
+       '[BlackElo "?"]',
+       '[PlyCount "47"]',
+       '',
+       '1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.b4 Bxb4 5.c3 Ba5 6.d4 exd4 7.O-O',
+       'd3 8.Qb3 Qf6 9.e5 Qg6 10.Re1 Nge7 11.Ba3 b5 12.Qxb5 Rb8 13.Qa4',
+       'Bb6 14.Nbd2 Bb7 15.Ne4 Qf5 16.Bxd3 Qh5 17.Nf6+ gxf6 18.exf6',
+       'Rg8 19.Rad1 Qxf3 20.Rxe7+ Nxe7 21.Qxd7+ Kxd7 22.Bf5+ Ke8',
+       '23.Bd7+ Kf8 24.Bxe7# 1-0'];
+     
+    var results = mypgn.match(/\S+\s*/g);
+    var game = new Chess(fen);
+   // game.load_pgn(pgn.join('\n'));
+   var board,
+  // game = new Chess(fen),
+  statusEl = $('#status'),
+  fenEl = $('#fen'),
+  pgnEl = $('#pgn');
+
+// do not pick up pieces if the game is over
+// only pick up pieces for the side to move
+var onDragStart = function(source, piece, position, orientation) {
+  if (game.game_over() === true ||
+      (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+    return false;
+  }
+};
+
+var onDrop = function(source, target) {
+  // see if the move is legal
+  var move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  });
+
+  // illegal move
+  if (move === null) return 'snapback';
+  
+  window.setTimeout(possibleMove, 500);
+  // possibleMove();
+  updateStatus();
+
+  // 
+};
+
+// update the board position after the piece snap 
+// for castling, en passant, pawn promotion
+var onSnapEnd = function() {
+  board.position(game.fen());
+};
+
+var updateStatus = function() {
+  var status = '';
+
+  var moveColor = 'White';
+  if (game.turn() === 'b') {
+    moveColor = 'Black';
+  }
+
+  // checkmate?
+  if (game.in_checkmate() === true) {
+    status = 'Game over, ' + moveColor + ' is in checkmate.';
+  }
+
+  // draw?
+  else if (game.in_draw() === true) {
+    status = 'Game over, drawn position';
+  }
+
+  // game still on
+  else {
+    status = moveColor + ' to move';
+
+    // check?
+    if (game.in_check() === true) {
+      status += ', ' + moveColor + ' is in check';
+    }
+  }
+
+  statusEl.html(status);
+  fenEl.html(game.fen());
+  pgnEl.html(game.pgn());
+};
+
+var cfg = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+};
+board = ChessBoard('board', cfg);
+board.position(game.fen());
+updateStatus();
+
+var  possibleMove = function() {
+   console.log('possibleMove');
+   console.log(game.turn());
+   console.log(game.moves());
+    game.move('exd5');
+   // game.move('e5');
+   // game.move('f4');
+   // game.put({ type: game.QUEEN, color: game.BLACK }, 'a5')
+   board.position(game.fen());
+   
+};
+
+
+//titan end
+</script>

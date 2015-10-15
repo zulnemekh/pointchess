@@ -1,0 +1,37 @@
+<%= form_for(@problem) do |f| %>
+  <% if @problem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
+
+      <ul>
+      <% @problem.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :pgn_data %><br>
+    <%= f.text_area :pgn_data %>
+  </div>
+  <div class="field">
+    <%= f.label :fen %><br>
+    <%= f.text_field :fen %>
+  </div>
+  <div class="field">
+    <%= f.label :insert_admin %><br>
+    <%= f.text_field :insert_admin %>
+  </div>
+  <div class="field">
+    <%= f.label :move %><br>
+    <%= f.text_field :move %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,3 @@
+http://chessboardjs.com/
+https://github.com/jhlywa/chess.js
+http://exoticorn.github.io/stockfish-js/

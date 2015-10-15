@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150930140713) do
+ActiveRecord::Schema.define(version: 20151015080858) do
 
   create_table "comments", force: true do |t|
     t.integer  "link_id"
@@ -33,6 +33,26 @@ ActiveRecord::Schema.define(version: 20150930140713) do
   end
 
   add_index "links", ["user_id"], name: "index_links_on_user_id"
+
+  create_table "problems", force: true do |t|
+    t.string   "title"
+    t.text     "pgn_data"
+    t.string   "fen"
+    t.string   "insert_admin"
+    t.string   "move"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "promblems", force: true do |t|
+    t.string   "title"
+    t.text     "pgn_data"
+    t.string   "fen"
+    t.string   "insert_admin"
+    t.string   "move"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "trains", force: true do |t|
     t.string   "title"

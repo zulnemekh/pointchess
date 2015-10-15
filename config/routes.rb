@@ -1,4 +1,6 @@
 Reddit::Application.routes.draw do
+  resources :problems
+
   resources :trains
 
   resources :comments
@@ -13,6 +15,8 @@ Reddit::Application.routes.draw do
   end
 
   root to: "links#index"
+  get "bootstrap" => "trains#bootstrap", :as => "bootstrap"
+  get "pgnviewer" => "trains#pgnviewer", :as => "pgnviewer"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

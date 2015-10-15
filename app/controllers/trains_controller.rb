@@ -1,6 +1,5 @@
 class TrainsController < ApplicationController
   before_action :set_train, only: [:show, :edit, :update, :destroy]
-
   respond_to :html
 
   def index
@@ -8,6 +7,12 @@ class TrainsController < ApplicationController
     respond_with(@trains)
   end
 
+  def bootstrap
+    # render :layout => false
+  end
+  def pgnviewer
+    # render :layout => false
+  end
   def show
     respond_with(@train)
   end

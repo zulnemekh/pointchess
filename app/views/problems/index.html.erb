@@ -1,0 +1,35 @@
+<h1>Listing problems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Pgn data</th>
+      <th>Fen</th>
+      <th>Insert admin</th>
+      <th>Move</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @problems.each do |problem| %>
+      <tr>
+        <td><%= problem.title %></td>
+        <td><%= problem.pgn_data %></td>
+        <td><%= problem.fen %></td>
+        <td><%= problem.insert_admin %></td>
+        <td><%= problem.move %></td>
+        <td><%= link_to 'Show', problem %></td>
+        <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
+        <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Problem', new_problem_path %>
