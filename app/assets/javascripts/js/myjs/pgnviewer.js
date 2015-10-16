@@ -68,6 +68,23 @@ pgnData = [
     '25. f4 Rxe3 26. Kxe3 Nb6 27. b3 g6 28. Kf3 Kc7 29. Re1 Kd7 30. Re3 Na8 31.',
     'Kf2 Nc7 32. a4 Re8 33. Rh3 Re7 34. f5 Kd6 35. c3 b5 36. a5 b4 37. Re3 bxc3',
     '38. Rxe7 Kxe7 39. Ke3 gxf5 40. gxf5 Kd6 41. Kd3 Ke5 1/2-1/2'
+  ],
+  [
+  '[Event "Buetzow"]',
+  '[Site "?"]',
+  '[Date "1969.??.??"]',
+  '[Round "?"]',
+  '[White "Breustedt"]',
+  '[Black "Brameyer"]',
+  '[Result "1-0"]',
+  '[Annotator "T1H"]',
+  '[SetUp "1"]',
+  '[FEN "2q5/pR6/1p3pnk/1P4pp/8/5QPP/P2r2BK/8 w - - 0 1"]',
+  '[PlyCount "3"]',
+  '[EventDate "1969.??.??"]',
+  '[EventType "game"]',
+
+'1. Qxh5+ Kxh5 2. Rh7# 1-0'
   ]
 ];
 

@@ -10,6 +10,7 @@ pgnData = [
     '[White "Simon Ansell"]',
     '[Black "J Garcia-Ortega Mendez"]',
     '[ECO "B27"]',
+    '[FEN "2q5/pR6/1p3pnk/1P4pp/8/5QPP/P2r2BK/8 w - - 0 1"]',
     '[WhiteElo "2410"]',
     '[BlackElo "2223"]',
     '[PlyCount "29"]',
@@ -68,36 +69,91 @@ pgnData = [
     '25. f4 Rxe3 26. Kxe3 Nb6 27. b3 g6 28. Kf3 Kc7 29. Re1 Kd7 30. Re3 Na8 31.',
     'Kf2 Nc7 32. a4 Re8 33. Rh3 Re7 34. f5 Kd6 35. c3 b5 36. a5 b4 37. Re3 bxc3',
     '38. Rxe7 Kxe7 39. Ke3 gxf5 40. gxf5 Kd6 41. Kd3 Ke5 1/2-1/2'
+  ],
+  [
+  '[Event "Buetzow"]',
+  '[Site "?"]',
+  '[Date "1969.??.??"]',
+  '[Round "?"]',
+  '[White "Breustedt"]',
+  '[Black "Brameyer"]',
+  '[Result "1-0"]',
+  '[Annotator "T1H"]',
+  '[SetUp "1"]',
+  '[FEN "2q5/pR6/1p3pnk/1P4pp/8/5QPP/P2r2BK/8 w - - 0 1"]',
+  '[PlyCount "3"]',
+  '[EventDate "1969.??.??"]',
+  '[EventType "game"]',
+  '',
+  '1. Qxh5+ Kxh5 2. Rh7# 1-0'
+  ],
+   [
+    '[Event "Euro Club Cup"]',
+    '[Site "Kallithea GRE"]',
+    '[Date "2008.10.18"]',
+    '[EventDate "2008.10.17"]',
+    '[Round "2"]',
+    '[Result "1-0"]',
+    '[White "Simon Ansell"]',
+    '[Black "J Garcia-Ortega Mendez"]',
+    '[ECO "B27"]',
+    '[WhiteElo "2410"]',
+    '[BlackElo "2223"]',
+    '[PlyCount "29"]',
+    '',
+    '1. e5 c5 2. Nf3 g6 3. d4 cxd4 4. Qxd4 Nf6 5. e5 Nc6 6. Qa4 Nd5 7. Qe4 Ndb4 8. Bb5 Qa5 9. Nc3 d5 10. exd6 Bf5 11. d7+ Kd8 12. Qc4 Nxc2+ 13. Ke2 Nxa1 14. Rd1 Be6 15. Qxe6 1-0'
   ]
 ];
 
 //Write the game to the DOM
 function writeGameText(g) {
-
+  console.log("writeGameText:"+JSON.stringify(g));
+  
   //remove the header to get the moves
   var h = g.header();
-  var gameHeaderText = '<h4>' + h.White + ' (' + h.WhiteElo + ') - ' + h.Black + ' (' + h.BlackElo + ')</h4>';
-  gameHeaderText += '<h5>' + h.Event + ', ' + h.Site + ' ' + h.EventDate + '</h5>';
-  var pgn = g.pgn();
-  var gameMoves = pgn.replace(/\[(.*?)\]/gm, '').replace(h.Result, '').trim();
+  fen=h.FEN;
+  // var gameHeaderText = '<h4>' + h.White + ' (' + h.WhiteElo + ') - ' + h.Black + ' (' + h.BlackElo + ')</h4>';
+  // gameHeaderText += '<h5>' + h.Event + ', ' + h.Site + ' ' + h.EventDate + '' + h.EventDate + '' + h.FEN + '</h5>';
+  // var pgn = g.pgn();
+  // var gameMoves = pgn.replace(/\[(.*?)\]/gm, '').replace(h.Result, '').trim();
+  // console.log("pgn:"+pgn);
+  // //format the moves so each one is individually identified, so it can be highlighted
+  // moveArray = gameMoves.split(/([0-9]+\.\s)/).filter(function(n) {return n;});
+  // console.log("moveArray:"+JSON.stringify(moveArray));
+  // for (var i = 0, l = moveArray.length; i < l; ++i) {
+  //   var s = $.trim(moveArray[i]);
+  //   if (!/^[0-9]+\.$/.test(s)) { //move numbers
+  //     m = s.split(/\s+/);
+  //     for (var j = 0, ll = m.length; j < ll; ++j) {
+  //       m[j] = '<span class="gameMove' + (i + j - 1) + '"><a id="myLink" href="#" onclick="goToMove(' + (i + j - 1) + ');return false;">' + m[j] + '</a></span>';
+  //     }
+  //     s = m.join(' ');
+  //   }
+  //   moveArray[i] = s;
+  // }
+  // $("#game-data").html(gameHeaderText + '<div class="gameMoves">' + moveArray.join(' ') + ' <span class="gameResult">' + h.Result + '</span></div>');
 
-  //format the moves so each one is individually identified, so it can be highlighted
-  moveArray = gameMoves.split(/([0-9]+\.\s)/).filter(function(n) {return n;});
-  for (var i = 0, l = moveArray.length; i < l; ++i) {
-    var s = $.trim(moveArray[i]);
+}
+
+function my_pgn (mypgn) {
+  var h = g.header();
+  // fen=h.FEN;
+  console.log("fen:"+fen);
+  mymoveArray = mypgn.split(/([0-9]+\.\s)/).filter(function(n) {return n;});
+  for (var i = 0, l = mymoveArray.length; i < l; ++i) {
+    var s = $.trim(mymoveArray[i]);
     if (!/^[0-9]+\.$/.test(s)) { //move numbers
       m = s.split(/\s+/);
       for (var j = 0, ll = m.length; j < ll; ++j) {
+        solution.push(m[j]);
         m[j] = '<span class="gameMove' + (i + j - 1) + '"><a id="myLink" href="#" onclick="goToMove(' + (i + j - 1) + ');return false;">' + m[j] + '</a></span>';
       }
       s = m.join(' ');
     }
-    moveArray[i] = s;
+    mymoveArray[i] = s;
   }
-  $("#game-data").html(gameHeaderText + '<div class="gameMoves">' + moveArray.join(' ') + ' <span class="gameResult">' + h.Result + '</span></div>');
-
+  $("#game-data").html('ZUK' + '<div class="gameMoves">' + mymoveArray.join(' ') + ' <span class="gameResult">' +'' + '</span></div>');
 }
-
 //buttons
 $('#btnStart').on('click', function() {
   game.reset();
@@ -110,11 +166,18 @@ $('#btnPrevious').on('click', function() {
     currentPly--;
     board.position(game.fen());
   }
+  //  if (currentPly >= 0) {
+  //   game.undo();
+  //   currentPly--;
+  //   board.position(game.fen());
+  // }
 });
 $('#btnNext').on('click', function() {
-  if (currentPly < gameHistory.length - 1) {
+ 
+  if (currentPly < solution.length - 1) {
     currentPly++;
-    game.move(gameHistory[currentPly].san);
+    game.move(solution[currentPly]);
+    console.log(solution[currentPly]);
     board.position(game.fen());
   }
 });
@@ -185,10 +248,12 @@ $(document).ready(function(){
 //used for clickable moves in gametext
 //not used for buttons for efficiency
 function goToMove(ply) {
-  if (ply > gameHistory.length - 1) ply = gameHistory.length - 1;
-  game.reset();
+ 
+  if (ply > solution.length - 1) ply = solution.length - 1;
+  // game.reset();
+     console.log("goToMove:"+ply);
   for (var i = 0; i <= ply; i++) {
-    game.move(gameHistory[i].san);
+    game.move(solution[i]);
   }
   currentPly = i - 1;
   board.position(game.fen());
@@ -196,17 +261,23 @@ function goToMove(ply) {
 
 var onChange = function onChange() { //fires when the board position changes
   //highlight the current move
-  $("[class^='gameMove']").removeClass('highlight');
-  $('.gameMove' + currentPly).addClass('highlight');
+  // $("[class^='gameMove']").removeClass('highlight');
+  // $('.gameMove' + currentPly).addClass('highlight');
 }
 
 function loadGame(i) {
-  game = new Chess();
-  game.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
-  writeGameText(game);
-  gameHistory = game.history({verbose: true});
+  game1 = new Chess();
+  game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
+  writeGameText(game1);
+  
+  myresult=  '1. Qxh5+ Kxh5 2. Rh7# 1-0'
+  my_pgn(myresult);  
+  console.log("fen:"+fen);
+  game = new Chess(fen);
   goToMove(-1);
+ 
   currentGame = i;
+  
 }
 
 //start doing stuff
@@ -215,11 +286,15 @@ var board, //the chessboard
     games, //array of all loaded games
     gameHistory,
     currentPly,
-    currentGame;
+    currentGame,
+    mymoveArray,
+    fen,
+    solution=[];
 
 //only need the headers here, issue raised on github
 //read all the games to populate the select
 for (var i = 0; i < pgnData.length; i++) {
+  console.log("for:"+i);
   var g = new Chess();
   g.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
   var h = g.header();

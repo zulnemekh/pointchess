@@ -19,6 +19,15 @@ class ProblemsController < ApplicationController
 
   def edit
   end
+  
+  #pgn viewer-g ashiglan problem solver-g hih huudas
+  def fenpuzzle
+  
+  end
+  #problem solver-g hiisen huudas
+  def problems
+  
+  end
 
   def create
     @problem = Problem.new(problem_params)

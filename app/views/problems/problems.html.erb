@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="dcterms.created" content="Tue, 29 Oct 2013 23:53:06 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>chessboardjs + chess.js pgn viewer</title>
+    
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+   
+
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+  	<script src="/assets/js/chess.min.js"></script>
+    
+    <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>chessboardjs + chess.js pgn viewer</h1>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div id="board" style="width: 400px"></div>
+          <div id="board-buttons">
+            <button type="button" class="btn btn-default" id="btnStart"><i class="fa fa-fast-backward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnPrevious"><i class="fa fa-step-backward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnNext"><i class="fa fa-step-forward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnEnd"><i class="fa fa-fast-forward fa-lg"></i></button>
+          </div>
+        </div>
+        <div class="col-xs-8">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="gameSelect" class="col-xs-4 control-label">Select game:</label>
+              <div class="col-xs-8">
+                <select id="gameSelect" class="form-control input-sm" onchange="loadGame(this.value);return false;"></select>
+              </div>
+            </div>
+          </form>
+          <div id="game-data">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Keyboard Shortcuts</h4>
+          <dl class="dl-horizontal">
+            <dt>Next move:</dt><dd>Right arrow key</dd>
+            <dt>Previous move:</dt><dd>Left arrow key</dd>
+            <dt>End of game:</dt><dd>Ctrl + right arrow key</dd>
+            <dt>Start of game:</dt><dd>Ctrl + left arrow key</dd>
+            <dt>Next game:</dt><dd>Up arrow key</dd>
+            <dt>Previous game:</dt><dd>Down arrow key</dd>
+            <dt>First game:</dt><dd>Ctrl + up  arrow key</dd>
+            <dt>Last game:</dt><dd>Ctrl + down arrow key</dd>
+          </dl>
+        </div>
+      </div>
+
+  
+    </div>
+        
+
+    <script src="/assets/js/chess.min.js"></script>
+	  <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+		<script type="text/javascript">
+			   $(function () {
+			      $('#myNav').affix({
+			         offset: {
+			            top: 60  
+			         }
+			      });
+			   });
+
+			//titan begin
+			// var results = pgn.match(/\S+\s*/g);
+			     var board,
+			     fen= '8/2b4p/Rr2k1p1/4pp2/2K5/1P2N1PP/5P2/8 w - -',
+			     // pgn='1. Nf6+ gxf6 2. Bxf7# ',
+			     pgn = ['[Event "Casual Game"]',
+			       '[Site "Berlin GER"]',
+			       '[Date "1852.??.??"]',
+			       '[EventDate "?"]',
+			       '[Round "?"]',
+			       '[Result "1-0"]',
+			       '[White "Adolf Anderssen"]',
+			       '[Black "Jean Dufresne"]',
+			       '[ECO "C52"]',
+			       '[WhiteElo "?"]',
+			       '[BlackElo "?"]',
+			       '[PlyCount "47"]',
+			       '',
+			       '1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.b4 Bxb4 5.c3 Ba5 6.d4 exd4 7.O-O',
+			       'd3 8.Qb3 Qf6 9.e5 Qg6 10.Re1 Nge7 11.Ba3 b5 12.Qxb5 Rb8 13.Qa4',
+			       'Bb6 14.Nbd2 Bb7 15.Ne4 Qf5 16.Bxd3 Qh5 17.Nf6+ gxf6 18.exf6',
+			       'Rg8 19.Rad1 Qxf3 20.Rxe7+ Nxe7 21.Qxd7+ Kxd7 22.Bf5+ Ke8',
+			       '23.Bd7+ Kf8 24.Bxe7# 1-0'];
+			     
+			    var game = new Chess();
+			   game.load_pgn(pgn.join('\n'));
+			   var board,
+			  // game = new Chess(fen),
+			  statusEl = $('#status'),
+			  fenEl = $('#fen'),
+			  pgnEl = $('#pgn');
+
+			// do not pick up pieces if the game is over
+			// only pick up pieces for the side to move
+			var onDragStart = function(source, piece, position, orientation) {
+			  if (game.game_over() === true ||
+			      (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+			      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+			    return false;
+			  }
+			};
+
+			var onDrop = function(source, target) {
+			  // see if the move is legal
+			  var move = game.move({
+			    from: source,
+			    to: target,
+			    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+			  });
+
+			  // illegal move
+			  if (move === null) return 'snapback';
+
+			  updateStatus();
+			};
+
+			// update the board position after the piece snap 
+			// for castling, en passant, pawn promotion
+			var onSnapEnd = function() {
+			  board.position(game.fen());
+			};
+
+			var updateStatus = function() {
+			  var status = '';
+
+			  var moveColor = 'White';
+			  if (game.turn() === 'b') {
+			    moveColor = 'Black';
+			  }
+
+			  // checkmate?
+			  if (game.in_checkmate() === true) {
+			    status = 'Game over, ' + moveColor + ' is in checkmate.';
+			  }
+
+			  // draw?
+			  else if (game.in_draw() === true) {
+			    status = 'Game over, drawn position';
+			  }
+
+			  // game still on
+			  else {
+			    status = moveColor + ' to move';
+
+			    // check?
+			    if (game.in_check() === true) {
+			      status += ', ' + moveColor + ' is in check';
+			    }
+			  }
+
+			  statusEl.html(status);
+			  fenEl.html(game.fen());
+			  pgnEl.html(game.pgn());
+			};
+
+			var cfg = {
+			  draggable: true,
+			  position: 'start',
+			  onDragStart: onDragStart,
+			  onDrop: onDrop,
+			  onSnapEnd: onSnapEnd
+			};
+			board = ChessBoard('board', cfg);
+
+			updateStatus();
+
+			var  possibleMove = function() {
+			   console.log('possibleMove');
+			   console.log(game.turn());
+			   console.log(game.moves());
+			    game.move('Nf6+');
+			   // game.move('e5');
+			   // game.move('f4');
+			   // game.put({ type: game.QUEEN, color: game.BLACK }, 'a5')
+			   board.position(game.fen());
+			   var tt=game.get('a5');
+			   var t1=JSON.stringify(tt);
+			   console.log("piece:"+t1);
+			};
+			     // window.setTimeout(possibleMove, 500);
+
+			//titan end
+</script>
+  </body>
+</html>

@@ -28,9 +28,9 @@
 <%= link_to 'Edit', edit_problem_path(@problem) %> |
 <%= link_to 'Back', problems_path %>
 <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
-  <script src="/assets/js/chess.min.js"></script>
-    
-    <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+ <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+<script src="/assets/js/chess.min.js"></script>
+<script src="/assets/js/chessboard-0.3.0.min.js"></script>
 
 <div class="container">
    <div>
@@ -38,7 +38,18 @@
     <div class="col-md-6">
       <div class="jumbotron">
          <div id="board" style="width: 400px"></div>
+            <div id="board-buttons">
+            <button type="button" class="btn btn-default" id="btnStart"><i class="fa fa-fast-backward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnPrevious"><i class="fa fa-step-backward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnNext"><i class="fa fa-step-forward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnEnd"><i class="fa fa-fast-forward fa-lg"></i></button>
+          </div>
       </div>
+      <p>Status: <span id="status"></span></p>
+      <p>nextMove: <span id="nextmovie"></span></p>
+      <p>FEN: <span id="fen"></span></p>
+      <p>PGN: <span id="pgn1"></span></p>
+      
    </div>
       <div class="col-md-6">
          <h2 id="one">Tutorial One</h2>
