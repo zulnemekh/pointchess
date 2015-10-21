@@ -1,48 +1,6 @@
- pgnData = [
-  ['[Event "Casual Game"]',
-       '[Site "Berlin GER"]',
-       '[Date "1852.??.??"]',
-       '[EventDate "?"]',
-       '[Round "?"]',
-       '[Result "1-0"]',
-       '[White "Adolf Anderssen"]',
-       '[Black "Jean Dufresne"]',
-       '[ECO "C52"]',
-       '[FEN "2q5/pR6/1p3pnk/1P4pp/8/5QPP/P2r2BK/8 w - - 0 1"]',
-       '[FEM "1. Qxh5+ Kxh5 2. Rh7# 1-0"]',
-       '[WhiteElo "?"]',
-       '[BlackElo "?"]',
-       '[PlyCount "47"]',
-       '',
-       '1.e4 e5 2.Nf3 Nc6 3.Bc4 Bc5 4.b4 Bxb4 5.c3 Ba5 6.d4 exd4 7.O-O',
-       'd3 8.Qb3 Qf6 9.e5 Qg6 10.Re1 Nge7 11.Ba3 b5 12.Qxb5 Rb8 13.Qa4',
-       'Bb6 14.Nbd2 Bb7 15.Ne4 Qf5 16.Bxd3 Qh5 17.Nf6+ gxf6 18.exf6',
-       'Rg8 19.Rad1 Qxf3 20.Rxe7+ Nxe7 21.Qxd7+ Kxd7 22.Bf5+ Ke8',
-       '23.Bd7+ Kf8 24.Bxe7# 1-0'
-       ],
-	[
-    '[Event "Euro Club Cup"]',
-    '[Site "Kallithea GRE"]',
-    '[Date "2008.10.18"]',
-    '[EventDate "2008.10.17"]',
-    '[Round "2"]',
-    '[Result "1-0"]',
-    '[White "Simon Ansell"]',
-    '[Black "J Garcia-Ortega Mendez"]',
-    '[ECO "B27"]',
-    '[FEN "R4rk1/5bb1/1N1Qpq1p/3pn1p1/3N4/2P2P1P/P5P1/5B1K w - - 0 1"]',
-    '[FEM "1. Nxd5 exd5 2. Rxf8+ Bxf8 3. Qxf6 1-0"]',
-    '[WhiteElo "2410"]',
-    '[BlackElo "2223"]',
-    '[PlyCount "29"]',
-    '',
-    '1. e4 c5 2. Nf3 g6 3. d4 cxd4 4. Qxd4 Nf6 5. e5 Nc6 6. Qa4 Nd5 7. Qe4 Ndb4 8. Bb5 Qa5 9. Nc3 d5 10. exd6 Bf5 11. d7+ Kd8 12. Qc4 Nxc2+ 13. Ke2 Nxa1 14. Rd1 Be6 15. Qxe6 1-0'
-  ]
- ];
-
-
    //start doing stuff
-var board, //the chessboard
+var pgnData,
+    board, //the chessboard
     game, //the current  game
     currentPly,
     currentGame,
@@ -51,17 +9,17 @@ var board, //the chessboard
     fen;
     
     // console.log("pgnData1:"+pgnData1);
-    pgnData=pgnData1;
+    pgnData=mate2;
     //read all the games to populate the select
 for (var i = 0; i < pgnData.length; i++) {
-  console.log("for:"+i);
   var g = new Chess();
   g.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
   var h = g.header();
   $('#gameSelect')
      .append($('<option></option>')
      .attr('value', i)
-     .text(h.White + ' - ' + h.Black + ', ' + h.Event + ' ' + h.Site + ' ' + h.Date));
+     .text(h.INFO + ' - ' + h.TYPE));
+     // .text(h.White + ' - ' + h.Black + ', ' + h.Event + ' ' + h.Site + ' ' + h.Date));
 }
 
   statusEl = $('#status'),
@@ -101,7 +59,7 @@ var onDrop = function(source, target) {
 	  if (lastMove!=solution[currentPly]) {  
 	  	alert("Wrong move!");
 	  }
-	  if (solution[currentPly+1]=='1-0') {
+	  if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1') {
  			alert("DONE!");
 	  }
   }
@@ -148,6 +106,7 @@ var updateStatus = function() {
 
   statusEl.html(status);
   fenEl.html(game.fen());
+  console.log("pgn:"+game.pgn());
   pgnEl.html(game.pgn());
 };
 
@@ -179,9 +138,9 @@ var  possibleMove = function() {
 function getFenFromPgnData(g) {
   var h = g.header();
   fen=h.FEN;
-  currentGameSolution=h.FEM;
+  currentGameSolution=h.FES;
   console.log("oFEN:"+fen);
-  console.log("oFEN:"+currentGameSolution);
+  console.log("oFES:"+currentGameSolution);
  }
 //bodlognii hariu boloh pgn file-g nuudel nuudeleer n zadalaad solutiond hiine
 //mon 
@@ -203,6 +162,14 @@ function pgnMoveStringToArray(currentGameSolution) {
   }
   $("#game-data").html('<div class="gameMoves">' + mymoveArray.join(' ') + ' <span class="gameResult">' +'' + '</span></div>');
 }
+function solutionParsing() {
+    for (var i = 0; i < solution.length; i++) {
+      var n=solution[i].indexOf("...");
+        if (n!=-1) { //n -1 ylgaatai uyd tuhain utga substring oldson gesen ug
+          if (solution[i].substring(n-1, n)=='1') {currentPly++;}
+        }
+    }
+}
 
 function goToMove(ply) {
  
@@ -211,6 +178,7 @@ function goToMove(ply) {
     game.move(solution[i]);
   }
   currentPly = i - 1;
+  console.log("currentPly:"+currentPly);
   board.position(game.fen());
 }
 
@@ -219,15 +187,32 @@ function loadGame(i) {
   game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
   getFenFromPgnData(game1);
 	solution.length=0;
-  pgnMoveStringToArray(currentGameSolution);  
+  
   game = new Chess(fen);
   goToMove(-1);
+  pgnMoveStringToArray(currentGameSolution); 
+   if (game.turn() === 'b') {
+    solutionParsing();
+    if (board.orientation()=="white") {
+      board.flip();
+    }
+    
+    console.log("solution"+JSON.stringify(solution));
+  }
+
+
   updateStatus();
   currentGame = i;
   
 }
 
 //buttons
+$('#btnNew').on('click', function() {
+  loadGame(currentGame+1);
+});
+$('#btnRetry').on('click', function() {
+  loadGame(currentGame);
+});
 $('#btnStart').on('click', function() {
   game.reset();
   currentPly = -1;
