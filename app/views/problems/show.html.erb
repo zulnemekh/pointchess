@@ -1,43 +1,29 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @problem.title %>
-</p>
-
-<p>
-  <strong>Pgn data:</strong>
-  <%= @problem.pgn_data %>
-</p>
-
-<p>
-  <strong>Fen:</strong>
-  <%= @problem.fen %>
-</p>
-
-<p>
-  <strong>Insert admin:</strong>
-  <%= @problem.insert_admin %>
-</p>
-
-<p>
-  <strong>Move:</strong>
-  <%= @problem.move %>
-</p>
-
-<%= link_to 'Edit', edit_problem_path(@problem) %> |
-<%= link_to 'Back', problems_path %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    
+  </title>
+</head>
+<body>
 <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
 <script src="/assets/js/chess.min.js"></script>
 <script src="/assets/js/chessboard-0.3.0.min.js"></script>
 
-<div class="container">
-   <div>
 
-    <div class="col-md-5">
-      <div class="jumbotron">
-         <div id="board" style="width: 400px"></div>
+<div class="container-full">
+  <h1>Hello World!</h1>
+  <p>Resize the browser window to see the effect.</p>      
+  <div class="row">
+  <div class="col-md-6"> <div id="board"></div> 
+</div>
+
+<!-- 
+    <div class="col-sm-6" style="background-color:lavender;">
+        <div id="board" ></div>
+             <div class="jumbotron">
+       
             <div id="board-buttons">
             <button type="button" class="btn btn-default" id="btnStart"><i class="fa fa-fast-backward fa-lg"></i></button>
             <button type="button" class="btn btn-default" id="btnPrevious"><i class="fa fa-step-backward fa-lg"></i></button>
@@ -48,16 +34,18 @@
           <button id="btnRetry" type="button" class="btn btn-warning">Retry</span></button>
           <button id="btnNew" type="button" class="btn btn-warning">New</span></button>
           </div>
-          
+           <p>Status: <span id="status"></span></p>
+            <p>nextMove: <span id="nextmovie"></span></p>
+          <p>FEN: <span id="fen"></span></p>
+            <p>PGN: <span id="pgn"></span></p>
+     
       </div>
-      <p>Status: <span id="status"></span></p>
-      <p>nextMove: <span id="nextmovie"></span></p>
-      <p>FEN: <span id="fen"></span></p>
-      <p>PGN: <span id="pgn"></span></p>
+     
       
-   </div>
-      <div class="col-md-7">
-       <div class="row">
+    </div>
+ -->
+    <div class="col-md-6" style="background-color:lavenderblush;">
+     <div class="row">
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <label for="gameSelect" class="col-xs-4 control-label">Select game:</label>
@@ -66,12 +54,53 @@
               </div>
             </div>
           </form>
-          <div id="game-data">
-          </div>
-      </div>    
+          
+          <!-- default -->
+          <div>
+        <p id="notice"><%= notice %></p>
+            <p>
+              <strong>Title:</strong>
+              <%= @problem.title %>
+            </p>
+
+            <p>
+              <strong>Pgn data:</strong>
+              <%= @problem.pgn_data %>
+            </p>
+
+            <p>
+              <strong>Fen:</strong>
+              <%= @problem.fen %>
+            </p>
+
+            <p>
+              <strong>Insert admin:</strong>
+              <%= @problem.insert_admin %>
+            </p>
+
+            <p>
+              <strong>Move:</strong>
+              <%= @problem.move %>
+            </p>
+
+            <%= link_to 'Edit', edit_problem_path(@problem) %> |
+            <%= link_to 'Back', problems_path %>
       </div>
-   </div>
+
+          <!-- dafualt end -->
+      </div>    
+    </div>
+  </div>
 </div>
+
+  
+
+  
 <script src="/assets/js/myjs/pgnData.js"></script>
-<script src="/assets/js/myjs/mate2.js"></script>
+<script src="/assets/js/myjs/mate2a.js"></script>
 <script src="/assets/js/myjs/problemsolve1019.js"></script>
+
+</body>
+</html>
+
+

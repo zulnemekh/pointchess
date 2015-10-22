@@ -9,7 +9,12 @@ var pgnData,
     fen;
     
     // console.log("pgnData1:"+pgnData1);
-    pgnData=mate2;
+    pgnData=mate2a;
+
+    var alertSuccess = document.getElementById('alertSuccess');
+    var alertFail = document.getElementById('alertFail')
+    alertSuccess.setAttribute('class', 'hidden');
+    alertFail.setAttribute('class', 'hidden');
     //read all the games to populate the select
 for (var i = 0; i < pgnData.length; i++) {
   var g = new Chess();
@@ -57,10 +62,12 @@ var onDrop = function(source, target) {
 	  //history-s awsan suuliin nuudel solution dotor bga suuliin 
 	  //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
 	  if (lastMove!=solution[currentPly]) {  
-	  	alert("Wrong move!");
+	  	alertFail.setAttribute('class', 'alert alert-danger visible');
 	  }
-	  if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1') {
- 			alert("DONE!");
+    var moveLast=solution[currentPly].indexOf("#");
+	  if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
+        alertSuccess.setAttribute('class', 'alert alert-success visible');
+ 			// $('#alertSuccess').show();
 	  }
   }
   window.setTimeout(possibleMove, 500);
@@ -207,10 +214,16 @@ function loadGame(i) {
 }
 
 //buttons
+// $(window).resize(board.resize);
+// $(window).resize(board.resize)
 $('#btnNew').on('click', function() {
+    alertSuccess.setAttribute('class', 'hidden');
+    alertFail.setAttribute('class', 'hidden');
   loadGame(currentGame+1);
 });
 $('#btnRetry').on('click', function() {
+    alertSuccess.setAttribute('class', 'hidden');
+    alertFail.setAttribute('class', 'hidden');
   loadGame(currentGame);
 });
 $('#btnStart').on('click', function() {
