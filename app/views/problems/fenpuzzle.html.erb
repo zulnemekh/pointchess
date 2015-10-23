@@ -14,7 +14,7 @@
 
 <div class="container-full">
   <div class="row">
-  <div class="col-md-6" >
+  <div class="col-md-5" >
   <div id="board"></div>
 
 </div>
@@ -34,7 +34,7 @@
       
     </div>
  -->
-    <div class="col-md-6" style="background-color:lavenderblush;">
+    <div class="col-md-7" style="background-color:lavenderblush;">
      <div class="row">
           <form class="form-horizontal" role="form">
             <div class="form-group">
@@ -50,13 +50,18 @@
             <button type="button" class="btn btn-default" id="btnStart"><i class="fa fa-fast-backward fa-lg"></i></button>
             <button type="button" class="btn btn-default" id="btnPrevious"><i class="fa fa-step-backward fa-lg"></i></button>
             <button type="button" class="btn btn-default" id="btnNext"><i class="fa fa-step-forward fa-lg"></i></button>
-            <button type="button" class="btn btn-default" id="btnEnd"><i class="fa fa-fast-forward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnNexPuzzle"><i class="fa fa-fast-forward fa-lg"></i></button>
           </div>
           <div>
           <button id="btnRetry" type="button" class="btn btn-warning">Retry</span></button>
           <button id="btnNew" type="button" class="btn btn-warning">New</span></button>
           </div>
-          
+             <p>Status: <span id="status"></span></p>
+             <p>PuzzleNumber: <span id="currentPuzzle"></span></p>
+             <p>nextMove: <span id="nextmovie"></span></p>
+             <p>FEN: <span id="fen"></span></p>
+             <p>PGN: <span id="pgn"></span></p>
+     
           <div id="alertSuccess" class="alert alert-success" role="alert">Well done! You successfully solve this problem.</div>
           <div id="alertFail" class="alert alert-danger" role="alert">Wrong move! try again.</div>
           <!-- default -->
