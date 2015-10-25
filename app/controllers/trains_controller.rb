@@ -7,7 +7,7 @@ class TrainsController < ApplicationController
     respond_with(@trains)
   end
 
-  def bootstrap
+  def computerplay
     # render :layout => false
   end
   def pgnviewer

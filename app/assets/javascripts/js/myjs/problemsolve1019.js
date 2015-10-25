@@ -10,11 +10,13 @@ var pgnData,
     
     // console.log("pgnData1:"+pgnData1);
     pgnData=mate2a;
+    console.log("allPuzzle"+pgnData.length);
 
     var alertSuccess = document.getElementById('alertSuccess');
     var alertFail = document.getElementById('alertFail')
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
+
     //read all the games to populate the select
 for (var i = 0; i < pgnData.length; i++) {
   var g = new Chess();
@@ -30,6 +32,7 @@ for (var i = 0; i < pgnData.length; i++) {
   statusEl = $('#status'),
   fenEl = $('#fen'),
   pgnEl = $('#pgn');
+  currentPuzzleEl = $('#currentPuzzle');
 
 // do not pick up pieces if the game is over
 // only pick up pieces for the side to move
@@ -53,22 +56,20 @@ var onDrop = function(source, target) {
   if (move === null) return 'snapback';
   
   currentPly++;
-  console.log("gameHistory:"+game.history());
-  console.log("dropMove:"+solution[currentPly]);
   //buruu nuusen esehiig shalgah
   hist=game.history();
   if (hist.length>0) {
-	  lastMove = hist[hist.length - 1];
-	  //history-s awsan suuliin nuudel solution dotor bga suuliin 
-	  //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
-	  if (lastMove!=solution[currentPly]) {  
-	  	alertFail.setAttribute('class', 'alert alert-danger visible');
-	  }
+    lastMove = hist[hist.length - 1];
+    //history-s awsan suuliin nuudel solution dotor bga suuliin 
+    //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
+    if (lastMove!=solution[currentPly]) {  
+      alertFail.setAttribute('class', 'alert alert-danger visible');
+    }
     var moveLast=solution[currentPly].indexOf("#");
-	  if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
+    if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
         alertSuccess.setAttribute('class', 'alert alert-success visible');
- 			// $('#alertSuccess').show();
-	  }
+      // $('#alertSuccess').show();
+    }
   }
   window.setTimeout(possibleMove, 500);
   // possibleMove();
@@ -113,8 +114,8 @@ var updateStatus = function() {
 
   statusEl.html(status);
   fenEl.html(game.fen());
-  console.log("pgn:"+game.pgn());
   pgnEl.html(game.pgn());
+  currentPuzzleEl.html(""+currentGame+"/"+pgnData.length);
 };
 
 var cfg = {
@@ -193,18 +194,17 @@ function loadGame(i) {
   game1 = new Chess();
   game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
   getFenFromPgnData(game1);
-	solution.length=0;
+  solution.length=0;
   
   game = new Chess(fen);
   goToMove(-1);
   pgnMoveStringToArray(currentGameSolution); 
    if (game.turn() === 'b') {
     solutionParsing();
-    if (board.orientation()=="white") {
-      board.flip();
-    }
-    
-    console.log("solution"+JSON.stringify(solution));
+    if (board.orientation()=="white") board.flip();
+      
+  } else {  
+    if (board.orientation()=="black") board.flip();
   }
 
 
@@ -217,9 +217,12 @@ function loadGame(i) {
 // $(window).resize(board.resize);
 // $(window).resize(board.resize)
 $('#btnNew').on('click', function() {
+  min=0;
+  max=pgnData.length;
+  currentGame=Math.floor(Math.random() * (max - min + 1)) + min;
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
-  loadGame(currentGame+1);
+  loadGame(currentGame);
 });
 $('#btnRetry').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
@@ -248,17 +251,16 @@ $('#btnNext').on('click', function() {
     board.position(game.fen());
   }
 });
-$('#btnEnd').on('click', function() {
-  while (currentPly < gameHistory.length - 1) {
-    currentPly++;
-    game.move(gameHistory[currentPly].san);
-  }
-  board.position(game.fen());
+$('#btnNexPuzzle').on('click', function() {
+    alertSuccess.setAttribute('class', 'hidden');
+    alertFail.setAttribute('class', 'hidden');
+    if (currentGame < pgnData.length) loadGame(currentGame+1);
 });
 
 
 //problemsolve end
 
-	//load the first game
-	loadGame(1);
+  //load the first game
+  currentGame=0;
+  loadGame(currentGame);
 //titan end

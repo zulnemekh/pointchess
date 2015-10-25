@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   
+  <title>TRAIN</title>
+
+    <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+    
+
+  </head>
+  <body>
+ 
+
+<div class="container-full">
+  <div class="row">
+    <div class="col-md-6" >
+    <div id="board"></div>
+    </div> 
+     
+    <div class="col-md-6" style="background-color:lavenderblush;">
+    <div class="row">
+    <div class="jumbotron">
+      <center>
+      
+          <p>Status: <span id="status"></span></p>
+          <p>nextMove: <span id="nextmovie"></span></p>
+          <p>FEN: <span id="fen"></span></p>
+          <p>PGN: <span id="pgn1"></span></p>
+            <div class="form-group">
+                  <label for="showScore" class="control-label col-xs-4 col-sm-6 col-md-4">Show score</label>
+                  <div class="col-xs-4 col-sm-6 col-md-4">
+                    <input type="checkbox" class="form-control" id="showScore" checked></input>
+                  </div>
+                </div>
+     
+      
+          <input type="button" id="start_btn" value="New Game" />
+          <input type="button" id="undo_btn" value="Undo" />
+          <input type="button" id="flip_btn" value="Flip" />
+          <input type="button" id="flipcolor_btn" value="FlipColor" />
+          <a class="btn btn-default">Watch Now!</a>
+          <a class="btn btn-default">Tweet it!</a>
+          </center>
+      </div>  <!-- jumbotron div -->
+    </div>  <!-- row div -->
+   </div>    <!-- <div class="col-md-6" -->
+  </div> <!-- row div -->
+</div> <!-- container-full -->
+
+  
+   
+    <script src="/assets/js/chess.min.js"></script>
+    <script src="/assets/js/myjs/mycustomengine.js"></script>
+    <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+    <script type="text/javascript">
+      //engine begin
+        
+        var my_game;
+        // var game=myEngineGame(fen, {book: '/assets/book.bin'});;
+        function newGame() {
+            var game = myEngineGame(fen, {book: '/assets/book.bin'});
+            my_game=game;
+            var baseTime = parseFloat($('#timeBase').val()) * 60;
+            var inc = parseFloat($('#timeInc').val());
+            var skill = parseInt($('#skillLevel').val());
+            
+            game.setTime(baseTime, inc);
+            game.setSkillLevel(skill);
+            game.setPlayerColor($('#color-white').hasClass('active') ? 'white' : 'black');
+            game.setDisplayScore($('#showScore').is(':checked'));
+            game.start();
+          }
+          
+          $("#document").ready(function() {
+                newGame();
+          });
+
+       
+
+              $('#undo_btn').on('click', function() {          
+                my_game.undo();
+              });
+               $('#start_btn').on('click', function() {          
+                newGame();
+              });
+
+               $('#flip_btn').on('click', function() {          
+                my_game.flip();
+              });
+
+               $('#flipcolor_btn').on('click', function() {          
+                my_game.flipColor();
+                
+              });
+
+              
+
+      </script>
+      
+
+</body>
+</html>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <%= stylesheet_link_tag    'application', media: 'all' %>    
     <%= csrf_meta_tags %>
-    
+    <%= favicon_link_tag '/assets/img/favicon.png' %>
   <meta charset="utf-8">
 </head>
 <body>
@@ -28,8 +28,8 @@
           <!-- <a class="navbar-brand" href="#">Project name</a> -->
         </div>
         <div id="navbar" class="navbar-collapse collapse" >
-          <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
+          <ul class="nav navbar-nav">             
+                <li><%= link_to 'Play', trains_computerplay_path %></li>
                 <li><%= link_to 'Problems', problems_path %></li>
                 <li><%= link_to 'Puzzle', problems_fenpuzzle_path %></li>
               </ul>
