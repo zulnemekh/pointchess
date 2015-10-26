@@ -8,7 +8,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
        var time = { wtime: 300000, btime: 300000, winc: 2000, binc: 2000 };
        
        var board,  
-          game = new Chess(my1_pgn),
+          game = new Chess(),
           statusEl = $('#status'),
           fenEl = $('#fen'),
           pgnEl = $('#pgn1');
@@ -98,7 +98,28 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           onSnapEnd: onSnapEnd
         };
      
+    //book
+     if(options.book) {
+      console.log("bookOption");
+        var bookRequest = new XMLHttpRequest();
+        bookRequest.open('GET', options.book, true);
+        bookRequest.responseType = "arraybuffer";
+        bookRequest.onload = function(event) {
+            if(bookRequest.status == 200) {
+                stockfish.postMessage({book: bookRequest.response});
+                engineStatus.book = 'ready.';
+                updateStatus();
+            } else {
+                engineStatus.book = 'failed!';
+                updateStatus();
+            }
+        };
+        bookRequest.send(null);
+    } else {
+        engineStatus.book = 'none';
+    }
  
+      //board
       board = ChessBoard('board', cfg);
       // board.position(game.fen());
     	var engineStatus = {};

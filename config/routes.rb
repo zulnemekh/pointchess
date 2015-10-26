@@ -15,7 +15,7 @@ Reddit::Application.routes.draw do
   end
 
   root to: "links#index"
-  get "bootstrap" => "trains#bootstrap", :as => "trains_bootstrap"
+  get "play" => "trains#computerplay", :as => "trains_computerplay"
   get "pgnviewer" => "trains#pgnviewer", :as => "trains_pgnviewer"
   get "fenpuzzle" => "problems#fenpuzzle", :as => "problems_fenpuzzle"
   get "fenproblems" => "problems#problems", :as => "problems_fenproflems"

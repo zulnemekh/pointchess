@@ -59,17 +59,17 @@ var onDrop = function(source, target) {
   //buruu nuusen esehiig shalgah
   hist=game.history();
   if (hist.length>0) {
-	  lastMove = hist[hist.length - 1];
-	  //history-s awsan suuliin nuudel solution dotor bga suuliin 
-	  //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
-	  if (lastMove!=solution[currentPly]) {  
-	  	alertFail.setAttribute('class', 'alert alert-danger visible');
-	  }
+    lastMove = hist[hist.length - 1];
+    //history-s awsan suuliin nuudel solution dotor bga suuliin 
+    //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
+    if (lastMove!=solution[currentPly]) {  
+      alertFail.setAttribute('class', 'alert alert-danger visible');
+    }
     var moveLast=solution[currentPly].indexOf("#");
-	  if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
+    if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
         alertSuccess.setAttribute('class', 'alert alert-success visible');
- 			// $('#alertSuccess').show();
-	  }
+      // $('#alertSuccess').show();
+    }
   }
   window.setTimeout(possibleMove, 500);
   // possibleMove();
@@ -194,7 +194,7 @@ function loadGame(i) {
   game1 = new Chess();
   game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
   getFenFromPgnData(game1);
-	solution.length=0;
+  solution.length=0;
   
   game = new Chess(fen);
   goToMove(-1);
@@ -258,9 +258,8 @@ $('#btnNexPuzzle').on('click', function() {
 });
 
 
-//problemsolve end
-
-	//load the first game
+  //problemsolve end
+  //load the first game
   currentGame=0;
-	loadGame(currentGame);
-//titan end
+  loadGame(currentGame);
+ //titan end
