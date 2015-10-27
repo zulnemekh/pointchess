@@ -16,31 +16,51 @@
     <div class="col-md-6" >
     <div id="board"></div>
     </div> 
-     
-    <div class="col-md-6" style="background-color:lavenderblush;">
-    <div class="row">
+  <!-- titan row begin -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create Game</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <img id="newwhite" data-dismiss="modal" class="kingChoice" data-toggle="tooltip" title="" data-container=".tooltip-a" src="/assets/img/chessimg/white.svg" alt="Smiley face" width="42" height="42">
+              <img id="newrandom" data-dismiss="modal" class="kingChoice" data-toggle="tooltip" title="" data-container=".tooltip-a" src="/assets/img/chessimg/randomcolor.svg" alt="Smiley face" width="42" height="42">
+              <img id="newblack" data-dismiss="modal" class="kingChoice" data-toggle="tooltip" title="" data-container=".tooltip-a" src="/assets/img/chessimg/black.svg" alt="Smiley face" width="42" height="42">
+              <div class="form-group">
+                <label for="message-text" class="control-label">Message:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- titan row end -->
     <div class="jumbotron">
-      <center>
-      
+
           <p>Status: <span id="status"></span></p>
           <p>nextMove: <span id="nextmovie"></span></p>
           <p>FEN: <span id="fen"></span></p>
           <p>PGN: <span id="pgn1"></span></p>
-            <div class="form-group">
-                  <label for="showScore" class="control-label col-xs-4 col-sm-6 col-md-4">Show score</label>
-                  <div class="col-xs-4 col-sm-6 col-md-4">
-                    <input type="checkbox" class="form-control" id="showScore" checked></input>
-                  </div>
-                </div>
-     
-      
-          <input type="button" id="start_btn" value="New Game" />
-          <input type="button" id="undo_btn" value="Undo" />
-          <input type="button" id="flip_btn" value="Flip" />
-          <input type="button" id="flipcolor_btn" value="FlipColor" />
-          <a class="btn btn-default">Watch Now!</a>
-          <a class="btn btn-default">Tweet it!</a>
-          </center>
+         
+    <button type="button" id="start_btn" class="btn btn-primary">New Game</button>
+    <button type="button" id="undo_btn" class="btn btn-primary">Undo</button>
+    <button type="button" id="flip_btn" class="btn btn-primary">Flip</button>
+    <button type="button" id="flipcolor_btn" class="btn btn-primary">FlipColor</button>
+   
       </div>  <!-- jumbotron div -->
     </div>  <!-- row div -->
    </div>    <!-- <div class="col-md-6" -->
@@ -53,9 +73,26 @@
     <script src="/assets/js/myjs/mycustomengine.js"></script>
     <script src="/assets/js/chessboard-0.3.0.min.js"></script>
     <script type="text/javascript">
+      $("#document").ready(function() {
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+          })
+
+       
+
+        });
+    </script>
+    <script type="text/javascript">
       //engine begin
         
         var my_game;
+        var currentUserColor;
         // var game=myEngineGame(fen, {book: '/assets/book.bin'});;
         function newGame() {
             var game = myEngineGame(fen, {book: '/assets/book.bin'});
@@ -72,6 +109,18 @@
           }
           
           $("#document").ready(function() {
+            currentUserColor='white';
+              $('#newwhite').click(function(event) {
+              currentUserColor='white';
+             });
+             $('#newrandom').click(function(event) {
+               tt=Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+               tt ? currentUserColor='white' : currentUserColor='black';
+             });
+             $('#newblack').click(function(event) {
+              currentUserColor='black';
+             });
+
                 newGame();
           });
 
@@ -80,11 +129,12 @@
               $('#undo_btn').on('click', function() {          
                 my_game.undo();
               });
-               $('#start_btn').on('click', function() {          
+               $('#start_btn').on('click', function() {  
                 newGame();
               });
 
-               $('#flip_btn').on('click', function() {          
+               $('#flip_btn').on('click', function() {   
+                console.log(currentUserColor);             
                 my_game.flip();
               });
 

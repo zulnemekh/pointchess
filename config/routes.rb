@@ -19,6 +19,7 @@ Reddit::Application.routes.draw do
   get "pgnviewer" => "trains#pgnviewer", :as => "trains_pgnviewer"
   get "fenpuzzle" => "problems#fenpuzzle", :as => "problems_fenpuzzle"
   get "fenproblems" => "problems#problems", :as => "problems_fenproflems"
+  get "bootstrap" => "trains#bootstrap", :as => "trains_bootstrap"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
