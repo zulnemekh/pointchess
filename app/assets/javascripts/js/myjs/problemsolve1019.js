@@ -191,6 +191,7 @@ function goToMove(ply) {
 }
 
 function loadGame(i) {
+  board.clear();
   game1 = new Chess();
   game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
   getFenFromPgnData(game1);

@@ -11,11 +11,20 @@
     <%= csrf_meta_tags %>
     <%= favicon_link_tag '/assets/img/favicon.png' %>
   <meta charset="utf-8">
+
+  <!-- #428bca -->
+   <style type="text/css">
+     .navbar {
+    background-color: #428bca;
+    border-color: #428bca;
+    text-color: #F0F7FA;
+}
+
+   </style>
 </head>
 <body>
 
-    
-<nav class="navbar navbar-static-top navbar-inverse">
+<nav class="navbar navbar-static-top navbar-inverse">    
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -51,7 +60,8 @@
     </nav>
 
  
-    <div class="navbar navbar-default navbar-fixed-bottom">
+
+    <div class="navbar navbar-default navbar-fixed-bottom hide">
       <div class="container">
         <p class="navbar-text pull-left">Site Build By Titan Chess Agency</p>
         <a class="navbar-button btn-danger btn pull-right">Subscribe on YouTube</a>
@@ -67,7 +77,12 @@
         <%= yield %>
       </div>
  
-
+      <footer class="blog-footer">
+      <p>Blog template built for <a href="http://titan-chess.com">Site build by Zulaa</a> by <a href="https://twitter.com/zulnemeh">@zulaa</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
     </div>
 </body>
 </html>

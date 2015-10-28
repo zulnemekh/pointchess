@@ -5,8 +5,58 @@
   <title>TRAIN</title>
 
     <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
-    
-
+    <style type="text/css">
+        #owl-demo .item{
+          background: #42bdc2;
+          padding: 30px 0px;
+          margin: 5px;
+          color: #FFF;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+          text-align: center;
+      }
+      .btn-default:hover,
+      .btn-default:active, 
+      .btn-default:focus{
+        color: #ffffff;
+        background-color: #428bff;
+        border-color: #357ebd;
+      }
+      .thumbnail:hover,
+      .thumbnail:focus {
+        color: #ffffff;
+        background-color: #428bff;
+        border-color: #357ebd;
+      }
+       #canvas-holder1 {
+        width: 300px;
+        margin: 20px auto;
+    }
+    #canvas-holder2 {
+        width: 50%;
+        margin: 20px 25%;
+    }
+    #chartjs-tooltip {
+        opacity: 1;
+        position: absolute;
+        background: rgba(0, 0, 0, .7);
+        color: white;
+        padding: 3px;
+        border-radius: 3px;
+        -webkit-transition: all .1s ease;
+        transition: all .1s ease;
+        pointer-events: none;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+    }
+    .chartjs-tooltip-key{
+      display:inline-block;
+      width:10px;
+      height:10px;
+    }
+      
+  </style>
   </head>
   <body>
  
@@ -24,22 +74,55 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+            <h4 class="modal-title" id="exampleModalLabel">Create Game</h4>
           </div>
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="recipient-name" class="control-label">Recipient:</label>
-                <input type="text" class="form-control" id="recipient-name">
+                <div class="row">
+                  <div class="col-sm-2">                  
+                  </div>
+                  <div class="col-sm-8">
+                  <center>
+                     <div class="btn-group" role="group" aria-label="First group">
+                      <button type="button" class="btn btn-default">1</button>
+                      <button type="button" class="btn btn-default">2</button>
+                      <button type="button" class="btn btn-default">3</button>
+                      <button type="button" class="btn btn-default">4</button>
+                      <button type="button" class="btn btn-default">5</button>
+                      <button type="button" class="btn btn-default">6</button>
+                      <button type="button" class="btn btn-default">7</button>
+                      <button type="button" class="btn btn-default">8</button>
+                    </div>
+                    </center>
+                  </div>
+                  <div class="col-sm-2">                 
+                  </div>
+                </div>
               </div>
-              <img id="newwhite" data-dismiss="modal" class="kingChoice" data-toggle="tooltip" title="" data-container=".tooltip-a" src="/assets/img/chessimg/white.svg" alt="Smiley face" width="42" height="42">
-              <img id="newrandom" data-dismiss="modal" class="kingChoice" data-toggle="tooltip" title="" data-container=".tooltip-a" src="/assets/img/chessimg/randomcolor.svg" alt="Smiley face" width="42" height="42">
-              <img id="newblack" data-dismiss="modal" class="kingChoice" data-toggle="tooltip" title="" data-container=".tooltip-a" src="/assets/img/chessimg/black.svg" alt="Smiley face" width="42" height="42">
-              <div class="form-group">
-                <label for="message-text" class="control-label">Message:</label>
-                <textarea class="form-control" id="message-text"></textarea>
-              </div>
-            </form>
+         
+      
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+              <a href="#" id="newwhite" class="thumbnail" data-dismiss="modal">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="/assets/img/chessimg/white.svg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+              </a>
+
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <a href="#" id="newrandom" class="thumbnail" data-dismiss="modal">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="/assets/img/chessimg/randomcolor.svg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <a href="#" id="newblack" class="thumbnail" data-dismiss="modal">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="/assets/img/chessimg/black.svg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+              </a>
+            </div>
+            </center>
+        </div>  <!-- class="row" div end -->
+
+          </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -49,7 +132,6 @@
       </div>
     </div>
   <!-- titan row end -->
-    <div class="jumbotron">
 
           <p>Status: <span id="status"></span></p>
           <p>nextMove: <span id="nextmovie"></span></p>
@@ -60,8 +142,11 @@
     <button type="button" id="undo_btn" class="btn btn-primary">Undo</button>
     <button type="button" id="flip_btn" class="btn btn-primary">Flip</button>
     <button type="button" id="flipcolor_btn" class="btn btn-primary">FlipColor</button>
-   
-      </div>  <!-- jumbotron div -->
+       <div class="row">
+          <div id="canvas-holder2">
+              <canvas id="chart2" width="450" height="600" />
+          </div>
+       </div>
     </div>  <!-- row div -->
    </div>    <!-- <div class="col-md-6" -->
   </div> <!-- row div -->
@@ -72,27 +157,20 @@
     <script src="/assets/js/chess.min.js"></script>
     <script src="/assets/js/myjs/mycustomengine.js"></script>
     <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+    <script src="/assets/js/chart/chart.js"></script>
+    <script src="/assets/js/chart/scorechart.js"></script>
     <script type="text/javascript">
       $("#document").ready(function() {
-        $('#exampleModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('whatever') // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-            modal.find('.modal-title').text('New message to ' + recipient)
-            modal.find('.modal-body input').val(recipient)
-          })
-
-       
-
-        });
+        
+           
+      });
     </script>
     <script type="text/javascript">
       //engine begin
         
         var my_game;
-        var currentUserColor;
+        var currentUserColor='white';
+        var level = 5;
         // var game=myEngineGame(fen, {book: '/assets/book.bin'});;
         function newGame() {
             var game = myEngineGame(fen, {book: '/assets/book.bin'});
@@ -103,25 +181,39 @@
             
             game.setTime(baseTime, inc);
             game.setSkillLevel(skill);
-            game.setPlayerColor($('#color-white').hasClass('active') ? 'white' : 'black');
+            game.setPlayerColor(currentUserColor);
             game.setDisplayScore($('#showScore').is(':checked'));
             game.start();
           }
           
           $("#document").ready(function() {
-            currentUserColor='white';
               $('#newwhite').click(function(event) {
               currentUserColor='white';
+              newGame();
              });
              $('#newrandom').click(function(event) {
                tt=Math.floor(Math.random() * (1 - 0 + 1)) + 0;
                tt ? currentUserColor='white' : currentUserColor='black';
+               newGame();
              });
              $('#newblack').click(function(event) {
               currentUserColor='black';
+              newGame();
              });
 
-                newGame();
+              // modal dotorh tohirgoo
+             $('.btn-group > button.btn').click();
+
+              $(".btn-group > button.btn").on("click", function(){
+                  level = +this.innerHTML;
+                $(".btn-group > button.btn").each(function(index, element) {
+                  $(element).removeClass('active');
+                });
+                $(this).addClass('btn-default:active');
+              });
+
+              //modal end
+              newGame();  
           });
 
        

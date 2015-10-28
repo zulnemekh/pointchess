@@ -5,6 +5,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
        var prex = 'position fen';
        var my1_pgn = fen;
        var my2_pgn = prex + " " + my1_pgn;
+       var allscores = [];
        var time = { wtime: 300000, btime: 300000, winc: 2000, binc: 2000 };
        
        var board,  
@@ -79,6 +80,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
  					
  					if(engineStatus.score) {
                 status += '<br>Score: ' + engineStatus.score;
+
             }
           if(engineStatus.search) {
                 status += '<br>Search: ' + engineStatus.search;
@@ -157,6 +159,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
    
       updateStatus();
     function uciCmd() {  
+
      stockfish.postMessage(prex+" "+game.fen());
       // stockfish.postMessage('go depth 11');
       stockfish.postMessage('go movetime 2000');
@@ -164,23 +167,15 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
 
 
     function prepareMove(){
-
-         board.position(game.fen());
-       
+    allscores.push(engineStatus.score);
+    console.log(""+JSON.stringify(allscores));
+        board.position(game.fen());
         var turn = game.turn() == 'w' ? 'white' : 'black';
-        if(!game.game_over()) {
-        	   console.log("prepareMove:"+playerColor);
-          	if(turn != playerColor) {
-          		  // var moves = '';
-              //   var history = game.history({verbose: true});
-              //   for(var i = 0; i < history.length; ++i) {
-              //       // var move = history[i];
-              //       // moves += ' ' + move.from + move.to + (move.promotion ? move.promotion : '');
-              //   }
-              uciCmd();
 
+        if(!game.game_over()) {
+          	if(turn != playerColor) {     		
+              uciCmd();
           	}
-        
         }
     }
 
@@ -189,7 +184,9 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
   		return {
         reset: function() {
             game.reset();
-          
+        },
+        getScores: function() {
+            return allscores;
         },
         loadPgn: function(pgn) { game.load_pgn(pgn); },
         setPlayerColor: function(color) {       
@@ -219,15 +216,11 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
            
         },
         flipColor: function() {
-        // var color = game.turn() == 'b' ? 'white' : 'black';
-         console.log("FLIPCOLOR:"+game.turn());
-         playerColor = 'white';
-         prepareMove();
-        //     playerColor = color;
-          board.flip();
-           
-        //     updateStatus();
-        //     game.reset();
+      
+           playerColor = playerColor == 'white' ? 'black' : 'white';
+           prepareMove();
+           board.flip();
+      
         },
         flip: function() {
             board.flip();
