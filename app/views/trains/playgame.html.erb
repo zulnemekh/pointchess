@@ -195,8 +195,12 @@
 		    board, //the chessboard
 		    game1, //the current  game
 		    fen,
+        selectGame,
 		    boardname="board";
 		    	pgnData=mate2a;
+
+    game1 = new Chess();
+    
 
 				function getFenFromPgnData(g) {
 				  var h = g.header();
@@ -212,19 +216,51 @@
       $("#document").ready(function() {
 
 				  $('#btn_board1').click(function(event) {
-              currentUserColor='white';
-              newGame();
-             });
+            game1.load_pgn(pgnData[1].join('\n'), {newline_char:'\n'});
+            fen=getFenFromPgnData(game1);
+            $('.container-full').removeClass('hide');
+            newGame();
+          });
+          $('#btn_board2').click(function(event) {
+            
+            game1.load_pgn(pgnData[2].join('\n'), {newline_char:'\n'});
+            fen=getFenFromPgnData(game1);
+            $('.container-full').removeClass('hide');
+            newGame();
+          });
+          $('#btn_board3').click(function(event) {
+            game1.load_pgn(pgnData[3].join('\n'), {newline_char:'\n'});
+            fen=getFenFromPgnData(game1);
+            $('.container-full').removeClass('hide');
+            newGame();
+          });
+          $('#btn_board4').click(function(event) {
+            game1.load_pgn(pgnData[4].join('\n'), {newline_char:'\n'});
+            fen=getFenFromPgnData(game1);
+            $('.container-full').removeClass('hide');
+            newGame();
+          });
+          $('#btn_board5').click(function(event) {
+            game1.load_pgn(pgnData[5].join('\n'), {newline_char:'\n'});
+            fen=getFenFromPgnData(game1);
+            $('.container-full').removeClass('hide');
+            newGame();
+          });
+          $('#btn_board6').click(function(event) {
+            game1.load_pgn(pgnData[6].join('\n'), {newline_char:'\n'});
+            fen=getFenFromPgnData(game1);
+            $('.container-full').removeClass('hide');
+            newGame();
+          });
+
 
 		           
       });
        
       	function loadGame(i) {
 				  
-				  game1 = new Chess();
 				  game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
-				  getFenFromPgnData(game1);
-				 
+  			 
 				  var board2 = ChessBoard(boardname+i, {
 					  position: getFenFromPgnData(game1),
 					  showNotation: false

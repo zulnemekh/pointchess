@@ -7,9 +7,9 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
        var my2_pgn = prex + " " + my1_pgn;
        var allscores = [];
        var time = { wtime: 300000, btime: 300000, winc: 2000, binc: 2000 };
-       
+       // fen="r1b2k1r/ppppq3/5N1p/4P2Q/4PP2/1B6/PP5P/n2K2R1 w - - 0 1";
        var board,  
-          game = new Chess(),
+          game = new Chess(fen),
           statusEl = $('#status'),
           fenEl = $('#fen'),
           pgnEl = $('#pgn1');
