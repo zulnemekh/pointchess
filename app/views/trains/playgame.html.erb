@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-   
-  <title>TRAIN</title>
+<head>
+	<title>
+		TRAIN
+	</title>
 
     <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+    <script src="/assets/js/chess.min.js"></script>
+    <script src="/assets/js/myjs/engine/fenengine.js"></script>
+    <script src="/assets/js/chessboard-0.3.0.min.js"></script>
     <style type="text/css">
-        #owl-demo .item{
-          background: #42bdc2;
-          padding: 30px 0px;
-          margin: 5px;
-          color: #FFF;
-          -webkit-border-radius: 3px;
-          -moz-border-radius: 3px;
-          border-radius: 3px;
-          text-align: center;
-      }
-      .btn-default:hover,
+			.btn-default:hover,
       .btn-default:active, 
       .btn-default:focus{
         color: #ffffff;
@@ -29,44 +23,11 @@
         background-color: #428bff;
         border-color: #357ebd;
       }
-       #canvas-holder1 {
-        width: 90%;
-        /*margin: 20px auto;*/
-    }
-    #canvas-holder2 {
-        width: 50%;
-        margin: 20px 25%;
-    }
-    #chartjs-tooltip {
-        opacity: 1;
-        position: absolute;
-        background: rgba(0, 0, 0, .7);
-        color: white;
-        padding: 3px;
-        border-radius: 3px;
-        -webkit-transition: all .1s ease;
-        transition: all .1s ease;
-        pointer-events: none;
-        -webkit-transform: translate(-50%, 0);
-        transform: translate(-50%, 0);
-    }
-    .chartjs-tooltip-key{
-      display:inline-block;
-      width:10px;
-      height:10px;
-    }
-    #char2 {
-      background-color: blue; 
-      width: 100%;
-      height: auto;
-    }
-      
-  </style>
-  </head>
-  <body>
- 
+    </style>
+</head>
+<body>
 
-<div class="container-full">
+<div class="container-full hide">
   <div class="row"> <!-- hoyor class="col-md-6" -g aguulsan row div -->
     <div class="col-md-6" >
     <div id="board"></div>
@@ -137,6 +98,8 @@
 
       </div>
     </div>
+
+
   <!-- create game towch darahad modal tsonh uusgej bga div-n togsgol-->
       <p>Status: <span id="status"></span></p>
       <p>nextMove: <span id="nextmovie"></span></p>
@@ -148,27 +111,141 @@
       <button type="button" id="flip_btn" class="btn btn-primary">Flip</button>
       <button type="button" id="flipcolor_btn" class="btn btn-primary">FlipColor</button>
 
-      <div id="canvas-holder1">
-          <canvas id="chart2" max-width="450" max-height="300"> </canvas>
-      </div>
-      <div id="canvas-holder1">
-          <canvas id="myChart" width="400" height="150"></canvas>
-      </div>
+     
     </div> <!--class="col-md-6" 2dahi column end -->
   </div> <!-- hoyor class="col-md-6" -g aguulsan row div -->
 </div> <!-- container-full -->
 
-  
-   
-    <script src="/assets/js/chess.min.js"></script>
-    <script src="/assets/js/myjs/mycustomengine.js"></script>
-    <script src="/assets/js/chessboard-0.3.0.min.js"></script>
-    <script src="/assets/js/chart/chart.js"></script>
-    <script type="text/javascript">
+<!-- Sanal bogloh orguudiin jagsaalt ehlej bna -->
+ <script src="/assets/js/myjs/engine/fenData.js"></script>
+<div class="row">
+            <div class="col-xs-6 col-lg-4">
+              <div class="col-md-1">
+	            </div>
+		            <div class="col-md-10">
+		            	<h2>Heading</h2>
+										<div id="board1" ></div>
+		              <p><a id="btn_board1" class="btn btn-default" href="#" role="button">View details »</a></p>
+		            </div>
+	            <div class="col-md-1">
+	            </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+	            <div class="col-md-1">
+	            </div>
+		            <div class="col-md-10">
+		            	<h2>Heading</h2>
+										<div id="board2" ></div>
+		              <p><a id="btn_board2" class="btn btn-default" href="#" role="button">View details »</a></p>
+		            </div>
+	            <div class="col-md-1">
+	            </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+	             <div class="col-md-1">
+	            </div>
+		            <div class="col-md-10">
+		            	<h2>Heading</h2>
+										<div id="board3" ></div>
+		              <p><a id="btn_board3" class="btn btn-default" href="#" role="button">View details »</a></p>
+		            </div>
+	            <div class="col-md-1">
+	            </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <div class="col-md-1">
+	            </div>
+		            <div class="col-md-10">
+		            	<h2>Heading</h2>
+										<div id="board4" ></div>
+		              <p><a id="btn_board4" class="btn btn-default" href="#" role="button">View details »</a></p>
+		            </div>
+	            <div class="col-md-1">
+	            </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <div class="col-md-1">
+	            </div>
+		            <div class="col-md-10">
+		            	<h2>Heading</h2>
+										<div id="board5" ></div>
+		              <p><a id="btn_board5"class="btn btn-default" href="#" role="button">View details »</a></p>
+		            </div>
+	            <div class="col-md-1">
+	            </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+            <div class="col-xs-6 col-lg-4">
+              <div class="col-md-1">
+	            </div>
+		            <div class="col-md-10">
+		            	<h2>Heading</h2>
+										<div id="board6" ></div>
+		              <p><a id="btn_board6" class="btn btn-default" href="#" role="button">View details »</a></p>
+		            </div>
+	            <div class="col-md-1">
+	            </div>
+            </div><!--/.col-xs-6.col-lg-4-->
+
+            <div style="clear:both"></div>
+          </div>
+        <!-- create game towch darahad modal tsonh uusgej bga div-n togsgol-->
+
+ <script type="text/javascript">
+		 var pgnData,
+		    board, //the chessboard
+		    game1, //the current  game
+		    fen,
+		    boardname="board";
+		    	pgnData=mate2a;
+
+				function getFenFromPgnData(g) {
+				  var h = g.header();
+				  fen=h.FEN;
+				  currentGameSolution=h.FES;
+				  return fen;
+				 }
+      	for (var i = 0; i < pgnData.length; i++) {
+				  var g = new Chess();
+				  g.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
+				  var h = g.header();
+				}
       $("#document").ready(function() {
-        
-           
+
+				  $('#btn_board1').click(function(event) {
+              currentUserColor='white';
+              newGame();
+             });
+
+		           
       });
+       
+      	function loadGame(i) {
+				  
+				  game1 = new Chess();
+				  game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
+				  getFenFromPgnData(game1);
+				 
+				  var board2 = ChessBoard(boardname+i, {
+					  position: getFenFromPgnData(game1),
+					  showNotation: false
+					});
+
+				  // game = new Chess(fen);
+				  // goToMove(-1);
+				  // pgnMoveStringToArray(currentGameSolution); 
+				  //  if (game.turn() === 'b') {
+				  //   solutionParsing();
+				  //   if (board.orientation()=="white") board.flip();
+				      
+				  // } else {  
+				  //   if (board.orientation()=="black") board.flip();
+				  // }
+				  // currentGame = i;
+				}
+				for (var i = 1; i < 7; i++) {
+					loadGame(i);
+				}
+			
     </script>
     <script type="text/javascript">
       //engine begin
@@ -179,7 +256,7 @@
         var allScores=[];
         // var game=myEngineGame(fen, {book: '/assets/book.bin'});;
         function newGame() {
-            var game = myEngineGame(fen, {book: '/assets/book.bin_alda'});
+            var game = myEngineGame(fen, {book: '/assets/book.bin'});
             my_game=game;
             var baseTime = parseFloat($('#timeBase').val()) * 60;
             var inc = parseFloat($('#timeInc').val());
@@ -246,7 +323,5 @@
               
 
       </script>
-        <script src="/assets/js/chart/scorechart.js"></script>
-
 </body>
 </html>

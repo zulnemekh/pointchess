@@ -20,6 +20,7 @@ Reddit::Application.routes.draw do
   get "fenpuzzle" => "problems#fenpuzzle", :as => "problems_fenpuzzle"
   get "fenproblems" => "problems#problems", :as => "problems_fenproflems"
   get "bootstrap" => "trains#bootstrap", :as => "trains_bootstrap"
+  get "playgame" => "trains#playgame", :as => "trains_playgame"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
