@@ -32,6 +32,7 @@ GEM
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     builder (3.1.4)
+    clrs (2.0.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -131,6 +132,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_votable (~> 0.10.0)
   bootstrap-sass
+  clrs (~> 2.0, >= 2.0.1)
   coffee-rails (~> 4.0.0)
   devise
   jbuilder (~> 1.2)
