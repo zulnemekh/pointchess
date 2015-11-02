@@ -18,7 +18,7 @@ Reddit::Application.routes.draw do
   get "play" => "trains#computerplay", :as => "trains_computerplay"
   get "pgnviewer" => "trains#pgnviewer", :as => "trains_pgnviewer"
   get "fenpuzzle" => "problems#fenpuzzle", :as => "problems_fenpuzzle"
-  get "fenproblems" => "problems#problems", :as => "problems_fenproflems"
+  get "analyse" => "trains#analyse", :as => "trains_analyse"
   get "bootstrap" => "trains#bootstrap", :as => "trains_bootstrap"
   get "playgame" => "trains#playgame", :as => "trains_playgame"
   # The priority is based upon order of creation: first created -> highest priority.

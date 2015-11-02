@@ -9,7 +9,9 @@
     <%= csrf_meta_tags %>
     <%= favicon_link_tag '/assets/img/favicon.png' %>
   <meta charset="utf-8">
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
   <!-- #428bca -->
    <style type="text/css">
      .navbar {
@@ -37,8 +39,10 @@
         <div id="navbar" class="navbar-collapse collapse" >
           <ul class="nav navbar-nav">             
                 <li><%= link_to 'Play', trains_computerplay_path %></li>
-                <li><%= link_to 'Problems', problems_path %></li>
                 <li><%= link_to 'Puzzle', problems_fenpuzzle_path %></li>
+                <li><%= link_to 'PgnViewer', trains_pgnviewer_path %></li>
+                <li><%= link_to 'DailyTrain', trains_playgame_path %></li>
+                <li><%= link_to 'Analyse', trains_analyse_path %></li>
               </ul>
               <% if user_signed_in? %>
                 <ul class="nav navbar-nav navbar-right">
@@ -76,7 +80,7 @@
       </div>
  
       <footer class="blog-footer">
-      <p>Blog template built for <a href="http://titan-chess.com">Site build by Zulaa</a> by <a href="https://twitter.com/zulnemeh">@zulaa</a>.</p>
+      <p>Built for <a href="http://titan-chess.com">Site build by Zulaa</a> by <a href="https://twitter.com/zulnemeh">@zulaa</a>.</p>
       <p>
         <a href="#">Back to top</a>
       </p>

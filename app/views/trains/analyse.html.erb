@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+		
+    <title>Analyse</title>
+    <meta name="description" content="">
+				
+		
+	 <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+    <script src="/assets/js/chess.min.js"></script>
+    <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+		
+		<style type="text/css">
+			 .defaultInput
+		    {
+		     border:1px solid blue;
+		    }
+
+				.error
+				{
+				 border:1px solid red;
+				}
+
+		</style>    
+				
+  </head>
+  <body>
+		
+
+<div class="container-full">
+  <div class="row"> <!-- hoyor class="col-md-6" -g aguulsan row div -->
+    <div class="col-md-1" >
+ 
+    </div> 
+ 		<div class="col-md-5" >
+    	   <div id="board"></div>
+    </div> 
+ 
+		<div class="col-md-6" >  <!--class="col-md-6" 2dahi column div-n ehlel  -->
+		
+		<div style="display: table; height: 400px; overflow: hidden;">
+     <div style="display: table-cell; vertical-align: middle;">
+      
+       	<div>
+       		<select id="moveColor">
+       	  	<option value="white" selected>white to play</option>
+				  	<option value="black">black to play</option>
+					</select>
+       	</div>
+       	
+
+				<button id="btnStart" type="button" class="btn btn-primary">Start position</button>
+				<button id="btnClear" type="button" class="btn btn-primary">Clear board</button>
+				<button id="btnContinue" type="submit" class="btn btn-primary">Play computer</button>
+				<button id="btnFlip" name="computer" type="button" class="btn btn-primary">Flip board</button>
+				
+     </div>
+   </div>
+
+
+<form action="play" method="get" target="">
+  <h3>FEN: <span id="inputFen" name="fendata" class="label label-default"></span></h3>
+  <input type="submit" value="Submit">
+</form>
+
+
+  			  
+		
+				<!-- /input-group -->
+			
+				
+    </div> <!--class="col-md-6" 2dahi column end -->
+  </div> <!-- hoyor class="col-md-6" -g aguulsan row div -->
+</div> <!-- container-full -->
+<script src="/assets/js/myjs/mycustomengine.js"></script>
+ <script type="text/javascript">
+      $("#document").ready(function() {
+				var onDragMove = function(newLocation, oldLocation, source,
+                          piece, position, orientation) {
+				  console.log("New location: " + newLocation);
+				  console.log("Old location: " + oldLocation);
+				  console.log("Source: " + source);
+				  console.log("Piece: " + piece);
+				  console.log("Position: " + ChessBoard.objToFen(position));
+				  console.log("Orientation: " + orientation);
+			
+						moveColorChange();
+		
+
+				};
+
+				var cfg = {
+				  draggable: true,
+				  position: 'start',
+				  dropOffBoard: 'trash',
+				  onDragMove: onDragMove,
+				  sparePieces: true
+				};
+				var board = ChessBoard('board', cfg);      
+				$(window).resize();
+				
+				 game = new Chess();
+				var fenValidate=true,fen='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1';
+          	
+		    
+
+		    function moveColorChange() { 
+		    	moveColor=$('#moveColor').find('option:selected').val(); 
+						if (moveColor=='white') 
+							fen=board.fen()+' w - - 0 1';
+						else
+							fen=board.fen()+' b - - 0 1';
+
+					tt=game.validate_fen(fen);
+					fenValidate=tt.valid;
+         	$("#inputFen").html(fen); 
+         		if (fenValidate)
+         			$('#inputFen').removeClass('error');
+	  				else
+	  					$('#inputFen').addClass('error');
+		    }
+				$("#inputFen").html(fen); 
+				
+					// button event listener
+				 $('#btnStart').on('click', function() {          
+           board.start();
+           moveColorChange();
+        });
+         $('#btnClear').on('click', function() {  
+         	 board.clear();
+         	 moveColorChange();
+         	 
+        });
+        $('#btnContinue').on('click', function() { 
+        	
+ 					game = new Chess(board.fen()),
+ 					 board.orientation(moveColor);
+				
+		
+
+        });
+ 				$('#btnFlip').on('click', function() { 
+           board.orientation();
+           board.flip();
+        });
+			
+				$('#moveColor').change(function(){
+	    		moveColorChange();
+				});
+				$('#inputFen').change(function(){
+	    		moveColorChange();
+				});
+
+
+     }); //document ready
+    </script>
+
+	</body>
+</html>

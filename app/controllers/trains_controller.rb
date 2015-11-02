@@ -13,6 +13,9 @@ class TrainsController < ApplicationController
   def playgame
     # render :layout => false
   end
+  def analyse
+    # render :layout => false
+  end
   def pgnviewer
     # render :layout => false
   end
