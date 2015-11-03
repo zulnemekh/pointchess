@@ -10,6 +10,9 @@ class TrainsController < ApplicationController
   def computerplay
     # render :layout => false
   end
+  def playcenter
+    # render :layout => false
+  end
   def playgame
     # render :layout => false
   end

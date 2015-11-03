@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		TRAIN
+	</title>
+    <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+    <link rel="stylesheet" href="/assets/css/design/colors.css">
+    <link rel="stylesheet" href="/assets/css/design/buttons.css">
+    <script src="/assets/js/chess.min.js"></script>
+    <script src="/assets/js/myjs/engine/fenengine.js"></script>
+    <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+    <style type="text/css">
+    
+			.btn-default:hover,
+      .btn-default:active, 
+      .btn-default:focus{
+        color: #ffffff;
+        background-color: #428bff;
+        border-color: #357ebd;
+      }
+      .thumbnail:hover,
+      .thumbnail:focus {
+        color: #ffffff;
+        background-color: #428bff;
+        border-color: #357ebd;
+      }
+    </style>
+</head>
+<body>
+
+<div class="container-full">
+  <div class="row"> <!-- hoyor class="col-md-6" -g aguulsan row div -->
+    <div class="col-md-6" >
+    <div id="board"></div>
+    </div> 
+ 
+<div class="col-md-6" >  <!--class="col-md-6" 2dahi column div-n ehlel  -->
+     <!-- create game towch darahad modal tsonh uusgej bga div-n ehlel-->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create Game</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">Create Game</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-2">                  
+                  </div>
+                  <div class="col-sm-8">
+                  <center>
+                     <div class="btn-group" role="group" aria-label="First group">
+                      <button type="button" class="btn btn-default">1</button>
+                      <button type="button" class="btn btn-default">2</button>
+                      <button type="button" class="btn btn-default">3</button>
+                      <button type="button" class="btn btn-default">4</button>
+                      <button type="button" class="btn btn-default">5</button>
+                      <button type="button" class="btn btn-default">6</button>
+                      <button type="button" class="btn btn-default">7</button>
+                      <button type="button" class="btn btn-default">8</button>
+                    </div>
+                    </center>
+                  </div>
+                  <div class="col-sm-2">                 
+                  </div>
+                </div>
+              </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+              <a href="#" id="newwhite" class="thumbnail" data-dismiss="modal">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="/assets/img/chessimg/white.svg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+              </a>
+
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <a href="#" id="newrandom" class="thumbnail" data-dismiss="modal">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="/assets/img/chessimg/randomcolor.svg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-4">
+              <a href="#" id="newblack" class="thumbnail" data-dismiss="modal">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="/assets/img/chessimg/black.svg" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+              </a>
+            </div>
+            </center>
+        </div>  <!-- class="row" div end -->
+
+          </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  <!-- create game towch darahad modal tsonh uusgej bga div-n togsgol-->
+      <p>Status: <span id="status"></span></p>
+      <p>nextMove: <span id="nextmovie"></span></p>
+      <p>FEN: <span id="fen"></span></p>
+      <p>PGN: <span id="pgn1"></span></p>
+      <a href="#" class="button button-rounded button-flat-primary">press me</a>
+      <button type="button" id="start_btn" class="btn btn-primary">New Game</button>
+      <button type="button" id="undo_btn" class="btn btn-primary">Undo</button>
+      <button type="button" id="flip_btn" class="btn btn-primary">Flip</button>
+      <button type="button" id="flipcolor_btn" class="btn btn-primary">FlipColor</button>
+<a href="#" class="button button-pill button-flat-primary">press me</a>
+
+
+     
+    </div> <!--class="col-md-6" 2dahi column end -->
+  </div> <!-- hoyor class="col-md-6" -g aguulsan row div -->
+</div> <!-- container-full -->
+
+ 
+    <script type="text/javascript">
+      //engine begin
+        
+        var my_game;
+        var currentUserColor='white';
+        var level = 5;
+        var allScores=[];
+        // var game=myEngineGame(fen, {book: '/assets/book.bin'});;
+        function newGame() {
+        	    var fen = '<%= params[:fendata] %>';
+        	    console.log("fen:"+fen);
+            var game = myEngineGame(fen, {book: '/assets/book.bin'});
+            my_game=game;
+            var baseTime = parseFloat($('#timeBase').val()) * 60;
+            var inc = parseFloat($('#timeInc').val());
+            var skill = parseInt($('#skillLevel').val());
+            
+            game.setTime(baseTime, inc);
+            game.setSkillLevel(skill);
+            game.setPlayerColor(currentUserColor);
+            game.setDisplayScore($('#showScore').is(':checked'));
+            game.start();
+          }
+          
+          $("#document").ready(function() {
+              $('#newwhite').click(function(event) {
+              currentUserColor='white';
+              newGame();
+             });
+             $('#newrandom').click(function(event) {
+               tt=Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+               tt ? currentUserColor='white' : currentUserColor='black';
+               newGame();
+             });
+             $('#newblack').click(function(event) {
+              currentUserColor='black';
+              newGame();
+             });
+
+              // modal dotorh tohirgoo
+             $('.btn-group > button.btn').click();
+
+              $(".btn-group > button.btn").on("click", function(){
+                  level = +this.innerHTML;
+                $(".btn-group > button.btn").each(function(index, element) {
+                  $(element).removeClass('active');
+                });
+                $(this).addClass('btn-default:active');
+              });
+
+              //modal end
+              newGame();  
+              // window.setTimeout(allScores=my_game.getScores(), 2000);
+          });
+
+       
+
+              $('#undo_btn').on('click', function() {          
+                my_game.undo();
+              });
+               $('#start_btn').on('click', function() {  
+                newGame();
+              });
+
+              $('#flip_btn').on('click', function() { 
+             
+              
+                my_game.flip();
+              });
+
+               $('#flipcolor_btn').on('click', function() {          
+                my_game.flipColor();
+                
+              });
+
+              
+
+      </script>
+</body>
+</html>

@@ -42,8 +42,10 @@
 
 /* black square */
 .black-3c85d {
-  background-color: #b58863;
-  color: #f0d9b5;
+  /*background-color: #b58863;*/
+  /*color: #f0d9b5;*/
+  background-color: #aaa;
+  color: #aaa;
 }
 
 /* highlighted square */

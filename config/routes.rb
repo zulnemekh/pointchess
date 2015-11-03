@@ -16,6 +16,8 @@ Reddit::Application.routes.draw do
 
   root to: "links#index"
   get "play" => "trains#computerplay", :as => "trains_computerplay"
+  post "/playcenter(.:format)" => "trains#playcenter", :as => :trains_playcenter
+  post "/checks/task(.:format)" => "abcdtask/checks#task", :as => "task_abcdtask_checks"
   get "pgnviewer" => "trains#pgnviewer", :as => "trains_pgnviewer"
   get "fenpuzzle" => "problems#fenpuzzle", :as => "problems_fenpuzzle"
   get "analyse" => "trains#analyse", :as => "trains_analyse"
