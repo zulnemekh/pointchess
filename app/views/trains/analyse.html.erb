@@ -61,13 +61,16 @@
 
 
   			  
-		 <%= form_tag trains_playcenter_path,
-                  :method => 'POST', :id => "task_work_form" do |f| %>
+	<%= form_tag trains_playcenter_path,
+            :method => 'POST', :target => "_blank", :id => "task_work_form" do |f| %>
                    <input type="hidden" name="fendata" id="fenValid">
-  <h3>FEN: <span id="inputFen" name="fendata" type="text" class="label label-default"></span></        
-  
-                <% end %> <!-- end form -->
-				<!-- /input-group -->
+  <!-- <h3>FEN: <span id="inputFen" name="fendata" type="text" class="label label-default"></span></h3> -->
+			  <div class="input-group">
+			  <span class="input-group-addon" id="basic-addon1">FEN</span>
+			  <input id="inputFen" type="text" class="form-control" aria-describedby="basic-addon1">
+			</div>
+
+  <% end %> <!-- end form -->
 			
 				
     </div> <!--class="col-md-6" 2dahi column end -->
@@ -75,7 +78,18 @@
 </div> <!-- container-full -->
 <script src="/assets/js/myjs/mycustomengine.js"></script>
  <script type="text/javascript">
+
       $("#document").ready(function() {
+      		var game,
+ 			    board,
+ 			    cfg = {
+				  draggable: true,
+				  position: 'start',
+				  dropOffBoard: 'trash',
+				  onDragMove: onDragMove,
+				  sparePieces: true
+				};
+			
 				var onDragMove = function(newLocation, oldLocation, source,
                           piece, position, orientation) {
 				  console.log("New location: " + newLocation);
@@ -90,18 +104,13 @@
 
 				};
 
-				var cfg = {
-				  draggable: true,
-				  position: 'start',
-				  dropOffBoard: 'trash',
-				  onDragMove: onDragMove,
-				  sparePieces: true
-				};
-				var board = ChessBoard('board', cfg);      
+				 board = ChessBoard('board', cfg);      
 				$(window).resize();
 				
 				 game = new Chess();
-				var fenValidate=true,fen='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1';
+				var fenValidate=true,
+				fen='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - 0 1';
+
           	
 		    
 
@@ -114,13 +123,18 @@
 
 					tt=game.validate_fen(fen);
 					fenValidate=tt.valid;
-         	$("#inputFen").html(fen); 
+         	$("#inputFen").val(fen); 
          		if (fenValidate)
          			$('#inputFen').removeClass('error');
 	  				else
 	  					$('#inputFen').addClass('error');
 		    }
-				$("#inputFen").html(fen); 
+		    $("form").on("keypress", function (e) {
+			    if (e.keyCode == 13) {
+			        return false;
+			    }
+				});
+				$("#inputFen").val(fen); 
 				
 					// button event listener
 				 $('#btnStart').on('click', function() {          
@@ -137,7 +151,7 @@
  					game = new Chess(board.fen()),
  					 board.orientation(moveColor);
 
-				 $("#fenValid").val($("#inputFen").html());
+				 $("#fenValid").val($("#inputFen").val());
 			   $("#task_work_form").submit();
 
         });
@@ -150,7 +164,16 @@
 	    		moveColorChange();
 				});
 				$('#inputFen').change(function(){
-	    		moveColorChange();
+					gg=$("#inputFen").val(); 
+	    		tt=game.validate_fen(gg);
+					fenValidate=tt.valid;
+
+         		if (fenValidate){
+         			$('#inputFen').removeClass('error');
+         			 board.position(gg);
+         		}
+	  				else
+	  					$('#inputFen').addClass('error');
 				});
 
 

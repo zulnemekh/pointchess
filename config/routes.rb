@@ -17,12 +17,14 @@ Reddit::Application.routes.draw do
   root to: "links#index"
   get "play" => "trains#computerplay", :as => "trains_computerplay"
   post "/playcenter(.:format)" => "trains#playcenter", :as => :trains_playcenter
-  post "/checks/task(.:format)" => "abcdtask/checks#task", :as => "task_abcdtask_checks"
   get "pgnviewer" => "trains#pgnviewer", :as => "trains_pgnviewer"
   get "fenpuzzle" => "problems#fenpuzzle", :as => "problems_fenpuzzle"
   get "analyse" => "trains#analyse", :as => "trains_analyse"
   get "bootstrap" => "trains#bootstrap", :as => "trains_bootstrap"
   get "playgame" => "trains#playgame", :as => "trains_playgame"
+
+  get "pgnanalyse" => "problems#pgnanalyse", :as => "problems_pgnanalyse"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

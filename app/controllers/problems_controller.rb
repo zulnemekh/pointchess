@@ -24,6 +24,10 @@ class ProblemsController < ApplicationController
   def fenpuzzle
   
   end
+  #pgn viewer-g pgn-g analyse hiih huudas
+  def pgnanalyse
+  
+  end
   #problem solver-g hiisen huudas
   def problems
   
