@@ -47,6 +47,10 @@
        	  	<option value="white" selected>white to play</option>
 				  	<option value="black">black to play</option>
 					</select>
+					<select id="playerColor">
+       	  	<option value="white" selected>player white</option>
+				  	<option value="black">player black</option>
+					</select>
        	</div>
        	
 
@@ -64,7 +68,9 @@
 	<%= form_tag trains_playcenter_path,
             :method => 'POST', :target => "_blank", :id => "task_work_form" do |f| %>
                    <input type="hidden" name="fendata" id="fenValid">
+                   <input type="hidden" name="plColor" id="plColor">
   <!-- <h3>FEN: <span id="inputFen" name="fendata" type="text" class="label label-default"></span></h3> -->
+
 			  <div class="input-group">
 			  <span class="input-group-addon" id="basic-addon1">FEN</span>
 			  <input id="inputFen" type="text" class="form-control" aria-describedby="basic-addon1">
@@ -82,6 +88,7 @@
       $("#document").ready(function() {
       		var game,
  			    board,
+ 			    playerColor,
  			    cfg = {
 				  draggable: true,
 				  position: 'start',
@@ -150,8 +157,11 @@
         	
  					game = new Chess(board.fen()),
  					 board.orientation(moveColor);
-
+rr=$('#playerColor').find('option:selected').val();
+	
 				 $("#fenValid").val($("#inputFen").val());
+				 $("#plColor").val(rr);
+		
 			   $("#task_work_form").submit();
 
         });

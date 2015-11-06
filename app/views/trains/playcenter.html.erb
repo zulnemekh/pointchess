@@ -131,7 +131,8 @@
         // var game=myEngineGame(fen, {book: '/assets/book.bin'});;
         function newGame() {
         	    var fen = '<%= params[:fendata] %>';
-        	    console.log("fen:"+fen);
+              var playerColor = '<%= params[:plColor] %>';
+ 
             var game = myEngineGame(fen, {book: '/assets/book.bin'});
             my_game=game;
             var baseTime = parseFloat($('#timeBase').val()) * 60;
@@ -140,7 +141,7 @@
             
             game.setTime(baseTime, inc);
             game.setSkillLevel(skill);
-            game.setPlayerColor(currentUserColor);
+            game.setPlayerColor(playerColor);
             game.setDisplayScore($('#showScore').is(':checked'));
             game.start();
           }
