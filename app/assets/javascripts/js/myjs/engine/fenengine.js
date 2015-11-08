@@ -40,6 +40,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           // illegal move
           if (move === null) return 'snapback';
 					
+          setScores(); 
 					prepareMove();
           updateStatus();
         };
@@ -47,7 +48,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
         // update the board position after the piece snap 
         // for castling, en passant, pawn promotion
         var onSnapEnd = function() {
-          // board.position(game.fen());
+         board.position(game.fen());
         };
 
         var updateStatus = function() {
@@ -86,10 +87,10 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
                 status += '<br>Search: ' + engineStatus.search;
             } 
           status += ' Book: ' + engineStatus.book;
-          board.position(game.fen());
+          // board.position(game.fen());
           statusEl.html(status);
           // fenEl.html(game.fen());
-          // pgnEl.html(game.pgn());
+           pgnEl.html(game.pgn());
         };
 
         var cfg = {
@@ -136,8 +137,10 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
 
               // game.move({from: 'f3', to: 'f7', promotion: 'q'});
               game.move({from: match[1], to: match[2], promotion: match[3]});
-              // board.position(game.fen());
+              
+                setScores();
                 prepareMove();
+
           } else if(match = line.match(/^info .*\bdepth (\d+) .*\bnps (\d+)/)) {
               engineStatus.search = 'Depth: ' + match[1] + ' Nps: ' + match[2];
           }  	
@@ -149,7 +152,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
                     engineStatus.scoreChart=engineStatus.score;
                 } else if(match[1] == 'mate') {
                     engineStatus.score = '#' + score;
-                    engineStatus.scoreChart=score;
+                    
                 }
                 if(match = line.match(/\b(upper|lower)bound\b/)) {
                     engineStatus.score = ((match[1] == 'upper') == (game.turn() == 'w') ? '<= ' : '>= ') + engineStatus.score
@@ -167,12 +170,22 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
       stockfish.postMessage('go movetime 2000');
     }
 
+    //score-uudiig aread hadgalna
+    function setScores(){
 
-    function prepareMove(){
       console.log(engineStatus.scoreChart);
-    allscores.push(""+engineStatus.scoreChart);
-    // drawChart(allscores);
-     console.log(""+JSON.stringify(allscores));
+      if (typeof engineStatus.scoreChart != 'undefined'){
+        updateChart(engineStatus.scoreChart);
+        allscores.push(""+engineStatus.scoreChart);    
+      }else{
+        updateChart("0");
+        allscores.push("0");
+      }
+      // drawChart(allscores);
+      console.log(""+JSON.stringify(allscores));
+    
+    }
+    function prepareMove(){
         board.position(game.fen());
         var turn = game.turn() == 'w' ? 'white' : 'black';
 

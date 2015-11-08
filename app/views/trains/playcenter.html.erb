@@ -10,6 +10,7 @@
     <script src="/assets/js/chess.min.js"></script>
     <script src="/assets/js/myjs/engine/fenengine.js"></script>
     <script src="/assets/js/chessboard-0.3.0.min.js"></script>
+    <script src="/assets/js/chart/chart.js"></script>
     <style type="text/css">
     
 			.btn-default:hover,
@@ -114,7 +115,7 @@
       <button type="button" id="flipcolor_btn" class="btn btn-primary">FlipColor</button>
 <a href="#" class="button button-pill button-flat-primary">press me</a>
 
-
+ <canvas id="myChart" width="400" height="200"></canvas>
      
     </div> <!--class="col-md-6" 2dahi column end -->
   </div> <!-- hoyor class="col-md-6" -g aguulsan row div -->
@@ -123,7 +124,18 @@
  
     <script type="text/javascript">
       //engine begin
-        
+       function updateChart (argument) {
+        // body...
+        // var inc = parseFloat($('#timeInc').val());
+        console.log("updateChart"+argument);
+        chartLabelNumber++;
+        if (chartLabelNumber%5==0) 
+        myNewChart.addData([argument], chartLabelNumber);
+        else
+        myNewChart.addData([argument]);
+
+      }
+
         var my_game;
         var currentUserColor='white';
         var level = 5;
@@ -197,7 +209,39 @@
                 
               });
 
-              
+              //Chart-n code begin
+        var chartDataArray=[];
+        var chartLabelNumber=1;
+        var chartLabelNumberArray=[];
+        for (i = 1; i <= chartLabelNumber; i++) {
+          chartLabelNumberArray.push(i);
+        };
+        var data1 = {
+        labels: [1],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: chartDataArray
+            }
+        ]
+      };
+
+
+        var ctx = $("#myChart").get(0).getContext("2d");
+        var myNewChart = new Chart(ctx).Line(data1,{
+           scaleOverride : true,
+            // scaleSteps : 10,
+            // scaleStepWidth : 0.2,
+            // scaleStartValue : -1 
+           scaleStartValue: 0
+        });
+         //Chart-n code end
 
       </script>
 </body>
