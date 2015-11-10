@@ -40,7 +40,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           // illegal move
           if (move === null) return 'snapback';
 					
-					prepareMove();
+					prepareMove("onDrop");
           updateStatus();
         };
 
@@ -168,21 +168,15 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
     }
 
 
-    function prepareMove(){
-      console.log(engineStatus.scoreChart);
-    allscores.push(""+engineStatus.scoreChart);
-    // drawChart(allscores);
-     console.log(""+JSON.stringify(allscores));
-        board.position(game.fen());
+     function prepareMove(from){
+        if (from!="onDrop") 
+         board.position(game.fen());
         var turn = game.turn() == 'w' ? 'white' : 'black';
 
-        if(!game.game_over()) {
-          	if(turn != playerColor) {     		
+        if(!game.game_over()) 
+            if(turn != playerColor)          
               uciCmd();
-          	}
-        }
-    }
-
+      }
     
 
   		return {

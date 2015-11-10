@@ -42,71 +42,68 @@
 
 <body>
  <!-- <canvas id="myChart" width="400" height="200"></canvas> -->
+ <div id="board" style="width: 400px"></div>
   <div ng-view></div>
 
 </body>
-
-  <script type="text/javascript">
-   var data1 = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: ["0","0.89","0.89","0.97","0.97","0.67","0.67","0.62","0.62","-0.96","-0.96","-0.96","-0.96","-1.03"]
-        }
-    ]
-};
-var data = {
-    labels: ["0","0.44","0.44","0.52","0.52","0.51","0.51","-0.15","-0.15","-0.06","-0.06","0.02","0.02","-0.44","-0.44","-0.86","-0.86","-0.79","-0.79","-0.77","-0.77","-4.56","-4.56","-4.60"],
-    datasets: [
+     <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.css" />
+    <script src="/assets/js/chess.min.js"></script>
+    <script src="/assets/js/chessboard-0.3.0.min.js"></script>
         
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: ["0","0.44","0.44","0.52","0.52","0.51","0.51","-0.15","-0.15","-0.06","-0.06","0.02","0.02","-0.44","-0.44","-0.86","-0.86","-0.79","-0.79","-0.77","-0.77","-4.56","-4.56","-4.60"]
-        }
-    ]
+  <script type="text/javascript">
+   
+var board,
+  game = new Chess();
+
+// do not pick up pieces if the game is over
+// only pick up pieces for White
+var onDragStart = function(source, piece, position, orientation) {
+  if (game.in_checkmate() === true || game.in_draw() === true ||
+    piece.search(/^b/) !== -1) {
+    return false;
+  }
 };
-       var array=["0","0.44","0.44","0.52","0.52","0.51","0.51","-0.15","-0.15","-0.06","-0.06","0.02","0.02","-0.44","-0.44","-0.86","-0.86","-0.79","-0.79","-0.77","-0.77","-4.56","-4.56","-4.60"];
 
-    // var ctx = $("#myChart").get(0).getContext("2d");
-    // This will get the first returned node in the jQuery collection.
-    // var myNewChart = new Chart(ctx);
-    // myNewChart.Line(data1, {
-    //         responsive: false
-    //     });
-// var myNewChart = new Chart(ctx).Line(data1);
-    // var ctx = $("#myChart").get(0).getContext("2d");
-    // var myLineChart = new Chart(ctx).Line(data, options);
+var makeRandomMove = function() {
+  var possibleMoves = game.moves();
 
-        $('#update_btn').on('click', function() {  
-            myNewChart.addData([40, 60], "August");
-             // myNewChart.datasets[0].points[2].value = 50;
-            // Would update the first dataset's value of 'March' to be 50
-            // myNewChart.update();
-         });
+  // game over
+  if (possibleMoves.length === 0) return;
 
+  var randomIndex = Math.floor(Math.random() * possibleMoves.length);
+  game.move(possibleMoves[randomIndex]);
+  board.position(game.fen());
+};
+
+var onDrop = function(source, target) {
+  // see if the move is legal
+  var move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  });
+
+  // illegal move
+  if (move === null) return 'snapback';
+
+  // make random legal move for black
+  window.setTimeout(makeRandomMove, 250);
+};
+
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+var onSnapEnd = function() {
+  board.position(game.fen());
+};
+
+var cfg = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+};
+board = ChessBoard('board', cfg);
 
   </script>
 </html>

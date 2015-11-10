@@ -157,7 +157,7 @@
         	
  					game = new Chess(board.fen()),
  					 board.orientation(moveColor);
-rr=$('#playerColor').find('option:selected').val();
+			rr=$('#playerColor').find('option:selected').val();
 	
 				 $("#fenValid").val($("#inputFen").val());
 				 $("#plColor").val(rr);
@@ -173,8 +173,14 @@ rr=$('#playerColor').find('option:selected').val();
 				$('#moveColor').change(function(){
 	    		moveColorChange();
 				});
+				$('#inputFen').keyup(function () {
+				  changeFENinput();
+				});
 				$('#inputFen').change(function(){
 				
+					changeFENinput();
+				});
+				function changeFENinput () {
 					gg=$("#inputFen").val(); 
 	    		tt=game.validate_fen(gg);
 					fenValidate=tt.valid;
@@ -185,7 +191,7 @@ rr=$('#playerColor').find('option:selected').val();
          		}
 	  				else
 	  					$('#inputFen').addClass('error');
-				});
+				}
 
 
 		

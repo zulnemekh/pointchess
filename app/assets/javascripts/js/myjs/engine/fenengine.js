@@ -41,7 +41,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           if (move === null) return 'snapback';
 					
           setScores(); 
-					prepareMove();
+					prepareMove("onDrop");
           updateStatus();
         };
 
@@ -93,14 +93,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
            pgnEl.html(game.pgn());
         };
 
-        var cfg = {
-          draggable: true,
-          position: game.fen(),
-          onDragStart: onDragStart,
-          onDrop: onDrop,
-          onSnapEnd: onSnapEnd
-        };
-     
+      
     //book
      if(options.book) {
       console.log("bookOption");
@@ -122,6 +115,15 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
         engineStatus.book = 'none';
     }
  
+
+      var cfg = {
+          draggable: true,
+          position: game.fen(),
+          onDragStart: onDragStart,
+          onDrop: onDrop,
+          onSnapEnd: onSnapEnd
+        };
+     
       //board
       board = ChessBoard('board', cfg);
       // board.position(game.fen());
@@ -185,18 +187,16 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
       console.log(""+JSON.stringify(allscores));
     
     }
-    function prepareMove(){
-        board.position(game.fen());
+
+      function prepareMove(from){
+        if (from!="onDrop") 
+         board.position(game.fen());
         var turn = game.turn() == 'w' ? 'white' : 'black';
 
-        if(!game.game_over()) {
-          	if(turn != playerColor) {     		
+        if(!game.game_over()) 
+            if(turn != playerColor)          
               uciCmd();
-          	}
-        }
-    }
-
-    
+      }
 
   		return {
         reset: function() {

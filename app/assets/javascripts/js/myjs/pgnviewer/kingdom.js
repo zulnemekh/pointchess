@@ -1596,6 +1596,7 @@
         {
             /// m = change in y-value (y2 - y1)
             ///     change in x-value (x2 - x1)
+        
             obj.m = (100 - 0) / (obj.min - obj.max);
         }
         
@@ -1679,6 +1680,7 @@
             /// Is this eval for the current position?
             if (e.ply === game_history.length - 1) {
                 if (e.type === "cp") {
+                console.log("e.score:"+e.score);
                     obj.set_eval(e.score);
                 } else if (e.type === "mate") {
                     if (e.score === 0) {
