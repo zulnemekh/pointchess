@@ -1,10 +1,15 @@
 <!doctype html>
-<html>
+<html  ng-app="phonecatApp">
 
 <head>
     <title>Line Chart with Custom Tooltips</title>
       <script src="/assets/js/chart/chart.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+     
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.js"></script>
+  <script src="/assets/js/chart/app.js"></script>
+  <script src="/assets/js/chart/controllers.js"></script>
     <style>
     #canvas-holder1 {
         width: 300px;
@@ -36,8 +41,9 @@
 </head>
 
 <body>
- <canvas id="myChart" width="400" height="200"></canvas>
- <button type="button" id="update_btn" class="btn btn-primary">Update chart</button>
+ <!-- <canvas id="myChart" width="400" height="200"></canvas> -->
+  <div ng-view></div>
+
 </body>
 
   <script type="text/javascript">
@@ -84,13 +90,13 @@ var data = {
 };
        var array=["0","0.44","0.44","0.52","0.52","0.51","0.51","-0.15","-0.15","-0.06","-0.06","0.02","0.02","-0.44","-0.44","-0.86","-0.86","-0.79","-0.79","-0.77","-0.77","-4.56","-4.56","-4.60"];
 
-    var ctx = $("#myChart").get(0).getContext("2d");
+    // var ctx = $("#myChart").get(0).getContext("2d");
     // This will get the first returned node in the jQuery collection.
     // var myNewChart = new Chart(ctx);
     // myNewChart.Line(data1, {
     //         responsive: false
     //     });
-var myNewChart = new Chart(ctx).Line(data1);
+// var myNewChart = new Chart(ctx).Line(data1);
     // var ctx = $("#myChart").get(0).getContext("2d");
     // var myLineChart = new Chart(ctx).Line(data, options);
 
