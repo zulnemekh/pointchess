@@ -168,8 +168,8 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
     function uciCmd() {  
 
      stockfish.postMessage(prex+" "+game.fen());
-      // stockfish.postMessage('go depth 11');
-      stockfish.postMessage('go movetime 2000');
+      stockfish.postMessage('go depth 14');
+      // stockfish.postMessage('go movetime 2000');
     }
 
     //score-uudiig aread hadgalna

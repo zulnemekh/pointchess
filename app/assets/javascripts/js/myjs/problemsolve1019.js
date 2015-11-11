@@ -9,7 +9,7 @@ var pgnData,
     fen;
     
     // console.log("pgnData1:"+pgnData1);
-    pgnData=mate2a;
+    pgnData=mate2;
     console.log("allPuzzle"+pgnData.length);
 
     var alertSuccess = document.getElementById('alertSuccess');
@@ -64,14 +64,18 @@ var onDrop = function(source, target) {
     //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
     if (lastMove!=solution[currentPly]) {  
       alertFail.setAttribute('class', 'alert alert-danger visible');
+    }else
+    {  //suuliin nuusen nuudel zow uyd l daraagiin nuudelee nuune
+      window.setTimeout(possibleMove, 500); 
+      var moveLast=solution[currentPly].indexOf("#");
+      if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
+          alertSuccess.setAttribute('class', 'alert alert-success visible');
+        // $('#alertSuccess').show();
+      }   
     }
-    var moveLast=solution[currentPly].indexOf("#");
-    if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
-        alertSuccess.setAttribute('class', 'alert alert-success visible');
-      // $('#alertSuccess').show();
-    }
+   
   }
-  window.setTimeout(possibleMove, 500);
+  
   // possibleMove();
   updateStatus();
 
@@ -146,7 +150,7 @@ var  possibleMove = function() {
 function getFenFromPgnData(g) {
   var h = g.header();
   fen=h.FEN;
-  currentGameSolution=h.FES;
+  currentGameSolution=h.FES; //[FES "1. Re8+ Kf7 2. R1e7#"] deerh format-r bichsen uyd ajilna
   console.log("oFEN:"+fen);
   console.log("oFES:"+currentGameSolution);
  }
@@ -208,9 +212,9 @@ function loadGame(i) {
     if (board.orientation()=="black") board.flip();
   }
 
-
-  updateStatus();
   currentGame = i;
+  updateStatus();
+ 
   
 }
 
@@ -235,6 +239,12 @@ $('#btnStart').on('click', function() {
   currentPly = -1;
   board.position(game.fen());
 });
+$('#btnNextProb').on('click', function() {
+    alertSuccess.setAttribute('class', 'hidden');
+    alertFail.setAttribute('class', 'hidden');
+    if (currentGame < pgnData.length) loadGame(currentGame+1);
+});
+
 $('#btnPrevious').on('click', function() {
   if (currentPly >= 0) {
     game.undo();
@@ -252,7 +262,7 @@ $('#btnNext').on('click', function() {
     board.position(game.fen());
   }
 });
-$('#btnNexPuzzle').on('click', function() {
+$('#btnNextPuzzle').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
     if (currentGame < pgnData.length) loadGame(currentGame+1);
@@ -261,6 +271,6 @@ $('#btnNexPuzzle').on('click', function() {
 
   //problemsolve end
   //load the first game
-  currentGame=0;
+  currentGame=86;
   loadGame(currentGame);
  //titan end

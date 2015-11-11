@@ -407,7 +407,7 @@ mate2=[
 ],[
 '[INFO "Michael Adams vs Luis Comas Fabrego, Adelaide, 1988"]',
 '[FEN "r4kr1/1b2R1n1/pq4p1/4Q3/1p4P1/5P2/PPP4P/1K2R3 w - - 0 1"]',
-'[FES "1.Rf7+ Kxf7 2.Qe7#"]',
+'[FES "1. Rf7+ Kxf7 2. Qe7#"]',
 '[TEST ""]'
 ],[
 '[INFO "Vassily Ivanchuk vs Bozidar Ivanovic, New York, 1988"]',
@@ -462,7 +462,7 @@ mate2=[
 ],[
 '[INFO "Michael Adams vs Eric Lobron, Brussels, 1992"]',
 '[FEN "8/7p/5pk1/3n2pq/3N1nR1/1P3P2/P6P/4QK2 w - - 0 1 "]',
-'[FES "1.Qe8+ Kg7 2.Nf5#"]',
+'[FES "1. Qe8+ Kg7 2. Nf5#"]',
 '[TEST ""]'
 ],[
 '[INFO "Hoang Thanh Tran vs Alina Calota, Duisburg, 1992"]',
@@ -1084,7 +1084,7 @@ mate2=[
 '[Type "White Mates in 2."]',
 '[INFO "Ana Srebrnic vs Laura Rogule, Belgrade, 8/2/2013"]',
 '[FEN "5bk1/6p1/5PQ1/pp4Pp/2p4P/P2r4/1PK5/8 w - - 0 1"]',
-'[FES "1. f7+ Kh8 2. Qxh5#"]'
+'[FES "1. f7+ Kh8 2. Qxh5#"]',
 '[TEST ""]'
 ]
 ]
