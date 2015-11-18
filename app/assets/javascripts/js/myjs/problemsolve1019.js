@@ -271,6 +271,6 @@ $('#btnNextPuzzle').on('click', function() {
 
   //problemsolve end
   //load the first game
-  currentGame=86;
+  currentGame=91;
   loadGame(currentGame);
  //titan end

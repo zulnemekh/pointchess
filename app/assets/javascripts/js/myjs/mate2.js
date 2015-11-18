@@ -461,7 +461,7 @@ mate2=[
 '[TEST ""]'
 ],[
 '[INFO "Michael Adams vs Eric Lobron, Brussels, 1992"]',
-'[FEN "8/7p/5pk1/3n2pq/3N1nR1/1P3P2/P6P/4QK2 w - - 0 1 "]',
+'[FEN "8/7p/5pk1/3n2pq/3N1nR1/1P3P2/P6P/4QK2 w - - 0 1"]',
 '[FES "1. Qe8+ Kg7 2. Nf5#"]',
 '[TEST ""]'
 ],[

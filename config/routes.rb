@@ -1,4 +1,7 @@
 Reddit::Application.routes.draw do
+  get "tournament/index"
+  get "tournament/battle"
+  
   resources :problems
 
   resources :trains
