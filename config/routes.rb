@@ -1,6 +1,6 @@
 Reddit::Application.routes.draw do
-  get "tournament/index"
-  get "tournament/battle"
+  get "tournament" => "tournament#index", :as => "tournament_index"
+  get "tournament/battle" => "tournament#battle", :as => "tournament_battle"
   
   resources :problems
 

@@ -5,34 +5,43 @@
     	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
 	<script src="/assets/js/myjs/tournament/controllers/timer.js"></script>
     <script>
-        angular.module('MyApp', ['timer']);
-        function MyAppController($scope) {
-            $scope.timerRunning = true;
- 
-            $scope.startTimer = function (){
-                $scope.$broadcast('timer-start');
-                $scope.timerRunning = true;
-            };
- 
-            $scope.stopTimer = function (){
-                $scope.$broadcast('timer-stop');
-                $scope.timerRunning = false;
-            };
-            $scope.$on('timer-stopped', function (event, data){
-                console.log('Timer Stopped - data = ', data);
-            });
-        }
-        MyAppController.$inject = ['$scope'];
+		 var openFile = function(event) {
+		    var input = event.target;
+
+		    var reader = new FileReader();
+		    reader.onload = function(){
+		      var text = reader.result;
+		      var str = "1. The rain in SPAIN stays [mainly] in the plain"; 
+   		    var atributes = str.match(/\[[\w\d\"\.]*\]/g);
+			
+			var regex3 = /1\.[\w\d\.\s\+\$\(\)\-\#]*[01\/2]+\-[01\/2]+[\s]/g
+			// var regex4= \[[\w\d\s\"\.\/\-'?]*\];  //heseg hesegeer n salgah
+					var regex1 = /^1\..*$/g;
+			  	var regex2 = /\[[\w\d\s\"\.\/\-\?]*\]/g;
+			    var check_temp_name_array = [];
+		      // console.log(regex2.exec(text));
+		      // console.log(text);
+			    while((match = regex3.exec(text)) !== null){
+			      check_temp_name_array.push(match[0]);
+			      // console.log(match[0]);
+			    }
+
+			var elements = $();
+			for(x = 0; x < check_temp_name_array.length; x++) {
+			    // elements = elements.add('<div>'+check_temp_name_array[x]+'</div>');
+			}
+
+		      $('#resultmatch').html(elements);
+		      $('#result').html(text);
+		    };
+		    reader.readAsText(input.files[0]);
+		  };
     </script>
 </head>
-<body ng-app="MyApp">
-    <div ng-controller="MyAppController">
-        <h2>AngularJS - Multiple Timers Example</h2>
-        <h3>Timer 1: <timer/></h3>
-        <h3>Timer 2: <timer interval="2000"/></h3>
-        <h3>Timer 3: <timer interval="1000">{{hours}} hour{{hoursS}}, {{minutes}} minute{{minutesS}}, {{seconds}} second{{secondsS}}.</timer></h3>
-        <button ng-click="startTimer()" ng-disabled="timerRunning">Start Timers</button>
-        <button ng-click="stopTimer()" ng-disabled="!timerRunning">Stop Timers</button>
-    </div>
+<body>
+	<input type='file' accept='text/plain' onchange='openFile(event)'><br>
+	<img id='output'>
+	<div id="resultmatch" style="text-color: blue"></div>
+	<div ><pre id="result"></pre></div>
 </body>
 </html>
