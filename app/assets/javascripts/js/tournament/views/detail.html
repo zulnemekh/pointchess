@@ -1,0 +1,63 @@
+<a ui-sref="list" class="btn btn-primary">List</a>
+
+
+
+<div class="container-full">
+  <div class="row">
+  <div class="col-md-5" >
+  <div id="board"></div>
+
+</div>
+
+<!-- 
+    <div class="col-sm-6" style="background-color:lavender;">
+        <div id="board" ></div>
+             <div class="jumbotron">
+          </div>
+           <p>Status: <span id="status"></span></p>
+            <p>nextMove: <span id="nextmovie"></span></p>
+          <p>FEN: <span id="fen"></span></p>
+            <p>PGN: <span id="pgn"></span></p>
+     
+      </div>
+     
+      
+    </div>
+ -->
+    <div class="col-md-7" style="background-color:lavenderblush;">
+     <div class="row">
+          <form class="form-horizontal" role="form">
+          
+          </form>
+          
+
+            <div id="board-buttons">
+            <button type="button" class="btn btn-default" id="btnStart"><i class="fa fa-fast-backward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnPrevious"><i class="fa fa-step-backward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnNext"><i class="fa fa-step-forward fa-lg"></i></button>
+            <button type="button" class="btn btn-default" id="btnNextPuzzle"><i class="fa fa-fast-forward fa-lg"></i></button>
+          </div>
+      <div><!-- buttons -->
+        
+        <button  id="btnRetry" type="button" class="button button-rounded button-flat-primary">Retry</button>
+          <button  id="btnNew" type="button" class="button button-rounded button-flat-primary">New Random</button>
+          
+          <button  id="btnNextProb" type="button" class="button button-rounded button-flat-primary">Next</button>
+          
+      </div>
+             <p>Status: <span id="status"></span></p>
+             <p>PuzzleNumber: <span id="currentPuzzle"></span></p>
+             <p>nextMove: <span id="nextmovie"></span></p>
+             <p>FEN: <span id="fen"></span></p>
+             <p>PGN: <span id="pgn"></span></p>
+     
+          <div id="alertSuccess" class="alert alert-success" role="alert">Well done! You successfully solve this problem.</div>
+          <div id="alertFail" class="alert alert-danger" role="alert">Wrong move! try again.</div>
+          <!-- default -->
+          
+          <!-- dafualt end -->
+      </div>    
+    </div>
+  </div>
+</div>
+<script src="/assets/js/tournament/problemsolve1125.js"></script> 

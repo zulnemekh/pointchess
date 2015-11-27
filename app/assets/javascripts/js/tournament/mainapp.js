@@ -13,15 +13,51 @@ var mainApp = angular.module('mainApp', ['ui.router'])
   }
 });
 
+mainApp.factory('Service', function() {
+
+
+ var Service = {
+    foo: 'Shared service',
+    fen: mate2.length
+
+  };
+ 
+ return Service;
+});
+
 
 mainApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+ $urlRouterProvider.otherwise('/home');
+	$stateProvider.state("list", {
+		url: "/home",
+		templateUrl: "/assets/js/tournament/views/list.html",
+		controller: "listController"
+	});
+
 	$stateProvider.state("detail", {
-		url: "/poll/detail",
-		//templateUrl: "/app/views/welcome.html"
-		templateUrl: "/assets/js/chart/partials/phone-list.html",
-		controller: "squareController"
+		url: "/detail/:id",
+		templateUrl: "/assets/js/tournament/views/detail.html",
+		controller: "detailController"
 	});
 	
 
 }]);
 
+/*
+mainApp.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+      when('/problems', {
+        templateUrl: '/assets/js/tournament/views/list.html',
+        controller: 'shapeController'
+      }).
+      when('/detail/:phoneId', {
+        templateUrl: '/assets/js/tournament/views/detail.html',
+        controller: 'circleController'
+      }).
+      otherwise({
+        redirectTo: '/problems'
+      });
+  }]);
+
+*/

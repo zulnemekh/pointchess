@@ -14,21 +14,22 @@
 		      var str = "1. The rain in SPAIN stays [mainly] in the plain"; 
    		    var atributes = str.match(/\[[\w\d\"\.]*\]/g);
 			
-			var regex3 = /1\.[\w\d\.\s\+\$\(\)\-\#]*[01\/2]+\-[01\/2]+[\s]/g
-			// var regex4= \[[\w\d\s\"\.\/\-'?]*\];  //heseg hesegeer n salgah
+			var regex3 = /1\.[\w\d\.\s\+\$\(\)\-\#]*[01\/2]+\-[01\/2]+[\s]/g;
+			 var regex4= /\[[\w\d\s\"\.\/\-'?]*\]/g; // heseg hesegeer n salgah
+			  
 					var regex1 = /^1\..*$/g;
 			  	var regex2 = /\[[\w\d\s\"\.\/\-\?]*\]/g;
 			    var check_temp_name_array = [];
 		      // console.log(regex2.exec(text));
 		      // console.log(text);
-			    while((match = regex3.exec(text)) !== null){
-			      check_temp_name_array.push(match[0]);
+			    while((match = regex4.exec(text)) !== null){
+			      // check_temp_name_array.push(match[0]);
 			      // console.log(match[0]);
 			    }
 
 			var elements = $();
 			for(x = 0; x < check_temp_name_array.length; x++) {
-			    // elements = elements.add('<div>'+check_temp_name_array[x]+'</div>');
+			    elements = elements.add('<div>'+check_temp_name_array[x]+'</div>');
 			}
 
 		      $('#resultmatch').html(elements);
