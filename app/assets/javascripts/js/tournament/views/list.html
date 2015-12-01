@@ -1,7 +1,6 @@
   <div class="row">
-    <div>{{timer}}</div>
 
-      <div ng-repeat="i in problems track by $index" on-finish-render="ngRepeatFinished">
+      <div ng-repeat="i in $parent.problems track by $index" on-finish-render="ngRepeatFinished">
         <div class="col-xs-6 col-lg-4">
               <div class="col-md-1">
 	            </div>
@@ -9,7 +8,7 @@
 		            	<h2 style="color: #FF851B; 
 		            	font-style: bold;">Point {{i.FES.length}}</h2>
 										<div id="board_{{$index}}" ></div>
-		              <p><a id="btn_board_{{$index}}"  class="btn btn-default" ui-sref="detail({id: $index })" role="button">View details »</a></p>
+		              <p><a id="btn_board_{{$index}}"  class="btn btn-default" ui-sref="detail"  data-ng-click="goto_detail($index)" role="button">View details »</a></p>
 
 		              <!-- <a ui-sref="detail({id: i.FEN})">View details</a> -->
 		            </div>

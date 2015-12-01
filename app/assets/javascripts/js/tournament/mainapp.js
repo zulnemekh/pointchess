@@ -1,4 +1,5 @@
-     
+var gb_fen="from scope";  //gb=global
+
 var mainApp = angular.module('mainApp', ['ui.router'])
   .directive('onFinishRender', function ($timeout) {
   return {
@@ -15,10 +16,10 @@ var mainApp = angular.module('mainApp', ['ui.router'])
 
 mainApp.factory('Service', function() {
 
-
  var Service = {
-    foo: 'Shared service',
-    fen: mate2.length
+    tempPoint: 0,  //tuhain temtseenees awah point
+    pgnData: mate3,
+    id: 1
 
   };
  

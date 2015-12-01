@@ -1,3 +1,4 @@
+ $scope.problemsolve = function() { 
    //start doing stuff
 var pgnData,
     board, //the chessboard
@@ -80,14 +81,20 @@ board = ChessBoard('board', cfg);
 
 
 
+//pgnData-s FEN file-g tataj awah
+function getFenFromPgnData(g) {
+  var h = g.header();
+  fen=h.FEN;
+  currentGameSolution=h.FES; //[FES "1. Re8+ Kf7 2. R1e7#"] deerh format-r bichsen uyd ajilna
+
+ }
 
 function loadGame(i) {
   board.clear();
   game1 = new Chess();
 
-  fen='r1bqkb1r/ppp2ppp/2np1n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1';
-  
-  console.log($scope.id);
+  // fen='r1bqkb1r/ppp2ppp/2np1n2/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1';
+  console.log(variable1);
   game = new Chess(fen);
 
   // pgnMoveStringToArray(currentGameSolution); 
@@ -98,9 +105,10 @@ function loadGame(i) {
   } else {  
     if (board.orientation()=="black") board.flip();
   }
- board.position(game.fen());
+  
+  board.position(game.fen());
   currentGame = i;
-  // updateStatus();
+  updateStatus();
  
   
 }
@@ -112,3 +120,5 @@ function loadGame(i) {
   currentGame=91;
   loadGame(currentGame);
  //titan end
+
+};
