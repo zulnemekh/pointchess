@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+ <% @problems.each do |problem| %>
+      <tr>
+        
+        <td><%= problem.info %></td>
+        <td><%= problem.fen %></td>
+        <td><%= problem.fes %></td>
+        <td><%= problem.short_info %></td>
+        <td><%= problem.genre %></td>
+        
+        <td><%= link_to 'Edit', edit_problempanel_path(problem) %></td>
+        </tr>
+    <% end %>
+</body>
+</html>

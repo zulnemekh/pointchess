@@ -1,21 +1,26 @@
 Reddit::Application.routes.draw do
+  # get "problempanel/new"
+  # get "problempanel/show"
+  # get "problempanel/index"
+  # get "problempanel/edit"
+ 
+  get "/problempanel(.:format)"            => "problempanel#index",    :as => "problempanel"
+  get "/problempanel/new(.:format)"        => "problempanel#new",      :as => "new_problempanel"
+  get "/problempanel/:id/edit(.:format)"   => "problempanel#edit",     :as => "edit_problempanel"
+  get "/problempanels/:id(.:format)"        => "problempanel#show",     :as => "show_problempanel"
+
+
   get "tournament" => "tournament#index", :as => "tournament_index"
   get "tournament/battle" => "tournament#battle", :as => "tournament_battle"
   
+
+  # resources :problempanel
   resources :problems
 
   resources :trains
 
   resources :comments
 
-  devise_for :users
-  resources :links do
-    member do
-      put "like", to: "links#upvote"
-      put "dislike", to: "links#downvote"
-    end
-    resources :comments
-  end
 
   root to: "links#index"
   get "play" => "trains#computerplay", :as => "trains_computerplay"

@@ -1,0 +1,28 @@
+<%= form_for @problem, :url => edit_problempanel_path do |f| %>
+ 
+
+  <div class="field">
+    <%= f.label :fen %><br>
+    <%= f.text_area :fen %>
+  </div>
+  <div class="field">
+    <%= f.label :fes %><br>
+    <%= f.text_area :fes %>
+  </div>
+ 
+  <div class="field">
+    <%= f.label :info %><br>
+    <%= f.text_area :info %>
+  </div>
+  <div class="field">
+    <%= f.label :short_info %><br>
+    <%= f.text_field :short_info %>
+  </div>
+  <div class="field">
+    <%= f.label :genre %><br>
+    <%= f.text_field :genre %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

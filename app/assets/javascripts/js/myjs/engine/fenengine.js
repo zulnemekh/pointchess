@@ -177,10 +177,10 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
 
       console.log(engineStatus.scoreChart);
       if (typeof engineStatus.scoreChart != 'undefined'){
-        updateChart(engineStatus.scoreChart);
+        // updateChart(engineStatus.scoreChart);
         allscores.push(""+engineStatus.scoreChart);    
       }else{
-        updateChart("0");
+        // updateChart("0");
         allscores.push("0");
       }
       // drawChart(allscores);
