@@ -4,8 +4,10 @@
 	<title></title>
 </head>
 <body>
+
+  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
  <% @problems.each do |problem| %>
-      <tr>
+     <div><tr>
         
         <td><%= problem.info %></td>
         <td><%= problem.fen %></td>
@@ -14,7 +16,10 @@
         <td><%= problem.genre %></td>
         
         <td><%= link_to 'Edit', edit_problempanel_path(problem) %></td>
+        <td><%= link_to 'New', new_problempanel_path %></td>
+        
         </tr>
+      </div>  
     <% end %>
 </body>
 </html>

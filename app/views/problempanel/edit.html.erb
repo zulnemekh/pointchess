@@ -1,6 +1,9 @@
-<%= form_for @problem, :url => edit_problempanel_path do |f| %>
+<%= form_for @problem, :url => update_problempanel_path do |f| %>
  
-
+<div class="field">
+    <%= f.label :id %><br>
+    <%= f.text_field :id, :readonly => true%>
+  </div>
   <div class="field">
     <%= f.label :fen %><br>
     <%= f.text_area :fen %>

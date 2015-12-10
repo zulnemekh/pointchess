@@ -1,7 +1,6 @@
 class ProblempanelController < ApplicationController
   def new
  		@problem = Base::MtbProblems.new
-     render template: 'edit'
   end
 
   def show
@@ -17,8 +16,10 @@ class ProblempanelController < ApplicationController
   end
 
   def update
-    @problem.update(problem_params)
-    respond_with(@problem)
+    @problem = Base::MtbProblems.find(params[:base_mtb_problems][:id])
+    @problem.update(params[:base_mtb_problems])
+    @problem.save!
+    redirect_to :action => 'index'
   end
 
   def destroy
@@ -26,12 +27,11 @@ class ProblempanelController < ApplicationController
     respond_with(@problem)
   end
 
-  private
-    def set_problem
-      @problem = Base::MtbProblems.find(params[:id])
-    end
+  def create
+    todo = Base::MtbProblems.new(params[:base_mtb_problems])
+    todo.save!
+    redirect_to :action => 'index'
+  end
 
-    def problem_params
-      params.require(:problem).permit(:title, :pgn_data, :fen, :insert_admin, :move)
-    end
+
 end
