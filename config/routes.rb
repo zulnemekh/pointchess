@@ -27,7 +27,7 @@ Reddit::Application.routes.draw do
   resources :comments
 
 
-  root to: "links#index"
+  root to: "problems#fenpuzzle"
   get "play" => "trains#computerplay", :as => "trains_computerplay"
   post "/playcenter(.:format)" => "trains#playcenter", :as => :trains_playcenter
   get "pgnviewer" => "trains#pgnviewer", :as => "trains_pgnviewer"
