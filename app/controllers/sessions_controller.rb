@@ -18,5 +18,12 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session[:id] = nil
+    #session.delete(:user_id)
+    cookies.delete(:auto_login)
+    reset_session
+    
+    redirect_to root_path
+
   end
 end

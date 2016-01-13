@@ -12,7 +12,18 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           game = new Chess(),
           statusEl = $('#status'),
           fenEl = $('#fen'),
-          pgnEl = $('#pgn1');
+          pgnEl = $('#pgn1'),
+          boardEl = $('#board'),
+          squareToHighlight,
+          myMove_from=null,
+          myMove_to=null;
+
+      var removeHighlights = function(color) {
+        boardEl.find('.square-55d63')
+          .removeClass('highlight-' + color);
+
+      };
+     
        // Setting w, b first move from FEN
        var playerColor = 'black';
        playerColor = game.turn() == 'w' ? 'white' : 'black';
@@ -40,6 +51,11 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           // illegal move
           if (move === null) return 'snapback';
 					
+           // highlight white's move
+          removeHighlights('white');
+          boardEl.find('.square-' + source).addClass('highlight-white');
+          boardEl.find('.square-' + target).addClass('highlight-white');
+
 					prepareMove("onDrop");
           updateStatus();
         };
@@ -49,7 +65,11 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
         var onSnapEnd = function() {
            board.position(game.fen());
         };
-
+        //computer nuuj duusahad buusan buudaliig highlight bolgono
+        var onMoveEnd = function() {
+          boardEl.find('.square-' + squareToHighlight)
+            .addClass('highlight-black');
+        };
         var updateStatus = function() {
           var status = '';
 
@@ -97,7 +117,9 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           position: game.fen(),
           onDragStart: onDragStart,
           onDrop: onDrop,
-          onSnapEnd: onSnapEnd
+          onSnapEnd: onSnapEnd,
+          onMoveEnd: onMoveEnd,
+          pieceTheme: '/assets/img/chesspieces/empty/zulaa.png'
         };
      
     //book
@@ -136,8 +158,12 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
 
               // game.move({from: 'f3', to: 'f7', promotion: 'q'});
               game.move({from: match[1], to: match[2], promotion: match[3]});
-              // board.position(game.fen());
-                prepareMove();
+              //computer-n suuliin nuudeliig highlight bolgoh
+              removeHighlights('black');
+              boardEl.find('.square-' + match[1]).addClass('highlight-black');
+              squareToHighlight = match[2];
+              
+               prepareMove();
           } else if(match = line.match(/^info .*\bdepth (\d+) .*\bnps (\d+)/)) {
               engineStatus.search = 'Depth: ' + match[1] + ' Nps: ' + match[2];
           }  	
@@ -172,7 +198,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
         if (from!="onDrop") 
          board.position(game.fen());
         var turn = game.turn() == 'w' ? 'white' : 'black';
-
+      updateBoardHint();
         if(!game.game_over()) 
             if(turn != playerColor)          
               uciCmd();
@@ -180,6 +206,12 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
     
 
   		return {
+        getGame: function() {
+            return game;
+        },
+        getBoard: function() {
+            return board;
+        },
         reset: function() {
             game.reset();
         },
@@ -190,6 +222,31 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
         setPlayerColor: function(color) {       
             playerColor = color;
             board.orientation(playerColor);
+        },
+        getSquare: function() {
+           console.log(myMove_to);
+          return myMove_to;
+        },
+        setSquare: function(value) {
+            if(myMove_from==null && myMove_to==null){
+              if (myMove_from!=value) {
+                myMove_from=value;
+                console.log("myMove_from"+myMove_from);
+                return;
+              }
+            }
+            if(myMove_from!=null && myMove_to==null){
+              if (myMove_to!=value) {
+                myMove_to=value;
+                console.log("myMove_to"+myMove_to);
+                return;
+              }
+            }
+            if(myMove_from!=null && myMove_to!=null){
+              myMove_from=null;
+              myMove_to=null;
+            }
+            
         },
         setSkillLevel: function(skill) {
             // uciCmd('setoption name Skill Level value ' + skill);

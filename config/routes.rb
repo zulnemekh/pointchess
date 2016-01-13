@@ -1,6 +1,6 @@
 Reddit::Application.routes.draw do
-  get "users/new"
-  get "sessions/new"
+  # get "users/new"
+  # get "sessions/new"
   # get "problempanel/new"
   # get "problempanel/show"
   # get "problempanel/index"
@@ -29,6 +29,7 @@ Reddit::Application.routes.draw do
 
   root to: "problems#fenpuzzle"
   get "play" => "trains#computerplay", :as => "trains_computerplay"
+  get "playpiece" => "trains#computer_not_piece", :as => "trains_computer_not_piece"
   post "/playcenter(.:format)" => "trains#playcenter", :as => :trains_playcenter
   get "pgnviewer" => "trains#pgnviewer", :as => "trains_pgnviewer"
   get "fenpuzzle" => "problems#fenpuzzle", :as => "problems_fenpuzzle"
@@ -39,10 +40,11 @@ Reddit::Application.routes.draw do
   get "pgnanalyse" => "problems#pgnanalyse", :as => "problems_pgnanalyse"
   
 
-  get    'signup'  => 'users#new'
-  get    'login'   => 'sessions#new'
+  get    'signup'  => 'users#new' , :as => "signup"
+  post  "/user/create(.:format)"   => "users#create",     :as => "create_user"
+  get    'login'   => 'sessions#new', :as => "users_login"
   post   'login'   => 'sessions#create'
-  delete 'logout'  => 'sessions#destroy'
+  get    'logout'  => 'sessions#destroy',:as => "users_logout"
   resources :users
 end
 
