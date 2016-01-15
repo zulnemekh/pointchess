@@ -9,6 +9,10 @@ class ProblempanelController < ApplicationController
 
   def index
   	@problems = Base::MtbProblems.all
+    # @objArray = []
+    # @problems.each do |problem|
+    #   @objArray.push problem
+    # end
   end
 
   def edit

@@ -19,8 +19,8 @@
    <body>
       <h2>Problem Panel</h2>
 
-      <%= link_to 'New', new_problempanel_path, class: "btn btn-lg btn-primary" %>
-     <% @problems.each_with_index  do |problem, index| %>
+      <%= link_to 'New', tactics_datainsert_path, class: "btn btn-lg btn-primary" %>
+     <% @tactics.each_with_index  do |tactic, index| %>
             
         <div class="col-xs-6 col-lg-4">
               <div class="col-md-1">
@@ -29,9 +29,9 @@
                   <h2 style="color: #FF851B; 
                   font-style: bold;"></h2>
                     <div id="board_<%=index%>" ></div>
-                    <span id="tactic_<%=index%>"><%= problem.fen %></span>
+                    <span id="tactic_<%=index%>"><%= tactic.fen %></span>
                   <p><a id="btn_board_<%=index%>"  class="btn btn-default"role="button">View details »</a></p>
-            <%= link_to 'Edit', edit_problempanel_path(problem) %>
+            <%= link_to 'Edit', edit_tactics_path(tactic) %>
                   <!-- <a ui-sref="detail({id: i.FEN})">View details</a> -->
                 </div>
               <div class="col-md-1">
@@ -61,8 +61,8 @@
           problems[i] = h;
         }
     var boardname='board_';
-    console.log("length:"+problems.length);
-      for (var i = 0; i < problems.length; i++) {
+    console.log("length:"+tactics.length);
+      for (var i = 0; i < tactics.length; i++) {
                   var board2 = ChessBoard(boardname+i, {
                     position: tactics[i],
                     showNotation: false

@@ -22,13 +22,13 @@
     <div class="col-md-1" >
  
     </div> 
-    <div class="col-md-5" >
+    <div class="col-md-3" >
          <div id="board"></div>
     </div> 
  
     <div class="col-md-6" >  <!--class="col-md-6" 2dahi column div-n ehlel  -->
     
-<%= form_for @problem, :url => create_problempanel_path do |f| %>
+<%= form_for @tactic, :url => create_tactics_path do |f| %>
  
   <div class="field">
     <%= f.label :fen %><br>
@@ -56,8 +56,51 @@
   </div>
 <% end %>
 </div>
+<div>
+	
+	<input type='file' accept='text/plain' onchange='openFile(event)'><br>
+	<img id='output'>
+	<div id="resultmatch" style="text-color: blue"></div>
+	<div ><pre id="result"></pre></div>
+
+</div>
 <script type="text/javascript">
 // var tt= '<%=@objArray%>'
+ var openFile = function(event) {
+		    var input = event.target;
+
+		    var reader = new FileReader();
+		    reader.onload = function(){
+		      var text = reader.result;
+		      var str = "8/8/8/8/1Q6/1K6/8/2Nk4 w - - 0 1|Deutsche Schachzeitung,1968,9 AUTHORS|1. Qa5 Kxc1 2. Qe1# 1-0"; 
+   		 
+var enteredText = text;
+var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
+var characterCount = enteredText.length + numberOfLineBreaks;
+// enteredText.replace( /\n/g, "|" );
+var arr = str.split("|");
+
+// alert('Number of breaks:  ' + numberOfLineBreaks);
+
+			    // var check_temp_name_array = [];
+		     //  // console.log(regex2.exec(text));
+		     //  // console.log(text);
+			    // while((match = regex3.exec(text)) !== null){
+			    //    check_temp_name_array.push(match[0]);
+			    //    console.log(match[0]);
+			    // }
+
+			// var elements = $();
+			// for(x = 0; x < check_temp_name_array.length; x++) {
+			//     elements = elements.add('<div>'+check_temp_name_array[x]+'</div>');
+			// }
+
+		      $('#resultmatch').html(enteredText);
+		      $('#result').html(enteredText);
+		    };
+		    reader.readAsText(input.files[0]);
+		  };
+
  $(document).ready(function() {
   var game,
     cfg = {
