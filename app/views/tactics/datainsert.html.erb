@@ -55,6 +55,8 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+    <button id="btnStart" type="button" class="btn btn-primary">Start insert</button>
 </div>
 <div>
 	
@@ -66,6 +68,7 @@
 </div>
 <script type="text/javascript">
 // var tt= '<%=@objArray%>'
+var objArray=[];
  var openFile = function(event) {
 		    var input = event.target;
 
@@ -75,10 +78,15 @@
 		      var str = "8/8/8/8/1Q6/1K6/8/2Nk4 w - - 0 1|Deutsche Schachzeitung,1968,9 AUTHORS|1. Qa5 Kxc1 2. Qe1# 1-0"; 
    		 
 var enteredText = text;
-var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
-var characterCount = enteredText.length + numberOfLineBreaks;
+// var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
+// var characterCount = enteredText.length + numberOfLineBreaks;
 // enteredText.replace( /\n/g, "|" );
-var arr = str.split("|");
+
+var str = enteredText.split("\n");
+for (var i=0; i < str.length; i++) {
+  objArray.push(str[i].split("|"));
+};
+// ari++split("|");
 
 // alert('Number of breaks:  ' + numberOfLineBreaks);
 
@@ -116,7 +124,18 @@ var arr = str.split("|");
   $('#inputFen').on("change paste keyup", function() {
       changeFENinput();
   });
+   $('#btnStart').click(){
+      insertdata();
+  });
+function insertdata(){
+console.log("insertdata");
+    <% todo = Base::MtbTactics.new %>
 
+    <% todo.fen=" fen test from js"%>
+    <% todo.fes=" fes test from js"%>
+    <% todo.short_info=" fes test from js"%>
+    <% todo.save!%>
+}
   function changeFENinput() {
       gg=$("#inputFen").val(); 
       tt=game.validate_fen(gg);
