@@ -17,9 +17,11 @@
    </head>
    
    <body>
+     <div class="row">
+     <div>  <%= link_to 'New', tactics_datainsert_path, class: "btn btn-lg btn-primary" %></div>
       <h2>Problem Panel</h2>
 
-      <%= link_to 'New', tactics_datainsert_path, class: "btn btn-lg btn-primary" %>
+    
      <% @tactics.each_with_index  do |tactic, index| %>
             
         <div class="col-xs-6 col-lg-4">
@@ -27,7 +29,7 @@
               </div>
                 <div class="col-md-10">
                   <h2 style="color: #FF851B; 
-                  font-style: bold;"></h2>
+                  font-style: bold;"><%=index%></h2>
                     <div id="board_<%=index%>" ></div>
                     <span id="tactic_<%=index%>"><%= tactic.fen %></span>
                   <p><a id="btn_board_<%=index%>"  class="btn btn-default"role="button">View details »</a></p>
@@ -39,7 +41,7 @@
             </div><!--/.col-xs-6.col-lg-4-->     
            
         <% end %>
- 
+</div> <!-- div.row -->
       <script src="/assets/js/myjs/mate2.js"></script>  
       <script src="/assets/js/tournament/data/mate3.js"></script>
 <script type="text/javascript">

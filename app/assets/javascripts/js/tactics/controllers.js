@@ -2,9 +2,40 @@
          mainApp.controller("parentController", function($scope,$timeout,Service) {
             $scope.message = "In parent controller";
             $scope.tempPoint = Service.tempPoint;
+            $scope.timer = "";
             $scope.counter = 300;
-            $scope.problems =[];
-				
+            $scope.problems =array;
+				    $scope.onTimeout = function(){
+				        if ($scope.counter == 0) {
+				        	console.log("Game Over");
+				        	return false;
+				        }
+				        var value = $scope.counter;
+				        var sec = $scope.counter;						        
+				        // total seconds
+							var seconds = $scope.counter;
+							 $scope.counter--;
+							// calculate seconds
+							var s = seconds % 60;
+							// add leading zero to seconds if needed
+							s = s < 10 ? "0" + s : s;
+							// calculate minutes
+							var m = Math.floor(seconds / 60) % 60;
+							// add leading zero to minutes if needed
+							m = m < 10 ? "0" + m : m;
+							// calculate hours
+							var h = Math.floor(seconds / 60 / 60);
+							var time = h + ":" + m + ":" + s
+
+										$scope.timer=time;
+						        mytimeout = $timeout($scope.onTimeout,1000);
+						    }
+						    var mytimeout = $timeout($scope.onTimeout,1000);
+						    
+						    $scope.stop = function(){
+						        $timeout.cancel(mytimeout);
+						    }
+
 
 			function getRandomSubarray(arr, size) {
 			    var shuffled = arr.slice(0), i = arr.length, temp, index;
@@ -19,30 +50,19 @@
  
       $scope.data = getRandomSubarray(Service.pgnData, 5);
 		    
- 		
+ 				// console.log("shapeController");
          });
          
       
          mainApp.controller("listController", function($scope,$timeout,Service) {
             $scope.message = "In list controller";
-       //baazas medeellee awah begin
-       
-       
-       // end
+  
             
-				    for (var i = 0; i < $scope.$parent.data.length; i++) {
-						  var g = new Chess();
-						  g.load_pgn($scope.$parent.data[i].join('\n'), {newline_char:'\n'});
-						  var h = g.header();
-							$scope.$parent.problems[i] = h;
-				
-						 }
-			
 					var boardname='board_';
 					 $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
 				  	for (var i = 0; i < $scope.$parent.problems.length; i++) {
 									var board2 = ChessBoard(boardname+i, {
-									  position: $scope.$parent.problems[i].FEN,
+									  position: $scope.$parent.problems[i].fen,
 									  showNotation: false
 									});
 								}
@@ -72,7 +92,7 @@ var board, //the chessboard
     solution=[],
     fen;
     
-    pgnData = $scope.$parent.data;
+    pgnData = array;
 		currentGame=Service.id;
   
 
@@ -199,8 +219,8 @@ var updateStatus = function() {
 
 //bodlognii hariu boloh pgn file-g nuudel nuudeleer n zadalaad solutiond hiine
 //mon 
-function pgnMoveStringToArray(currentGameSolution,g) {
-  var h = g.header();
+function pgnMoveStringToArray(currentGameSolution) {
+  // var h = g.header();
   results = currentGameSolution.match(/\S+\s*/g);
   mymoveArray = currentGameSolution.split(/([0-9]+\.\s)/).filter(function(n) {return n;});
   for (var i = 0, l = mymoveArray.length; i < l; ++i) {
@@ -214,6 +234,7 @@ function pgnMoveStringToArray(currentGameSolution,g) {
     }
     mymoveArray[i] = s;
   }
+  console.log(solution);
 }
 function solutionParsing() {
     for (var i = 0; i < solution.length; i++) {
@@ -235,23 +256,25 @@ function goToMove(ply) {
 }
 
 //pgnData-s FEN file-g tataj awah
-function getFenFromPgnData(g) {
-  var h = g.header();
-  fen=h.FEN;
-  currentGameSolution=h.FES; //[FES "1. Re8+ Kf7 2. R1e7#"] deerh format-r bichsen uyd ajilna
+// function getFenFromPgnData(g) {
+//   var h = g.header();
+//   fen=h.FEN;
+//   currentGameSolution=h.FES; //[FES "1. Re8+ Kf7 2. R1e7#"] deerh format-r bichsen uyd ajilna
 
- }
+//  }
 
 function loadGame(i) {
   board.clear();
-  game1 = new Chess();
- 	game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
-  getFenFromPgnData(game1);
+  // game1 = new Chess();
+ 	// game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
+  // getFenFromPgnData(game1);
+  fen=pgnData[i].fen;
+  currentGameSolution=pgnData[i].fes; 
 	solution.length=0;
 
   game = new Chess(fen);
 	goToMove(-1);
-  pgnMoveStringToArray(currentGameSolution,game1); 
+  pgnMoveStringToArray(currentGameSolution); 
    if (game.turn() === 'b') {
   	solutionParsing();
     if (board.orientation()=="white") board.flip();

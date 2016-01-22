@@ -7,10 +7,14 @@ Reddit::Application.routes.draw do
   # get "problempanel/edit"
 
   get "/tactics(.:format)"            => "tactics#index",    :as => "tactics"
+  get "/tactics/tactic(.:format)"            => "tactics#tactic",    :as => "tactic_tactics"
   get "/tactics/datainsert(.:format)"        => "tactics#datainsert",      :as => "tactics_datainsert"
   get "/tactics/:id/edit(.:format)"   => "tactics#edit",     :as => "edit_tactics"
   patch "/tactics/update(.:format)"   => "tactics#update",     :as => "update_tactics"
   post "/tactics/create(.:format)"   => "tactics#create",     :as => "create_tactics"
+
+  #FILE-unshsan data-gaa data baazruu bicheh 
+  post "/tactics_update_ajax"       => "tactics#tactics_update_ajax",        :as => "tactics_update_ajax"
 
   get "/problempanel(.:format)"            => "problempanel#index",    :as => "problempanel"
   get "/problempanel/new(.:format)"        => "problempanel#new",      :as => "new_problempanel"
