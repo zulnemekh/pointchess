@@ -1,6 +1,6 @@
 class TacticsController < ApplicationController
   def index
-    	@tactics = Base::MtbTactics.all
+    	@tactics = Base::MtbTactics.all.limit(100)
   end
   
   def edit
@@ -15,8 +15,8 @@ class TacticsController < ApplicationController
   end
 
   def tactic
-      @tactics = Base::MtbTactics.all.limit(100)
-
+      @tactics = Base::MtbTactics.where("tactic_type = 2")
+      .order("RAND()").limit(10)
   end
 
   def datainsert

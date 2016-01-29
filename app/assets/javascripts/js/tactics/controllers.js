@@ -68,7 +68,7 @@
 								}
 				  });
 
-			
+			console.log(JSON.stringify($scope.$parent.problems));
   
 		    $scope.goto_detail = function(id) {
 		       Service.id=id;

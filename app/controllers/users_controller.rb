@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 		  @user.email = params[:base_dtb_user_info][:email]
 		  @user.password = ApplicationHelper.encrypt(params[:base_dtb_user_info][:password])
 		  @user.save
+		  session[:id]= @user.id
 		  redirect_to root_path
 		end
   rescue
