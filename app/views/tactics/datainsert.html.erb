@@ -132,19 +132,43 @@ for (var i=0; i < str.length; i++) {
       changeFENinput();
   });
    $('#btnStart').on('click', function() {  
-       insertdata();
+       insertdata1();
         // $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, note: "str", id: "userId"}, function(data) {
         //       console.log(data);
         //   });
       
   });
 
+var counter1 = 0;
+//mate2 mate3 mate4-n data-g baazruu bicheh function
+function insertdata1(){
+
+  game1 = new Chess();
+  game1.load_pgn(mate4[counter1].join('\n'), {newline_char:'\n'});
+  
+  h = game1.header();
+   //[FES "1. Re8+ Kf7 2. R1e7#"] deerh format-r bichsen uyd ajilna
+  _fen=h.FEN;
+  _fes=h.FES;
+  _info=h.INFO;
+
+    $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, fen: _fen, fes: _fes, info: _info}, function(data) {
+            counter1++;
+            console.log(data);
+            insertdata1();
+  });
+
+  
+}
+
+
  var counter = 0;
 function insertdata(){
 
-	var fes="1. Qa5 Kxc1 2. Qe1# 1-0";
-	var fen="8/8/8/8/1Q6/1K6/8/2Nk4 w - - 0 1"
-	var info="|Deutsche Schachzeitung,1968,9 AUTHORS|";
+	// var fes="1. Qa5 Kxc1 2. Qe1# 1-0";
+	// var fen="8/8/8/8/1Q6/1K6/8/2Nk4 w - - 0 1"
+	// var info="|Deutsche Schachzeitung,1968,9 AUTHORS|";
+
 	subObj=objArray[counter];
   
    _fen=subObj[0];
@@ -174,3 +198,7 @@ function insertdata(){
 
   }); //document ready
 </script>
+      
+      <script src="/assets/js/tournament/data/mate2.js"></script>
+      <script src="/assets/js/tournament/data/mate3.js"></script>
+      <script src="/assets/js/tournament/data/mate4.js"></script>

@@ -15,7 +15,16 @@ class TacticsController < ApplicationController
   end
 
   def tactic
-      @tactics = Base::MtbTactics.where("tactic_type = 2")
+      @tactics = Base::MtbTactics.where("tactic_type = 2 and genre = 1")
+      .order("RAND()").limit(10)
+  end
+
+  def tactic_three
+      @tactics = Base::MtbTactics.where("tactic_type = 3 and genre = 1")
+      .order("RAND()").limit(10)
+  end
+  def tactic_four
+      @tactics = Base::MtbTactics.where("tactic_type = 4 and genre = 1")
       .order("RAND()").limit(10)
   end
 
@@ -31,7 +40,8 @@ class TacticsController < ApplicationController
       tactic.fen =params[:fen]
       tactic.fes =params[:fes]
       tactic.info=params[:info]
-      tactic.genre=2
+      tactic.genre=1
+      tactic.tactic_type=4
       tactic.save!
       render :text => tactic.fen.to_s+" | "+tactic.fen.to_s+" | "+tactic.fen.to_s
     else

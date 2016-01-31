@@ -133,6 +133,7 @@
         function newGame() {
             var game = myEngineGame(fen, {book: '/assets/book.bin'});
             my_game=game;
+            my_board=my_game.getBoard();
             var baseTime = parseFloat($('#timeBase').val()) * 60;
             var inc = parseFloat($('#timeInc').val());
             var skill = parseInt($('#skillLevel').val());
@@ -175,6 +176,7 @@
               // window.setTimeout(allScores=my_game.getScores(), 2000);
 						   //holognii nuden deer darahad daragdsan nudnii value-g awna
 						    var clickedSquare = [];
+                var toSquare = [];
 						  $(".row-5277c > div").on("click", function(){
 						  	
                 $(this).each(function() {
