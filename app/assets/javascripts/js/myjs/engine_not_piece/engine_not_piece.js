@@ -15,8 +15,9 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
           pgnEl = $('#pgn1'),
           boardEl = $('#board'),
           squareToHighlight,
-          myMove_from=null,
-          myMove_to=null;
+          isDrop=true,    //drop eswel click
+          myMove_from='e2',
+          myMove_to='e4';
 
       var removeHighlights = function(color) {
         boardEl.find('.square-55d63')
@@ -31,6 +32,10 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
         // do not pick up pieces if the game is over
         // only pick up pieces for the side to move
         var onDragStart = function(source, piece, position, orientation) {
+
+          removeHighlights('white');
+          boardEl.find('.square-' + source).addClass('highlight-white');
+
           var re = playerColor == 'white' ? /^b/ : /^w/
           if (game.game_over() === true ||  piece.search(re) !== -1){
             // console.log("dragStart:"+playerColor);
@@ -38,9 +43,38 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
               // (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
             return false;
           }
+             myMove_from=source; 
+     
         };
+        //click to click move method
+        //nuden deer daraad daraagiin nuuh nudruugee dararad nuune
+         function clicked_move() {
+       
+       console.log("clicked_move"+myMove_from+":"+myMove_to);
+          var move = game.move({
+                    from: myMove_from,
+                    to: myMove_to,
+                    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+                  });
 
+          if (move === null) return 'snapback';
+             
+
+          removeHighlights('white');
+          boardEl.find('.square-' + myMove_from).addClass('highlight-white');
+          boardEl.find('.square-' + myMove_to).addClass('highlight-white');
+  
+                prepareMove("onDrop");
+               updateStatus();
+            
+         }
         var onDrop = function(source, target) {
+           console.log("onDrop"+source+":"+target);
+          if (target==source) {
+            // clicked_move();
+            return false;
+          }
+          
           // see if the move is legal
           var move = game.move({
             from: source,
@@ -48,16 +82,19 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
             promotion: 'q' // NOTE: always promote to a queen for example simplicity
           });
 
+          removeHighlights('white');
           // illegal move
           if (move === null) return 'snapback';
 					
-           // highlight white's move
-          removeHighlights('white');
+           isDrop=false;  // drag drop-r amjilta nuutsen uyd click-r nuuhiig false bolgono
+
+          // highlight white's move
           boardEl.find('.square-' + source).addClass('highlight-white');
           boardEl.find('.square-' + target).addClass('highlight-white');
 
 					prepareMove("onDrop");
           updateStatus();
+
         };
 
         // update the board position after the piece snap 
@@ -158,11 +195,13 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
 
               // game.move({from: 'f3', to: 'f7', promotion: 'q'});
               game.move({from: match[1], to: match[2], promotion: match[3]});
+               fenEl.html(match[1]);
               //computer-n suuliin nuudeliig highlight bolgoh
               removeHighlights('black');
               boardEl.find('.square-' + match[1]).addClass('highlight-black');
               squareToHighlight = match[2];
               
+              isDrop=true;// drop-r ail nuutsen uyd butsaagad click-r nuuh bolomjtoi bolgno
                prepareMove();
           } else if(match = line.match(/^info .*\bdepth (\d+) .*\bnps (\d+)/)) {
               engineStatus.search = 'Depth: ' + match[1] + ' Nps: ' + match[2];
@@ -189,8 +228,8 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
     function uciCmd() {  
 
      stockfish.postMessage(prex+" "+game.fen());
-      // stockfish.postMessage('go depth 11');
-      stockfish.postMessage('go movetime 2000');
+      stockfish.postMessage('go depth 11');
+      // stockfish.postMessage('go movetime 2000');
     }
 
 
@@ -224,28 +263,15 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
             board.orientation(playerColor);
         },
         getSquare: function() {
-           console.log(myMove_to);
           return myMove_to;
         },
-        setSquare: function(value) {
-            if(myMove_from==null && myMove_to==null){
-              if (myMove_from!=value) {
-                myMove_from=value;
-                console.log("myMove_from"+myMove_from);
-                return;
-              }
-            }
-            if(myMove_from!=null && myMove_to==null){
-              if (myMove_to!=value) {
-                myMove_to=value;
-                console.log("myMove_to"+myMove_to);
-                return;
-              }
-            }
-            if(myMove_from!=null && myMove_to!=null){
-              myMove_from=null;
-              myMove_to=null;
-            }
+        setSquare: function(two) {
+          myMove_to=two;
+          console.log(isDrop);
+          if (isDrop==true)
+          clicked_move();
+
+       
             
         },
         setSkillLevel: function(skill) {

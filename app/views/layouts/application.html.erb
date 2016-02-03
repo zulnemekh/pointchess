@@ -54,9 +54,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tactics <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><%= link_to 'Tactics', tactics_path %></li>
-                <li><%= link_to 'Mate in 2', tactic_tactics_path %></li>
-                <li><%= link_to 'Mate in 3', tactic_tactics_three_path %></li>
-                <li><%= link_to 'Mate in 4', tactic_tactics_four_path %></li>
+                <li><%= link_to 'Mate in 2', tactic_tactics_path(:type => '2') %></li>
+                <li><%= link_to 'Mate in 3', tactic_tactics_path(:type => '3') %></li>
+                <li><%= link_to 'Mate in 4', tactic_tactics_path(:type => '4') %></li>
                 
                 <li><%= link_to 'Problempanel', problempanel_path %></li>
                 <li><%= link_to 'Tournament', tournament_index_path %></li>

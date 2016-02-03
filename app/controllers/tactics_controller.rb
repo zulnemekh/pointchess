@@ -15,11 +15,22 @@ class TacticsController < ApplicationController
   end
 
   def tactic
+    b=params[:type].to_i
+
+    if b.is_a? Integer
+      @tactics = Base::MtbTactics.where("tactic_type = #{b
+        } and genre = 1")
+      .order("RAND()").limit(10)
+      
+    else
       @tactics = Base::MtbTactics.where("tactic_type = 2 and genre = 1")
       .order("RAND()").limit(10)
+      # raise params[:type].to_s
+    end  
   end
 
-  def tactic_three
+  def tactic_ajax
+    raise params.to_s
       @tactics = Base::MtbTactics.where("tactic_type = 3 and genre = 1")
       .order("RAND()").limit(10)
   end
