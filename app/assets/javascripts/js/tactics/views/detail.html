@@ -1,10 +1,25 @@
-<a ui-sref="list" class="btn btn-primary">List</a>
-
+<style type="text/css">
+       
+      .highlight-white {
+      -webkit-box-shadow: inset 0 0 3px 3px yellow;
+      -moz-box-shadow: inset 0 0 3px 3px yellow;
+      box-shadow: inset 0 0 3px 3px yellow;  
+      }
+      .highlight-black {
+        -webkit-box-shadow: inset 0 0 3px 3px black;
+        -moz-box-shadow: inset 0 0 3px 3px black;
+        box-shadow: inset 0 0 3px 3px black;  
+      }
+          
+</style>
 
 
 <div class="container-full">
+<h2>{{$parent.tempPoint}}</h2>
+
   <div class="row">
   <div class="col-md-5" >
+
   <div id="board"></div>
 
 </div>
@@ -26,7 +41,12 @@
  -->
     <div class="col-md-7" style="background-color:lavenderblush;">
      <div class="row">
-     <h2>{{$parent.tempPoint}}</h2>
+     
+<a ui-sref="list" class="btn btn-primary">List</a>
+
+      <div id="alertSuccess" class="alert alert-success" role="alert">Well done! You successfully solve this problem.</div>
+      <div id="alertFail" class="alert alert-danger" role="alert">Wrong move! try again.</div>
+     
           <form class="form-horizontal" role="form">
           
           </form>
@@ -52,8 +72,7 @@
              <p>FEN: <span id="fen"></span></p>
              <p>PGN: <span id="pgn"></span></p>
      
-          <div id="alertSuccess" class="alert alert-success" role="alert">Well done! You successfully solve this problem.</div>
-          <div id="alertFail" class="alert alert-danger" role="alert">Wrong move! try again.</div>
+    
           <!-- default -->
           
           <!-- dafualt end -->

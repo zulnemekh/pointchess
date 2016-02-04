@@ -47,10 +47,9 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
      
         };
         //click to click move method
-        //nuden deer daraad daraagiin nuuh nudruugee dararad nuune
+        //nuden deer daraad daraagiin nuuh nudruugee darahad nuune
          function clicked_move() {
        
-       console.log("clicked_move"+myMove_from+":"+myMove_to);
           var move = game.move({
                     from: myMove_from,
                     to: myMove_to,
@@ -179,7 +178,7 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
     } else {
         engineStatus.book = 'none';
     }
- 
+
       //board
       board = ChessBoard('board', cfg);
       // board.position(game.fen());
@@ -190,12 +189,12 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
       	var line = event.data;
 				var match = line.match(/^bestmove ([a-h][1-8])([a-h][1-8])([qrbk])?/);
           if(match) {
-          	
+       
               isEngineRunning = false;
 
               // game.move({from: 'f3', to: 'f7', promotion: 'q'});
               game.move({from: match[1], to: match[2], promotion: match[3]});
-               fenEl.html(match[1]);
+        
               //computer-n suuliin nuudeliig highlight bolgoh
               removeHighlights('black');
               boardEl.find('.square-' + match[1]).addClass('highlight-black');
@@ -226,9 +225,9 @@ var stockfish = new Worker(options.stockfishjs || '/assets/stockfish.js');
    
       updateStatus();
     function uciCmd() {  
-
+      
      stockfish.postMessage(prex+" "+game.fen());
-      stockfish.postMessage('go depth 11');
+      stockfish.postMessage('go depth 5');
       // stockfish.postMessage('go movetime 2000');
     }
 

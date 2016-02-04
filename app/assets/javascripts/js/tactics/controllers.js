@@ -90,6 +90,10 @@ var board, //the chessboard
     currentGame,
     currentGameSolution,
     solution=[],
+    squareToHighlight='e5',
+    boardEl = $('#board'),
+    myMove_from='e2',
+    myMove_to='e4';
     fen;
     
     pgnData = array;
@@ -106,6 +110,11 @@ var board, //the chessboard
   pgnEl = $('#pgn');
   currentPuzzleEl = $('#currentPuzzle');
 
+  var removeHighlights = function(color) {
+        boardEl.find('.square-55d63')
+          .removeClass('highlight-' + color);
+
+  };
 // do not pick up pieces if the game is over
 // only pick up pieces for the side to move
 var onDragStart = function(source, piece, position, orientation) {
@@ -114,9 +123,36 @@ var onDragStart = function(source, piece, position, orientation) {
       (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
     return false;
   }
+    removeHighlights('white');
+    boardEl.find('.square-' + source).addClass('highlight-white');
+    myMove_from=source; //nuuh talin piece deer n darsan uyd ene uildel ajilna
 };
 
-var onDrop = function(source, target) {
+ //click to click move method
+//nuden deer daraad daraagiin nuuh nudruugee darahad nuune
+ function clicked_move() {
+  var move = game.move({
+            from: myMove_from,
+            to: myMove_to,
+            promotion: 'q' // NOTE: always promote to a queen for example simplicity
+          });
+
+  if (move === null) return 'snapback';
+    
+
+  removeHighlights('white');
+  boardEl.find('.square-' + myMove_from).addClass('highlight-white');
+  boardEl.find('.square-' + myMove_to).addClass('highlight-white');
+ 
+    onSnapEnd();
+    movingUser();
+ }
+  var onDrop = function(source, target) {
+    if (target==source) {
+        // clicked_move();
+        return false;
+  }
+
   // see if the move is legal
   var move = game.move({
     from: source,
@@ -124,10 +160,24 @@ var onDrop = function(source, target) {
     promotion: 'q' // NOTE: always promote to a queen for example simplicity
   });
 
+ removeHighlights('white');
   // illegal move
   if (move === null) return 'snapback';
   
-  currentPly++;
+   boardEl.find('.square-' + source).addClass('highlight-white');
+   boardEl.find('.square-' + target).addClass('highlight-white');
+
+    // isDrop=false;  // drag drop-r amjilta nuutsen uyd click-r nuuhiig false bolgono
+    movingUser();
+
+};
+  //computer nuuj duusahad buusan buudaliig highlight bolgono
+  var onMoveEnd = function() {
+    boardEl.find('.square-' + squareToHighlight)
+      .addClass('highlight-black');
+  };
+function movingUser(){
+    currentPly++;
   //buruu nuusen esehiig shalgah
   hist=game.history();
   if (hist.length>0) {
@@ -151,10 +201,7 @@ var onDrop = function(source, target) {
   
   // possibleMove();
   updateStatus();
-
-  // 
-};
-
+}
 // update the board position after the piece snap 
 // for castling, en passant, pawn promotion
 var onSnapEnd = function() {
@@ -169,7 +216,7 @@ var cfg = {
   onDrop: onDrop,
   onSnapEnd: onSnapEnd
 };
-board = ChessBoard('board', cfg);
+
 
 // User drag drop-r nuusenii daraa solution dotor bga nuudeliig 
 //nuuhed zow bwal daraagin nuudeliig nuune
@@ -179,6 +226,11 @@ var  possibleMove = function() {
     currentPly++;
     game.move(solution[currentPly]);
     board.position(game.fen());
+console.log("possibleMove:"+solution[currentPly]);
+    // removeHighlights('black');
+    // boardEl.find('.square-' + match[1]).addClass('highlight-black');
+    // squareToHighlight = match[2];
+    
   }
    
 };
@@ -255,19 +307,12 @@ function goToMove(ply) {
   board.position(game.fen());
 }
 
-//pgnData-s FEN file-g tataj awah
-// function getFenFromPgnData(g) {
-//   var h = g.header();
-//   fen=h.FEN;
-//   currentGameSolution=h.FES; //[FES "1. Re8+ Kf7 2. R1e7#"] deerh format-r bichsen uyd ajilna
-
-//  }
-
+board = ChessBoard('board', cfg);
 function loadGame(i) {
+
   board.clear();
-  // game1 = new Chess();
- 	// game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
-  // getFenFromPgnData(game1);
+  removeHighlights('white');  //retry, next-r orj irehed highlight-g remove hiih
+
   fen=pgnData[i].fen;
   currentGameSolution=pgnData[i].fes; 
 	solution.length=0;
@@ -286,7 +331,11 @@ function loadGame(i) {
   currentGame = i;
   updateStatus();
  
-  
+  $("div[class^='square-']").on("click", function(){
+     // console.log(this.id);  
+    myMove_to=this.id.substring(0,2);
+        clicked_move();
+});
 }
 
   //problemsolve end
@@ -296,6 +345,9 @@ function loadGame(i) {
 //buttons
 // $(window).resize(board.resize);
 // $(window).resize(board.resize)
+
+//click selected square
+ 
 $('#btnNew').on('click', function() {
   min=0;
   max=pgnData.length;
