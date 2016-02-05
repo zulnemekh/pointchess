@@ -115,6 +115,21 @@ var board, //the chessboard
           .removeClass('highlight-' + color);
 
   };
+var removeGreySquares = function() {
+  $('#board .square-55d63').css('background', '');
+};
+
+var greySquare = function(square) {
+  var squareEl = $('#board .square-' + square);
+  
+  var background = '#a9a9a9';
+  if (squareEl.hasClass('black-3c85d') === true) {
+    background = '#696969';
+  }
+
+  squareEl.css('background', background);
+};
+
 // do not pick up pieces if the game is over
 // only pick up pieces for the side to move
 var onDragStart = function(source, piece, position, orientation) {
@@ -123,8 +138,10 @@ var onDragStart = function(source, piece, position, orientation) {
       (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
     return false;
   }
-    removeHighlights('white');
-    boardEl.find('.square-' + source).addClass('highlight-white');
+    removeGreySquares();
+    //removeHighlights('white');
+    greySquare(source);
+    //boardEl.find('.square-' + source).addClass('highlight-white');
     myMove_from=source; //nuuh talin piece deer n darsan uyd ene uildel ajilna
 };
 
@@ -139,10 +156,12 @@ var onDragStart = function(source, piece, position, orientation) {
 
   if (move === null) return 'snapback';
     
-
-  removeHighlights('white');
-  boardEl.find('.square-' + myMove_from).addClass('highlight-white');
-  boardEl.find('.square-' + myMove_to).addClass('highlight-white');
+    removeGreySquares();
+  // removeHighlights('white');
+    greySquare(myMove_from);
+    greySquare(myMove_to);
+  // boardEl.find('.square-' + myMove_from).addClass('highlight-white');
+  // boardEl.find('.square-' + myMove_to).addClass('highlight-white');
  
     onSnapEnd();
     movingUser();
@@ -160,12 +179,16 @@ var onDragStart = function(source, piece, position, orientation) {
     promotion: 'q' // NOTE: always promote to a queen for example simplicity
   });
 
- removeHighlights('white');
+ // removeHighlights('white');
+  removeGreySquares();
   // illegal move
   if (move === null) return 'snapback';
   
-   boardEl.find('.square-' + source).addClass('highlight-white');
-   boardEl.find('.square-' + target).addClass('highlight-white');
+   
+    greySquare(source);
+    greySquare(target);
+   // boardEl.find('.square-' + source).addClass('highlight-white');
+   // boardEl.find('.square-' + target).addClass('highlight-white');
 
     // isDrop=false;  // drag drop-r amjilta nuutsen uyd click-r nuuhiig false bolgono
     movingUser();
@@ -224,13 +247,15 @@ var  possibleMove = function() {
    
    if (currentPly < solution.length - 1) {
     currentPly++;
-    game.move(solution[currentPly]);
+    movedObj=game.move(solution[currentPly]);
     board.position(game.fen());
-console.log("possibleMove:"+solution[currentPly]);
-    // removeHighlights('black');
-    // boardEl.find('.square-' + match[1]).addClass('highlight-black');
-    // squareToHighlight = match[2];
     
+    removeGreySquares();
+    greySquare(movedObj.from);
+    greySquare(movedObj.to);
+    // removeHighlights('white');
+    // boardEl.find('.square-' + movedObj.from).addClass('highlight-white');
+    // boardEl.find('.square-' + movedObj.to).addClass('highlight-white');
   }
    
 };
@@ -311,8 +336,8 @@ board = ChessBoard('board', cfg);
 function loadGame(i) {
 
   board.clear();
-  removeHighlights('white');  //retry, next-r orj irehed highlight-g remove hiih
-
+  removeGreySquares();
+  
   fen=pgnData[i].fen;
   currentGameSolution=pgnData[i].fes; 
 	solution.length=0;
@@ -330,10 +355,12 @@ function loadGame(i) {
  	board.position(game.fen());
   currentGame = i;
   updateStatus();
- 
+ tBoard=board;
+ tGame=game;
   $("div[class^='square-']").on("click", function(){
-     // console.log(this.id);  
+    
     myMove_to=this.id.substring(0,2);
+      console.log(myMove_to);  
         clicked_move();
 });
 }

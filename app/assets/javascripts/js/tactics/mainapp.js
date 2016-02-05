@@ -1,5 +1,5 @@
 var gb_fen="from scope";  //gb=global
-
+var tBoard,tGame;
 var mainApp = angular.module('mainApp', ['ui.router'])
   .directive('onFinishRender', function ($timeout) {
   return {
