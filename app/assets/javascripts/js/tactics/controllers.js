@@ -2,6 +2,7 @@
          mainApp.controller("parentController", function($scope,$timeout,Service) {
             $scope.message = "In parent controller";
             $scope.tempPoint = Service.tempPoint;
+            $scope.allPoint = 0;
             $scope.timer = "";
             $scope.counter = 300;
             $scope.problems =array;
@@ -77,9 +78,42 @@
 
       });
          
-         mainApp.controller("detailController", function($rootScope,$scope,Service, $stateParams,$window) {
-            $scope.message = "In detail controller";
-            $scope.type = "detail";
+ mainApp.controller("detailController", function($rootScope,$scope,$timeout,Service, $stateParams,$window) {
+    $scope.message = "In detail controller";
+    $scope.type = "detail";
+    $scope.timer = "";
+    $scope.progress = 100;
+    $scope.counter = 0;
+    //point calculate begin
+    maxPoint=20;
+    masterDone=20;
+    tacticDone1=1;
+    tacticDone2=0.75;
+    tacticDone3=0.6;
+    tacticDone4=0.4;
+    currentCorrectMoveCount=0;
+    currentTacticIsDone=false;
+    //point calculate end
+  //timer for detail
+  $scope.onTimeout = function(){
+    // if ($scope.counter == 0) {
+    //   console.log("Game Over");
+    //   return false;
+    // }
+  valeur=$scope.progress-$scope.counter;
+  if (valeur > -1) 
+    $('.progress-bar').css('width', valeur+'%').attr('aria-valuenow', valeur);    
+    
+    $scope.counter++;
+    $scope.timer= $scope.counter;
+    mytimeout = $timeout($scope.onTimeout,1000);
+
+  }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+    
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
 
 
 	//detailProblem begin
@@ -130,6 +164,45 @@ var greySquare = function(square) {
   squareEl.css('background', background);
 };
 
+function pointCalculate() {
+  
+  if (currentCorrectMoveCount==0) return false
+  
+  perSec=$scope.counter/currentCorrectMoveCount;
+  tempPoint=maxPoint-perSec/2;
+  if (tempPoint < 1) tempPoint=0;
+  tempDone=0;
+  if (currentTacticIsDone) {
+    // if (perSec <= 5) {tempDone=masterDone*tacticDone1;}
+    //   if (perSec > 5 && perSec <=15) {tempDone=masterDone*tacticDone2;}
+    //     if (perSec > 15 && perSec <= 30) {tempDone=masterDone*tacticDone3;}
+    //       if (perSec > 30) {tempDone=masterDone*tacticDone4;}
+    var x = perSec;
+    switch (true) {
+        case (x < 5):
+            tempDone=masterDone*tacticDone1;
+            break;
+        case (perSec > 5 && perSec <=20):
+            tempDone=masterDone*tacticDone2;
+            break;
+        case (perSec > 20 && perSec <= 50):
+            tempDone=masterDone*tacticDone3;
+            break;
+        case (perSec > 50):
+            tempDone=masterDone*tacticDone4;
+            break;    
+        default:
+            tempDone=masterDone*tacticDone4;
+            break;
+    }
+  }
+
+  console.log("perSec:"+perSec);
+  console.log("tempDone:"+tempDone);
+  console.log("tempPoint:"+tempPoint);
+  $scope.$parent.allPoint=$scope.$parent.allPoint+tempPoint+tempDone;
+  $scope.$parent.tempPoint=tempPoint+tempDone;
+}
 // do not pick up pieces if the game is over
 // only pick up pieces for the side to move
 var onDragStart = function(source, piece, position, orientation) {
@@ -209,6 +282,7 @@ function movingUser(){
     //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
     if (lastMove!=solution[currentPly]) {  
       alertFail.setAttribute('class', 'alert alert-danger visible');
+      pointCalculate();
     }else
     {  //suuliin nuusen nuudel zow uyd l daraagiin nuudelee nuune
       window.setTimeout(possibleMove, 500); 
@@ -216,7 +290,9 @@ function movingUser(){
       if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
           alertSuccess.setAttribute('class', 'alert alert-success visible');
         // $('#alertSuccess').show();
-         $scope.$parent.tempPoint=$scope.$parent.tempPoint+currentGameSolution.length;
+        currentTacticIsDone=true;
+        pointCalculate();
+         
       }   
     }
    
@@ -249,7 +325,10 @@ var  possibleMove = function() {
     currentPly++;
     movedObj=game.move(solution[currentPly]);
     board.position(game.fen());
-    
+    //
+    currentCorrectMoveCount++;
+
+    //nuusen square-g highlight bolgoh
     removeGreySquares();
     greySquare(movedObj.from);
     greySquare(movedObj.to);
@@ -334,6 +413,9 @@ function goToMove(ply) {
 
 board = ChessBoard('board', cfg);
 function loadGame(i) {
+  $scope.counter = 0; // tur zuur 0 utgaar bichew
+  currentCorrectMoveCount=0; //zow nuusen nuudeluudiig tooloh
+  currentTacticIsDone=false;
 
   board.clear();
   removeGreySquares();
