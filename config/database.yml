@@ -2,9 +2,9 @@ development:
   adapter: mysql2
   encoding: utf8
   database: titan_clan
-  host: 127.0.0.1
-  username: root
-  password: root
+  host: test.c5729kvnntur.us-east-1.rds.amazonaws.com
+  username: masteruser
+  password: masteruser
   socket: /tmp/mysql.sock
   reconnect: true
 

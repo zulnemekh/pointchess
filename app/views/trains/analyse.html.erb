@@ -89,17 +89,21 @@
       	
 				var onDragMove = function(newLocation, oldLocation, source,
                           piece, position, orientation) {
-				  console.log("New location: " + newLocation);
-				  console.log("Old location: " + oldLocation);
-				  console.log("Source: " + source);
-				  console.log("Piece: " + piece);
-				  console.log("Position: " + ChessBoard.objToFen(position));
-				  console.log("Orientation: " + orientation);
+				  // console.log("New location: " + newLocation);
+				  // console.log("Old location: " + oldLocation);
+				  // console.log("Source: " + source);
+				  // console.log("Piece: " + piece);
+				  // console.log("Position: " + ChessBoard.objToFen(position));
+				  // console.log("Orientation: " + orientation);
 			
-						moveColorChange();
+						// moveColorChange();
 		
 
 				};
+	
+		var onSnapEnd = function() {
+		  moveColorChange();
+		};
 					var game,
  			   	playerColor,
  			    cfg = {
@@ -107,7 +111,8 @@
 				  position: 'start',
 				  dropOffBoard: 'trash',
 				  onDragMove: onDragMove,
-				  sparePieces: true
+				  sparePieces: true,
+				  onSnapEnd: onSnapEnd
 				};
 			
 				   var board = ChessBoard('board', cfg);      
@@ -129,7 +134,7 @@
 
 					tt=game.validate_fen(fen);
 					fenValidate=tt.valid;
-					console.log("moeColor:"+fen);
+
          	$("#inputFen").val(fen); 
          		if (fenValidate)
          			$('#inputFen').removeClass('error');
