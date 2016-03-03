@@ -53,7 +53,7 @@ Reddit::Application.routes.draw do
   get "playgame" => "trains#playgame", :as => "trains_playgame"
 
   get "pgnanalyse" => "problems#pgnanalyse", :as => "problems_pgnanalyse"
-  
+  get "mqtt" => "problems#mqtt", :as => "problems_mqtt"
 
   get    'signup'  => 'users#new' , :as => "signup"
   post  "/user/create(.:format)"   => "users#create",     :as => "create_user"
