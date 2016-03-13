@@ -1,1 +1,27 @@
-Sudalgaa.txt
+Project manager include all things
+
+ -Business
+ 		-Business model
+ 		-Marketing plan
+ 		-Risk, Scope, Planning
+
+ -System engineer
+ 		-Server     | Schedule
+ 		-Database   |	Planning
+ 		-Code				| Patern
+ 		-Library, Plugin  | Management
+ 		-System logic			| Documentation
+
+ -Programming development
+ 		-Find best solution 
+ 		-Research technology
+ 		-Writing code in Patern
+ 		-Following document and schedule planning
+ 		-Bug, Degrade fix
+ 		-Comment for code
+ 		-Server configration
+ 		-Procedure, query development
+
+ -Design
+ 		-Draw logo, characters etc..
+ 		-Html, css color ficker		 		
