@@ -3,7 +3,7 @@
 <head>
     <title>AngularJS Example - Multiple Timers Example</title>
     	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
-	<script src="/assets/js/myjs/tournament/controllers/timer.js"></script>
+
     <script>
 		 var openFile = function(event) {
 		    var input = event.target;
@@ -13,8 +13,10 @@
 		      var text = reader.result;
 		      var str = "1. The rain in SPAIN stays [mainly] in the plain"; 
    		    var atributes = str.match(/\[[\w\d\"\.]*\]/g);
-			
-			var regex3 = /1\.[\w\d\.\s\+\$\(\)\-\#]*[01\/2]+\-[01\/2]+[\s]/g;
+
+		//regex3	tactics.txt -n hariunuudiig songoj awdag heseg		
+			 var regex3 = /1\.[\w\d\.\s\+\$\(\)\-\#]*[01\/2]+\-[01\/2]+[\s]/g;
+
 			 var regex4= /\[[\w\d\s\"\.\/\-'?]*\]/g; // heseg hesegeer n salgah
 			  
 					var regex1 = /^1\..*$/g;
@@ -22,9 +24,9 @@
 			    var check_temp_name_array = [];
 		      // console.log(regex2.exec(text));
 		      // console.log(text);
-			    while((match = regex4.exec(text)) !== null){
-			      // check_temp_name_array.push(match[0]);
-			      // console.log(match[0]);
+			    while((match = regex3.exec(text)) !== null){
+			       check_temp_name_array.push(match[0]);
+			       console.log(match[0]);
 			    }
 
 			var elements = $();
@@ -33,7 +35,7 @@
 			}
 
 		      $('#resultmatch').html(elements);
-		      $('#result').html(text);
+		      // $('#result').html(text);
 		    };
 		    reader.readAsText(input.files[0]);
 		  };

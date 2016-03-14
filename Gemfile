@@ -13,8 +13,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'devise'
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 4.0.3'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'simple_form', '~> 3.1.1'
+gem 'mysql2', '0.3.15'
+gem 'protected_attributes'

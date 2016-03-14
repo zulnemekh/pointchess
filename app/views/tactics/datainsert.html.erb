@@ -1,0 +1,204 @@
+<link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+ <script src="/assets/js/chess.min.js"></script>
+<script src="/assets/js/chessboard-0.3.0.min.js"></script>    
+
+<script type="text/javascript">
+	var _AUTH_TOKEN = <%= raw form_authenticity_token.inspect if protect_against_forgery? %>
+</script>
+  <style type="text/css">
+    .myfield {
+      width: 400px;
+    }
+  
+    .defaultInput
+        {
+         border:1px solid blue;
+        }
+
+        .error
+        {
+         border:1px solid red;
+        }
+</style>
+<div class="container-full">
+  <div class="row"> <!-- hoyor class="col-md-6" -g aguulsan row div -->
+    <div class="col-md-1" >
+ 
+    </div> 
+    <div class="col-md-3" >
+         <div id="board"></div>
+    </div> 
+ 
+    <div class="col-md-6" >  <!--class="col-md-6" 2dahi column div-n ehlel  -->
+    
+<%= form_for @tactic, :url => create_tactics_path do |f| %>
+ 
+  <div class="field">
+    <%= f.label :fen %><br>
+    <%= f.text_area :fen, :id =>"inputFen", class: "myfield"%>
+  </div>
+  <div class="field">
+    <%= f.label :fes %><br>
+    <%= f.text_area :fes, class: "myfield" %>
+  </div>
+ 
+  <div class="field">
+    <%= f.label :info %><br>
+    <%= f.text_area :info, class: "myfield" %>
+  </div>
+  <div class="field">
+    <%= f.label :short_info %><br>
+    <%= f.text_field :short_info, class: "myfield" %>
+  </div>
+  <div class="field">
+    <%= f.label :genre %><br>
+    <%= f.text_field :genre, class: "myfield" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+    <button id="btnStart" type="button" class="btn btn-primary">Start insert</button>
+</div>
+<div>
+	
+	<input type='file' accept='text/plain' onchange='openFile(event)'><br>
+	<img id='output'>
+	<ul class="quoteList"></ul>
+	<div id="resultmatch" style="text-color: blue"></div>
+	<div ><pre id="result"></pre></div>
+
+</div>
+<script type="text/javascript">
+// var tt= '<%=@objArray%>'
+var objArray=[];
+ var openFile = function(event) {
+		    var input = event.target;
+
+		    var reader = new FileReader();
+		    reader.onload = function(){
+		      var text = reader.result;
+		      var str = "8/8/8/8/1Q6/1K6/8/2Nk4 w - - 0 1|Deutsche Schachzeitung,1968,9 AUTHORS|1. Qa5 Kxc1 2. Qe1# 1-0"; 
+   		 
+var enteredText = text;
+// var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
+// var characterCount = enteredText.length + numberOfLineBreaks;
+// enteredText.replace( /\n/g, "|" );
+
+var str = enteredText.split("\n");
+for (var i=0; i < str.length; i++) {
+  objArray.push(str[i].split("|"));
+    	// $.post('/tactics_update_ajax', {fen: fen, fes: fes, info: info}, function(data) {
+
+     //      });
+};
+
+
+// alert('Number of breaks:  ' + numberOfLineBreaks);
+
+			    // var check_temp_name_array = [];
+		     //  // console.log(regex2.exec(text));
+		     //  // console.log(text);
+			    // while((match = regex3.exec(text)) !== null){
+			    //    check_temp_name_array.push(match[0]);
+			    //    console.log(match[0]);
+			    // }
+
+			// var elements = $();
+			// for(x = 0; x < check_temp_name_array.length; x++) {
+			//     elements = elements.add('<div>'+check_temp_name_array[x]+'</div>');
+			// }
+
+		      // $('#resultmatch').html(enteredText);
+		      $('#result').html(enteredText);
+		    };
+		    reader.readAsText(input.files[0]);
+		  };
+
+ $(document).ready(function() {
+  var game,
+    cfg = {
+    position: '',
+  };
+      
+  var board = ChessBoard('board', cfg);      
+    $(window).resize();
+  game = new Chess();
+  
+  changeFENinput(); 
+  
+  $('#inputFen').on("change paste keyup", function() {
+      changeFENinput();
+  });
+   $('#btnStart').on('click', function() {  
+       insertdata1();
+        // $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, note: "str", id: "userId"}, function(data) {
+        //       console.log(data);
+        //   });
+      
+  });
+
+var counter1 = 0;
+//mate2 mate3 mate4-n data-g baazruu bicheh function
+function insertdata1(){
+
+  game1 = new Chess();
+  game1.load_pgn(mate4[counter1].join('\n'), {newline_char:'\n'});
+  
+  h = game1.header();
+   //[FES "1. Re8+ Kf7 2. R1e7#"] deerh format-r bichsen uyd ajilna
+  _fen=h.FEN;
+  _fes=h.FES;
+  _info=h.INFO;
+
+    $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, fen: _fen, fes: _fes, info: _info}, function(data) {
+            counter1++;
+            console.log(data);
+            insertdata1();
+  });
+
+  
+}
+
+
+ var counter = 0;
+function insertdata(){
+
+	// var fes="1. Qa5 Kxc1 2. Qe1# 1-0";
+	// var fen="8/8/8/8/1Q6/1K6/8/2Nk4 w - - 0 1"
+	// var info="|Deutsche Schachzeitung,1968,9 AUTHORS|";
+
+	subObj=objArray[counter];
+  
+   _fen=subObj[0];
+   _info=subObj[1];
+   _fes=subObj[2];
+            
+	$.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, fen: _fen, fes: _fes, info: _info}, function(data) {
+            counter++;
+             console.log(data);
+            insertdata();
+  });
+}
+  function changeFENinput() {
+      gg=$("#inputFen").val(); 
+      tt=game.validate_fen(gg);
+      fenValidate=tt.valid;
+    
+        if (fenValidate){
+          $('#inputFen').removeClass('error');
+           board.position(gg);
+        }
+        else
+          $('#inputFen').addClass('error');
+    
+    } // function changeFENinput()  end
+
+
+  }); //document ready
+</script>
+      
+      <script src="/assets/js/tournament/data/mate2.js"></script>
+      <script src="/assets/js/tournament/data/mate3.js"></script>
+      <script src="/assets/js/tournament/data/mate4.js"></script>

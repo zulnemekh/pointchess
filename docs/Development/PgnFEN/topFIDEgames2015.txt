@@ -1,0 +1,815 @@
+
+Simen Agdestein vs Borki Predojevic, Norway, 2015
+FEN 2R5/5ppk/7q/pp1N3Q/8/1P4pP/2P2nK1/4r3 w - - 1 0 
+FES Nf6+ gxf6 Qxf7+ Qg7 Qh5+ Qh6 Rc7+
+
+
+
+Evgeny Alekseev vs Denis Khismatullin, Sochi, 2015
+FEN 2Q2q2/1P3pkp/4p1p1/1r3n2/8/7P/P4PP1/3R2K1 w - - 1 0 
+FES Qxf8+ Kxf8 Rd8+
+
+
+
+Elbek Alikulov vs Vladimir Potkin, Sochi, 2015
+FEN r3k3/5p2/pbq1p3/3rPp1Q/2p4B/8/P1P3PP/1R3R1K w - - 1 0 
+FES Rxb6 Qxb6 Qh8+
+
+
+
+White mates in 4.Dmitry Andreikin vs Maksim Chigaev, Sochi, 2015
+FEN r4k2/1p2R3/2bR1rp1/p7/2q5/2P3QP/1P3PP1/6K1 w - - 1 0 
+FES Rxf6+ if Kxe7 Qd6+
+
+
+
+White mates in 4.Alexander Areshchenko vs Andreas Schenk, Germany, 2015
+FEN 7k/4r2B/1pb5/2P5/4p2Q/2q5/2P2R2/1K6 w - - 1 0 
+FES Rf8+ Kg7 Rg8+
+
+
+
+
+
+White mates in 3.Maksat Atabayev vs Muhammad Lutfi Ali, Moscow, 2015
+FEN 1R6/p5kp/2q1b1p1/4R1Q1/2P5/3r3P/5PP1/6K1 w - - 1 0 
+FES Qe7+ Bf7 Qf8+
+
+
+
+Yusup Atabayev vs Sergey Grigoriants, Moscow, 2015
+FEN 2r4k/4r2p/p3PNp1/1p6/n5P1/P3RR2/7P/6K1 w - - 1 0 
+FES Nd5 if Ree8 Rf7 w/Nf6
+
+
+
+Vlastimil Babula vs Ilja Schneider, Germany, 2015
+FEN r2q1k1r/1p3p2/p6p/2Np1B1P/3b3p/8/PPQ2P1P/1K4R1 w - - 1 0 
+FES Nd7+ Ke7 Qd2 w/Qb4+ or Re1+
+
+
+
+White mates in 3.Tal Baron vs Asaf Givon, Jerusalem, 2015
+FEN 4R3/q2Q1ppk/1p5p/3p4/r1nP2P1/1R3P2/P5P1/6K1 w - - 1 0 
+FES Qf5+ g6 Qf6
+
+
+
+Mateusz Bartel vs Quinten Ducarmon, Jerusalem, 2015
+FEN r4rk1/p4ppp/1p1p4/3QpnN1/6q1/P1R3P1/1P2PP1P/5RK1 w - - 1 0 
+FES Nxf7 if Qh5 Nd8+ or if Rxf7 Qxa8+
+
+
+
+
+
+White mates in 4.Matthias Bluebaum vs Dmitrij Kollars, Bad Zwischenahn, 2015
+FEN 1b3rk1/3n4/p3q1pQ/1p2p3/1P4N1/P1p5/2B2PPP/3R2K1 w - - 1 0 
+FES Rxd7 Qxd7 Bb3+
+
+
+
+White mates in 3.Dmitry Bocharov vs Rakhim Pasiev, Sochi, 2015
+FEN 4rbk1/1r3p2/p1b2ppP/8/1PPBqP1Q/P3P3/6N1/2R2RK1 w - - 1 0 
+FES h7+
+
+
+
+White mates in 3.Dmitry Bocharov vs Alexey Mokshanov, Sochi, 2015
+FEN 1k1r4/6p1/4pp2/N1p3p1/1n1P4/5PP1/4Q1KP/q7 w - - 1 0 
+FES Qb5+ Kc7 Qb7+
+
+
+
+Stanislav Bogdanovich vs Vahap Sanal, Moscow, 2015
+FEN q3r3/5kb1/6p1/1p5p/3QB3/7b/1P1B1P2/4R1K1 w - - 1 0 
+FES Bd5+ if Kf8 Qc5+ mates
+
+
+
+White mates in 3.Benjamin Bok vs Liafbern Riemersma, Netherlands, 2015
+FEN 6k1/3b2pq/p3p3/2Q5/3p1B2/nr6/2P4P/2K2RR1 w - - 1 0 
+FES Qf8+ Kxf8 Bd6+
+
+
+
+
+
+White mates in 2.Piotr Brodowski vs Zbynek Hracek, Trzcianka, 2015
+FEN 2r2b2/p4k2/3q1N1p/n2NpQpP/3pP3/P5P1/2r2PK1/2R5 w - - 1 0 
+FES Qg6+
+
+
+
+White mates in 5.Ivan Bukavshin vs Ernesto Inarkiev, Moscow, 2015
+FEN 3n2k1/p3q1bN/1p2p1Q1/4Pp2/3P1P2/7R/P4BPK/2r5 w - - 1 0 
+FES Nf6+ if Kf8 Rh8+ or if Qxf6 exf6
+
+
+
+Vladimir Burmakin vs Matthias Dann, Fagernes, 2015
+FEN 1rbq1k2/1p2p1bQ/p1pp1rB1/3P4/1n1P4/1P4P1/P4P1P/R1B2RK1 w - - 1 0 
+FES Bh6 Rxg6 Qh8+ Kf7 Qxd8
+
+
+
+White mates in 3.Emre Can vs Luka Draskovic, Jerusalem, 2015
+FEN r3n3/6pp/pn2pp2/8/1k1NPB2/1P3PP1/6KP/2R5 w - - 1 0 
+FES Bd2+ Ka3 Bc3
+
+
+
+White mates in 4.Lukas Cernousek vs Milan Pacher, Vienna, 2015
+FEN 2kr3r/pp1b2b1/q1n1B3/1N4pp/3pQ3/1P2P1B1/P4PPP/2RK3R w - - 1 0 
+FES Nxa7+ Qxa7 Rxc6+
+
+
+
+
+
+White mates in 3.Boris Chatalbashev vs Luca Moroni, Lugano, 2015
+FEN 3r1rk1/pp1bRp2/3q1QB1/2p5/2P3Pp/5P2/1P6/1K6 w - - 1 0 
+FES Bxf7+ if Kh7 Bg6+
+
+
+
+Maksim Chigaev vs Ilia Iljiushenok, Sochi, 2015
+FEN r4r2/1R3p1p/2kqp3/p1n5/1B1p1P2/2Q5/2P3PP/1R4K1 w - - 1 0 
+FES Rb6+
+
+
+
+Maksim Chigaev vs Michail Panarin, Sochi, 2015
+FEN 7R/1p4R1/2p1p3/2Pp1p1n/3P3k/8/8/q5BK w - - 1 0 
+FES Kg2
+
+
+
+White mates in 5.Slavko Cicak vs Christian Jepson, Sweden, 2015
+FEN 2k1r3/ppr5/3R1p2/1P4p1/7p/4PQ1P/q4PP1/3R2K1 w - - 1 0 
+FES Qf5+ if Kb8 Rd8+
+
+
+
+Viktorija Cmilyte vs Ekaterina Kovalevskaya, Sochi, 2015
+FEN Qn6/2q1kp2/p3pr2/1p6/2p4P/2N3P1/PP3P2/2KR4 w - - 1 0 
+FES Qe4 if Rf5 Qxf5 or if Kf8 Qd4
+
+
+
+
+
+Matthieu Cornette vs Ilja Zaragatski, Germany, 2015
+FEN 2br3r/pk4pp/1pp1p3/4Q3/2PP2qP/R7/PP3PP1/2K1R3 w - - 1 0 
+FES Rxa7+ Kxa7 Qc7+ Ka6 Re3 w/Ra3+
+
+
+
+White mates in 3.Jose Fernando Cubas vs Kevin Paveto, Florianopolis, 2015
+FEN r3r3/bp4pk/pqp2nNp/4P2P/5pb1/1BP5/PPQ2PP1/R3R1K1 w - - 1 0 
+FES Nf8+ Kh8 Qh7+
+
+
+
+White mates in 2.Martijn Dambacher vs Erald Dervishi, Germany, 2015
+FEN r2rnk2/p2R3Q/1q5p/1ppb4/8/8/PP3PPP/1B2R1K1 w - - 1 0 
+FES Rxe8+
+
+
+
+Alexandre Danin vs Mikhail Simantsev, Prague, 2015
+FEN 3q1r1k/1r3pp1/p6p/4p1n1/6RQ/3B4/1PP3PP/5R1K w - - 1 0 
+FES Rxg5 if Qxg5 Qe4
+
+
+
+Radoslav Dimitrov vs Vasil Spasov, Plovdiv, 2015
+FEN 8/p4R2/3r1Bpk/2p4p/6rP/5K2/PP3P2/8 w - - 1 0 
+FES Be7
+
+
+
+
+
+White mates in 2.Ilya Duzhakov vs Pavel Martynov, St. Petersburg, 2015
+FEN 2r5/r1PnpkP1/4n3/p3BN1p/1p4bP/8/PP4P1/1BR1R1K1 w - - 1 0 
+FES Nh6+
+
+
+
+White mates in 6.Pavel Eljanov vs Evgeny Romanov, Jerusalem, 2015
+FEN 5r1k/1q3r1p/3p3Q/3Np3/4P3/5n2/P5RP/6RK w - - 1 0 
+FES Nf6 if Nxg1 Nxh7 Rb8 Nf8+ or if Rxf6 Qxf6+
+
+
+
+Thomas Fiebig vs Zoltan Medvegy, Germany, 2015
+FEN 8/p4p2/2p1k2p/1bR3p1/3PN3/3r1P2/P5PP/6K1 w - - 1 0 
+FES Re5+ Kd7 Nc5+
+
+
+
+Alexander Fier vs Eesha Karavade, Dubai, 2015
+FEN 3qr3/Rb2rpk1/1np2npp/1p1p4/1P1P3B/3BPP2/2Q3PP/2R2NK1 w - - 1 0 
+FES Bxf6+ if Kxf6 Rxb7 Rxb7 Qxc6+
+
+
+
+Alexander Fier vs Petar Arnaudov, Skopje, 2015
+FEN 3q1rk1/r6p/2n5/2pN2p1/8/1Q1B4/P4PPP/b4RK1 w - - 1 0 
+FES Ne7+ Kh8 Nxc6
+
+
+
+
+
+Daniel Fridman vs Jaan Ehlvest, Yurmala, 2015
+FEN r2qnrk1/pp1nppb1/3p3p/2pPP1N1/5Pp1/2N5/PPP3P1/R1BQK2R w KQ - 1 0 
+FES Qd3 if f5 Ne6
+
+
+
+Anish Giri vs Baadur Jobava, Wijk aan Zee, 2015
+FEN 1r4k1/1p6/pN1p1qr1/P2Pp2R/1P2Ppb1/5BP1/5PKQ/8 w - - 1 0 
+FES Bxg4 Rxg4 Qh3
+
+
+
+White mates in 3.Evgeny Gleizerov vs Michal Krasenkow, Yurmala, 2015
+FEN 5rk1/6r1/pp1pR2Q/2pP4/q4p1R/5B1P/1P5K/8 w - - 1 0 
+FES Qh8+ Kf7 Bh5+
+
+
+
+White mates in 5.Dmitry Gordievsky vs Eduard Khatoev, Loo, 2015
+FEN 3r3k/pp6/2q1bNp1/6P1/2pBP3/2P2P2/P4QK1/8 w - - 1 0 
+FES Qh4+ Kg7 Nd5+
+
+
+
+Karen Grigoryan vs Viktor Laznicka, Jerusalem, 2015
+FEN 2r5/3q1p2/p2b1pk1/2pP1Nrp/1pP1Pp2/5Q1R/P5PP/2R3K1 w - - 1 0 
+FES Rxh5 Rxh5 Qg4+ Rg5 Nh4+
+
+
+
+
+
+White mates in 3.Valentina Gunina vs Zhansaya Abdumalik, Chengdu, 2015
+FEN 1r2rk2/p1Q1Np1p/6p1/2P1b1N1/6n1/1P1RB3/P3KP1P/q7 w - - 1 0 
+FES Nxg6+ if Kg7 Qxf7+
+
+
+
+Gadir Guseinov vs Sergei Tiviakov, Nakhichevan, 2015
+FEN 7k/pp1nRrqp/2p5/3p2p1/3P4/P1PB3P/1P4P1/4Q2K w - - 1 0 
+FES Rxd7 if Rxd7 Qe8+
+
+
+White mates in 3.Stelios Halkias vs Misa Pap, Bad Woerishofen, 2015FEN 2r3k1/pp1rR1b1/6p1/q4b2/6NQ/2N4P/PP3PP1/4R1K1 w - - 1 0 
+FES Nf6+ if Kf8 Qh7
+
+
+
+Conrad Holt vs Jeffrey Xiong, Richardson, 2015
+FEN 4R3/2p2ppk/1p1p3p/2n2b2/p1q5/P1B3P1/1P3P1P/3Q2K1 w - - 1 0 
+FES Qh5 if Qg4 Qxf7 Be6 Qf8 or if Bg6 Rh8+ mates
+
+
+
+Artem Iljin vs Sergey Grishchenko, Sochi, 2015
+FEN rq3rk1/p1N2pbp/2n2pp1/5b2/1P6/PQ3NP1/5PBP/1R2R1K1 w - - 1 0 
+FES Nxa8 Bxb1 Qxb1 if Qxa8 Nd4
+
+
+
+
+
+Miguel Illescas Cordoba vs Daniel Forcen Esteban, Madrid, 2015
+FEN 2r5/2Rnq2k/1p3pp1/1p5p/3P2N1/P3P1P1/1P3P1P/3R2K1 w - - 1 0 
+FES Rxd7
+
+
+
+Ernesto Inarkiev vs David Klein, Jerusalem, 2015
+FEN r2q1r2/pp1nppkp/6p1/2p1Pn2/2P1N3/4Q2P/PP4P1/1B1R1RK1 w - - 1 0 
+FES Rxf5 gxf5 Qg5+ Kh8 Nf6 if exf6 Qxf5
+
+
+
+White mates in 3.Aleksandar Indjic vs Jha Sriram, Lienz, 2015
+FEN 5Q2/pqr2b1p/2p1k1p1/3p2p1/1P1P3P/5R2/P4PP1/6K1 w - - 1 0 
+FES Qd8 Re7 hxg5
+
+
+
+Alojzije Jankovic vs Mladen Palac, Opatija, 2015
+FEN 1q6/3R1rk1/2B3p1/1Pp1ppQ1/r1P5/6P1/5P2/6K1 w - - 1 0 
+FES Rd8 Qc7 Qh4 if Rf8 Rxf8 Kxf8 Qh8+
+
+
+
+Lela Javakhishvili vs Nino Khurtsidze, Tbilisi, 2015
+FEN 2r1r1k1/1p2qpp1/7p/1p1bP3/p1nB1P2/P2B2QP/6P1/3RR1K1 w - - 1 0 
+FES e6 if fxe6 Qg6 Qf7 Qh7+ Kf8 Bc3 or if f5 Bxf5 Rf8 Qg6
+
+
+
+
+
+Baadur Jobava vs Shakhriyar Mamedyarov, Tbilisi, 2015
+FEN 3R4/pp3kr1/2b1p1p1/1q5p/3Q4/1P3P2/P1P3PP/1K6 w - - 1 0 
+FES Qf4+ if Qf5 Qc7+
+
+
+
+Gawain Jones vs Salome Melia, Gibraltar, 2015
+FEN 3rqrk1/4pp2/6pQ/p2NPb2/8/Pn3P1P/1P2R1P1/3R2K1 w - - 1 0 
+FES Nf6+
+
+
+
+Robert Kempinski vs Valeriy Neverov, Jerusalem, 2015
+FEN r5k1/p2Q1p1p/1p1p2p1/n2Pb3/8/1P2BBP1/q4P1P/2R3K1 w - - 1 0 
+FES Bh6 if Rf8 Rc8 or if Bg7 Qc8+
+
+
+
+Ildar Khairullin vs Gudmundur Kjartansson, Jerusalem, 2015
+FEN r1b2rk1/3nb1p1/pq2p2p/1p3p2/8/1Q2P1N1/PP1BBPPP/R2R2K1 w - - 1 0 
+FES Ba5 if Qxa5 Qxe6+ Kh8 Qxe7 Rg8 Nxf5 or if Qc6 Bf3
+
+
+
+White mates in 4.Mikhail Kobalia vs Ivan Rozum, St. Petersburg, 2015
+FEN 2r1r3/1bq1k3/p3p1pQ/1p6/2nPNR2/P7/BP3PPP/4R1K1 w - - 1 0 
+FES Qg5+ Kd7 Rf7+
+
+
+
+
+
+Bernd Kohlweyer vs Karen Movsziszian, Llucmajor, 2015
+FEN 2rr2k1/pp4pp/1b6/3q4/3p4/1Q3P2/PP3NPP/3RR1K1 w - - 1 0 
+FES Re8+
+
+
+
+Humpy Koneru vs Alisa Galliamova, Sochi, 2015
+FEN 1k1r4/R5R1/pp1P4/2r2p2/7p/7P/P4P2/7K w - - 1 0 
+FES Rgb7+ Kc8 d7+
+
+
+
+White mates in 4.Anton Korobov vs Boris Kharchenko, Moscow, 2015
+FEN 4Rr1k/3b2p1/p1p3Qp/1p3P2/1q6/1B6/PP1r2PP/5R1K w - - 1 0 
+FES f6
+
+
+
+Bence Korpa vs Nikola Sedlak, Graz, 2015
+FEN 5Q2/p3p2p/pr1p2p1/3PN1k1/4P1P1/8/P4P1P/2q1nK2 w - - 1 0 
+FES h4+ Kxh4 Qxe7+ Qg5 Qxh7+
+
+
+
+Alexander Kovchan vs Ilmars Starostits, Palma de Majorca, 2015
+FEN 8/5Bk1/2Q5/p3qp1P/1p6/6P1/Pr3PK1/8 w - - 1 0 
+FES Qg6+ Kf8 Qg8+ Ke7 Qe8+ w/Qh8+ or Qb8+
+
+
+
+
+
+Zdenko Kozul vs Ante Brkic, Opatija, 2015
+FEN 2b2rk1/p1Q3b1/4p1pp/5p2/3P4/Pr3N2/1P1RBPqP/3KR3 w - - 1 0 
+FES Rg1 if Rb7 Qxg7+
+
+
+
+Jan Krejci vs Jan Bernasek, Czech Republic, 2015
+FEN 6b1/pp5k/3qp1np/3r4/8/5R1P/P4PP1/1Q3RK1 w - - 1 0 
+FES Rf6 Rg5 h4 Rg4 Rxg6 Rxg6 h5
+
+
+
+Quang Liem Le vs Giorgi Margvelashvili, New York, 2015
+FEN r2Rrqk1/3R1ppp/p7/np2B1Q1/8/P5P1/4P2P/5K2 w - - 1 0 
+FES Rxe8 Rxe8 Bd6 if h6 Qc5
+
+
+
+White mates in 3.Alex Lenderman vs Samy Shoker, Tsaghkadzor, 2015
+FEN 3q1rk1/pR3pb1/3B3p/3QN1p1/rn6/6P1/PP5P/5R1K w - - 1 0 
+FES Rfxf7 if Kh8 Ng6+
+
+
+
+White mates in 3.Quentin Loiseau vs Igor Naumkin, Lille, 2015
+FEN 6k1/5p2/pR2pP1p/n1p4p/7P/P2r2P1/5PB1/6K1 w - - 1 0 
+FES Rb8+ if Kh7 Be4#
+
+
+
+
+
+Vladimir Malakhov vs Sergei Iskusnyh, St. Petersburg, 2015
+FEN r1r5/p1bb1kqQ/4pp2/3p4/8/1P2RN2/P2B1PP1/2R3K1 w - - 1 0 
+FES Rxc7 if Rxc7 Ng5+ or if Qxh7 Rxd7+ Kg6 Ne5+
+
+
+
+White mates in 3.Pavel Maletin vs Ivan Popov, St. Petersburg, 2015
+FEN rn3b1r/pBqn2pk/7p/4P3/1p1p4/5QP1/PPP2P1P/R1B1K2R w KQ - 1 0 
+FES Be4+ Kg8 Qb3+
+
+
+
+White mates in 3.Rauf Mamedov vs Stanislav Bogdanovich, Moscow, 2015
+FEN r7/4N2k/n5R1/p1p1B3/2b3p1/P6P/5P1K/8 w - - 1 0 
+FES Rg7+ Kh6 Nf5+
+
+
+
+Normunds Miezis vs Jaroslaw Krassowizkij, Schwaebisch Gmuend, 2015
+FEN 2r2rk1/p1q2p2/1p4B1/1R5p/2n4P/2P3b1/P3QPP1/2B3K1 w - - 1 0 
+FES Bh7+ if Kh8 Qxh5 Bf4 Bxf4 Qxf4 Rg5
+
+
+
+Alexander Moiseenko vs Alexander Huzman, Jerusalem, 2015
+FEN 8/pb1r1pk1/2P1pq1p/2R3pP/4B3/P1Q3P1/3r1P2/6K1 w - - 1 0 
+FES Rxg5+ if hxg5 h6+
+
+
+
+
+
+Leon Mons vs Jure Skoberne, Austria, 2015
+FEN rr4k1/3p1p1p/pq4p1/1p1Pp2n/4P3/P3QPP1/1P2B2P/1KR4R w - - 1 0 
+FES Rc8+ if Kg7 Qxb6 or if Rxc8 Qxb6
+
+
+
+Alexander Motylev vs Bela Khotenashvili, Gibraltar, 2015
+FEN 3r2k1/ppqr1pp1/4p3/4nn1p/1PPNR2P/P1Q2NP1/5P2/4R1K1 w - - 1 0 
+FES Nxf5 if Nxf3+ Qxf3 exf5 Re8+ mates
+
+
+
+Mikhail Mozharov vs Chakkravarthy Deepan, New Delhi, 2015
+FEN 3q1nk1/4r2p/1pp4B/p2p1Q2/P2P4/1P5P/2P3K1/4R3 w - - 1 0 
+FES Qg4+ if Kh8 Bg5
+
+
+
+White mates in 3.Tamir Nabaty vs Quinten Ducarmon, Gibraltar, 2015
+FEN 2r3k1/p2b3p/4NQpq/2p1Bp2/5P2/2P3P1/P6P/6K1 w - - 1 0 
+FES Ng5
+
+
+
+Hikaru Nakamura vs Sergey Karjakin, Zuerich, 2015
+FEN 2b1r1k1/r6p/2pb4/p1p1np1N/2Pp1B1q/1P1P3P/P5PN/R2QR2K w - - 1 0 
+FES g3 Qd8 Nf3
+
+
+
+
+
+Matas Narmontas vs Jens Fries-Nielsen Jens, Fredericia, 2015
+FEN b4rk1/5p2/p2p1Rp1/8/4q1NQ/7P/P1r2R1K/8 w - - 1 0 
+FES Rxc2 Qxc2+ Rf2 if g5 Qh6
+
+
+
+David Navara vs Stefan Kristjansson, Reykjavik, 2015
+FEN R1n3k1/3q1pb1/3p2pp/3P2B1/2p5/1rN4P/1P3PP1/4Q1K1 w - - 1 0 
+FES Qe7
+
+
+
+White mates in 3.David Navara vs Bart Michiels, Wijk aan Zee, 2015
+FEN r4r1k/1RQ3R1/4p3/3p4/3Pbp2/P5Pq/5P2/6K1 w - - 1 0 
+FES Rg8+
+
+
+
+Ian Nepomniachtchi vs Sergey Grigoriants, Moscow, 2015
+FEN 4r2r/3k1p2/p3bP2/1pPq1B1p/3n1BpP/8/1PQ2PPN/3R2K1 w - - 1 0 
+FES Qe4
+
+
+
+Ngoc Truongson Nguyen vs Haridas Pascua, Ho Chi Minh City, 2015
+FEN r2r3k/pp1bR2p/5qp1/2Q5/2B1p3/7P/P4PP1/5RK1 w - - 1 0 
+FES Rf7 if Qc3 Qe7 or if Rac8 Qe3 Qb2 Qh6
+
+
+
+
+
+Stanislav Novikov vs Nikita Meskovs, Yurmala, 2015
+FEN r2qrbk1/1p3p2/2n2npp/pNp1p1B1/P1N5/2PP2P1/1P2QPKP/R4R2 w - - 1 0 
+FES Bxf6 Qxf6 Nc7
+
+
+
+Tomi Nyback vs Liviu-Dieter Nisipeanu, Germany, 2015
+FEN 6k1/p1q1bpp1/1pn1p3/3nP3/1P1P4/P1Q5/1B1N2BK/8 w - - 1 0 
+FES Bxd5 exd5 b5
+
+
+
+Milan Pacher vs Georg Kilgus, Vienna, 2015
+FEN rqb2r1k/1p5p/p4p1P/4p1pR/2B5/2Q5/PPP3P1/2K4R w - - 1 0 
+FES Qb4 if Bf5 Qe7 or if Re8 Qb6 Rf8 Bf7
+
+
+
+Luka Paichadze vs Vladimir Onischuk, Nakhichevan, 2015
+FEN b1n5/2r2pk1/6p1/1qp1p2p/2N1P3/5P1P/3R2P1/3Q1BK1 w - - 1 0 
+FES Nd6 if Qb6 Ne8+ or if Qc6 Bb5
+
+
+
+White mates in 5.Michail Panarin vs Yan Dzhumagaliev, St. Petersburg, 2015
+FEN 1r2q3/3b1k2/3Qp1p1/1p5p/P2BP2P/1B6/1PP3P1/7K w - - 1 0 
+FES Qf4+ if Ke7 Bc5+ or if Kg8 Qf6
+
+
+
+
+
+White mates in 4.Miles Perunovic vs Roland Loetscher, Austria, 2015
+FEN 1rb3r1/p1p2p1p/1qN2k2/2p2p2/P1Pp1Q2/8/1P4PP/R1B3K1 w - - 1 0 
+FES Qh4+ Kg7 Bh6+
+
+
+
+Pavel Ponkratov vs Boris Savchenko, St. Petersburg, 2015
+FEN r3rk2/pp3pp1/2p1n2p/3b1Qq1/8/2B1R3/PPB2PPP/3R2K1 w - - 1 0 
+FES Rxd5 cxd5 Bb4+ Re7 Qh7
+
+
+
+White mates in 4.Gil Popilski vs Eylon Nakar, Israel, 2015
+FEN 1R2B3/2r1k1pp/1N2np2/2n1p3/2P1P3/6PP/5PK1/8 w - - 1 0 
+FES Nd5+ if Kd6 Rb6+ or if Kf8 Bh5+
+
+
+
+White mates in 4.Ivan Popov vs Van Huy Nguyen, New Delhi, 2015
+FEN 1r6/R4p2/1pk1p1p1/3p2q1/3Q4/2P2KP1/4BP1r/5R2 w - - 1 0 
+FES Qa4+ if b5 Qa6+ Rb6 Qc8+ or if Kd6 Rd7+ Ke5 Qd4+
+
+
+
+White mates in 2.Vladimir Potkin vs Amin Tabatabaei, Moscow, 2015
+FEN r1q1r3/bppb2pQ/p3k2p/3NpN2/n1P3n1/P3P1P1/1B1P2BP/R5K1 w - - 1 0 
+FES Nf4+ exf4 Bd5#
+
+
+
+
+
+White mates in 5.Richard Rapport vs Aryan Tari, Gibraltar, 1/28/2015
+FEN r1q2rk1/pb1nb3/1p2ppp1/2p3P1/P2PpB2/2P1PN1R/1P1K1PP1/R6Q w - - 1 0 
+FES Rh7 w/Qh6
+
+
+
+White mates in 4.Richard Rapport vs Ottomar Ladva, Yurmala, 3/7/2015
+FEN 7r/p5r1/2p1p3/3kPpNp/1PRP1n1P/R7/8/1K6 w - - 1 0 
+FES Rc5+ Kxd4 Nf3+ Ke4 Rc4+
+
+
+
+White mates in 2.Dimitri Reinderman vs Benjamin Bok, Amsterdam, 5/17/2015
+FEN 3R1nk1/5rpp/8/3QPp2/Pp3P2/2q1B3/2r4P/5N1K w - - 1 0 
+FES Rxf8+
+
+
+
+Olivier Renet vs Richard Forster, Switzerland, 4/26/2015
+FEN 5r2/1R1n2kp/p2q2p1/4p3/4Q3/P4N1P/6P1/7K w - - 1 0 
+FES Qxe5+
+
+
+Christopher Repka vs Guillaume Sermier, Mayrhofen, 6/22/2015FEN r3r1k1/3p2p1/1pp2pP1/p1nq4/3Bb3/7Q/PP4PP/5RK1 w - - 1 0 
+FES Qh7+ Kf8 Bxf6
+
+
+
+
+
+Alexander Riazantsev vs Ivan Bocharov, Kaliningrad, 6/26/2015
+FEN r5k1/ppq3pp/2pb1rb1/5p2/5BP1/1PN5/1PP1Q2P/2KR1R2 w - - 1 0 
+FES Rxd6 Rxd6 gxf5 if Bxf5 Bxd6 or if Bf7 Qe5 Rad8 Ne4
+
+
+
+Andres Rodriguez vs Roberto Molina, Florianopolis, 1/24/2015
+FEN 2br1n1k/1p3Qpp/8/p1P2pr1/3p1q2/P2B4/1P1N1P2/4RKR1 w - - 1 0 
+FES Rxg5 Qxg5 Re8 if Qf6 Qxf6
+
+
+
+Axel Rombaldoni vs Zaven Andriasian, Jerusalem, 3/8/2015
+FEN 2k1b3/r1p1b3/pr2q1pp/N2RP3/1P1Q1P2/P1R5/2P3P1/2K5 w - - 1 0 
+FES Rd6 if Rxd6 Qxa7 or if Bxd6 Qxb6 Ra8 Rxc7+
+
+
+
+Yago De Moura Santiago vs Pia Cramling, Gibraltar, 2/5/2015
+FEN 4Rn2/6kp/2rp1qp1/6N1/p2r1P2/6PQ/PP5P/5N1K w - - 1 0 
+FES Rxf8 if Qxf8 Qd7+
+
+
+
+White mates in 4.Ivan Sarenac vs Boban Bogosavljevic, Belgrade, 5/30/2015
+FEN r6k/p5bp/3pQ1p1/2p5/1p2PB2/2q2P2/P1P1K3/3R3R w - - 1 0 
+FES Rxh7+ Kxh7 Rh1+ Bh6 Qf7+
+
+
+
+
+
+White mates in 4.Deep Sengupta vs Ruiyuan Yu, Golden Sands, 6/16/2015
+FEN 2q2k1r/pb3p2/2p1pP2/4Q1p1/P5P1/4PN2/6K1/3R4 w - - 1 0 
+FES Qc5+ Kg8 Qxg5+
+
+
+
+White mates in 2.Sam Shankland vs Timur Gareev, Honolulu, 3/22/2015
+FEN 5k2/3r1p2/p1q4p/4Q1pP/1P4P1/1BP2PN1/KP6/2b5 w - - 1 0 
+FES Qh8+ Ke7 Nf5#
+
+
+
+Alexei Shirov vs Marcin Szelag, Germany, 4/12/2015
+FEN 2k4b/2nr4/3Q3p/q2pP3/8/3B2P1/p4P1P/2R3K1 w - - 1 0 
+FES Ba6+ if Kb8 Qxd7 or if Kd8 Qf8+
+
+
+
+White mates in 5.Vitaly Sivuk vs Elbek Alikulov, Voronezh, 6/16/2015
+FEN 7k/1p1r1nr1/8/3N4/5pQP/8/Pq6/3RRBK1 w - - 1 0 
+FES Re8+ Kh7 Bd3+ Kh6 Re6+
+
+
+
+Pontus Sjodahl vs Daniel Semcesen, Tylosand, 5/15/2015
+FEN 1k6/1pr5/1qbQp3/4Pppp/3P4/3BP3/6PP/2R3K1 w - - 1 0 
+FES Qd8+
+
+
+
+
+
+Wesley So vs Ivan Saric, Wijk aan Zee, 1/23/2015
+FEN 3nr1k1/2p2pp1/7p/1pPbNq2/1n6/1B5P/1P1Q1PP1/2B1R1K1 w - - 1 0 
+FES g4 if Qg5 Qxb4 or if Qf6 Bxd5
+
+
+
+White mates in 3.Bartosz Socko vs Sabino Brunello, Civitanova Marche, 5/1/2015
+FEN 8/1pp1nq2/p1r2p1k/4pP2/R5Q1/1PP4P/1P1r1P1K/6R1 w - - 1 0 
+FES Qg7+ if Kh5 Qxf7+
+
+
+
+Ram Soffer vs Asaf Givon, Israel, 5/1/2015
+FEN 5k2/4np1r/pq1NpQpp/r2pP3/2b3P1/1p6/1P3P1P/2RBR1K1 w - - 1 0 
+FES Qxe7+ Kxe7 Nc8+
+
+
+
+Andrei Sokolov vs Richard Pile, Montpellier, 5/31/2015
+FEN 3k4/7p/R7/3pPp1p/1B1Pn2P/4r1P1/2K5/8 w - - 1 0 
+FES e6 if Nxg3 Ra8+
+
+
+
+Stef Soors vs Daniel Gormally, Amsterdam, 2/23/2015
+FEN 6k1/5p1p/5np1/p1r5/B1PRP3/P7/1r4PP/4R1K1 w - - 1 0 
+FES e5 if Nh5 g4
+
+
+
+
+
+White mates in 2.Hrvoje Stevic vs Denis Kadric, Sarajevo, 6/1/2015
+FEN 5k2/3n2p1/3b1p1p/NK1Bp3/P3P3/1PR5/2P1RPP1/1rr5 w - - 1 0 
+FES Rc8+ Ke7 Nc6#
+
+
+
+Jacek Stopa vs Antonio Granero Roca, Sevilla, 1/28/2015
+FEN r6k/q6p/p2p1pnB/1p1P4/1b1NP3/3p1P1Q/PP5P/R6K w - - 1 0 
+FES Nc6 if Qc5 Qd7 mates
+
+
+
+White mates in 3.Titas Stremavicius vs Tomas Laurusas, Kaunas, 4/25/2015
+FEN rn2r1k1/1p3pb1/2pP2p1/p5N1/P3N3/7Q/4qPPP/1B1R2K1 w - - 1 0 
+FES Nf6+
+
+
+
+Nenad Sulava vs Julian Jorczik, Austria, 3/7/2015
+FEN 2r4r/5k2/2n1p3/q5Q1/3p2p1/BR1P2P1/2P4P/4NK2 w - - 1 0 
+FES Rb7+ if Rc7 Qf4+ or if Ke8 Qg6+
+
+
+
+Krisztian Szabo vs Jean-Pierre Le Roux, Montpellier, 6/1/2015
+FEN 3r1rk1/2p1b1pp/p3p3/2n1N3/P3P3/2p1B3/1P2RPPP/R5K1 w - - 1 0 
+FES Nc6
+
+
+
+
+
+White mates in 3.Hans Tikkanen vs Fabrizio Bellia, Stockholm, 1/2/2015
+FEN 3q2rk/1p5p/p2Ppp1Q/1br1n2N/8/1B6/PB1n1P1P/R2K2R1 w - - 1 0 
+FES Rxg8+
+
+
+
+White mates in 5.Adam Tukhaev vs Nikita Maiorov, Voronezh, 6/18/2015
+FEN rqb1N1nr/pp1k2Np/2pp4/4n1B1/3QP3/5P2/PPP1K1P1/R4B2 w - - 1 0 
+FES Qxe5 if dxe5 Rd1+ Qd6 Rxd6#
+
+
+
+Tahir Vakhidov vs Khamparia Akshat, Chittagong, 2/9/2015
+FEN 5rk1/1b5p/1pnq1pp1/1B1N4/1P3P2/2Q5/6PP/5R1K w - - 1 0 
+FES Bxc6 Bxc6 Qxc6 Qxc6 Ne7+
+
+
+
+Leonardo Valdes vs Daniel Forcen Esteban, Roquetas de Mar, 1/5/2015
+FEN 2r5/3b2pp/3qpk2/p2p4/4P3/PP5Q/5PBP/2R3K1 w - - 1 0 
+FES Rxc8 Bxc8 Qc3+
+
+
+
+White mates in 4.Francisco Vallejo Pons vs Angel Espinosa Aranda, Madrid, 5/9/2015
+FEN r3kr2/pp6/3Q4/3n1P2/3P4/3B3b/PP6/6K1 w - - 1 0 
+FES Bb5+ Kf7 Qg6+
+
+
+
+
+
+White mates in 5.Robin Van Kampen vs Pontus Carlsson, Reykjavik, 3/20/2015
+FEN 2r4k/1p3prp/p4Q2/3BpP2/2PbR3/1P5R/1P1q2PP/7K w - - 1 0 
+FES Rxh7+ Kxh7 Rh4+ Kg8 Bxf7+
+
+
+
+White mates in 4.Renier Vazquez vs Erik Blomqvist, Cappelle la Grande, 3/2/2015
+FEN 2k5/1p4rr/pRPBp1b1/P2pP1p1/7p/4K3/1R4PP/8 w - - 1 0 
+FES Rxa6 if bxc6 Rb8+
+
+
+
+White mates in 4.Prasanna Vishnu vs Emil Sutovsky, Gibraltar, 1/28/2015
+FEN 6R1/1p1r1p1p/4p2k/p6p/2P1PPn1/5KP1/PB6/8 w - - 1 0 
+FES Bg7+ Kg6 f5+ if exf5 Be5+ or if Kg5 Be5+
+
+
+
+White mates in 3.Kesav Viswanadha vs Andrey Stukopin, Brownsville, 3/7/2015
+FEN 8/8/p7/4B3/4PpbQ/3P1k2/PP1q1r2/K1N4R w - - 1 0 
+FES Rh3+ if Kg2 Qxg4+
+
+
+
+Andrei Volokitin vs Daniele Vocaturo, Jerusalem, 3/1/2015
+FEN 4k1r1/pbp5/1pn2RN1/2pN2p1/6P1/1P3P2/P1P5/6K1 w - - 1 0 
+FES Rxc6 Bxc6 Nf6+ Kf7 Nxg8 if Kxg8 Ne7+
+
+
+
+
+
+Bojan Vuckovic vs Milos Roganovic, Goracici, 5/24/2015
+FEN 4qnk1/p2r4/1p1pN1p1/3P1p1p/1PP1r3/P2Q3P/5RP1/5RK1 w - - 1 0 
+FES Qxe4 if fxe4 Rxf8+
+
+
+
+White mates in 4.Yi Wei vs Vladimir Potkin, Wijk aan Zee, 1/11/2015
+FEN 2b4R/r3n2Q/4k1p1/3pPp2/3P1P2/p1p1B3/P1q4P/6RK w - - 1 0 
+FES Rxg6+ if Kd7 Qxe7+
+
+
+
+Robert Zelcic vs Zdenko Kozul, Opatija, 1/12/2015
+FEN 5r1k/1bqr1ppp/pp2p3/4P1B1/P2n2Q1/2N1R3/1P4PP/5R1K w - - 1 0 
+FES Bf6 if gxf6 or Rg8 Rg3
+
+
+

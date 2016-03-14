@@ -33,6 +33,10 @@ class ProblemsController < ApplicationController
   
   end
 
+  def mqtt
+  
+  end
+
   def create
     @problem = Problem.new(problem_params)
     @problem.save

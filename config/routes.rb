@@ -1,24 +1,50 @@
 Reddit::Application.routes.draw do
+  # get "users/new"
+  # get "sessions/new"
+  # get "problempanel/new"
+  # get "problempanel/show"
+  # get "problempanel/index"
+  # get "problempanel/edit"
+
+  get "/tactics(.:format)"            => "tactics#index",    :as => "tactics"
+  get "/tactics/datainsert(.:format)"        => "tactics#datainsert",      :as => "tactics_datainsert"
+  get "/tactics/:id/edit(.:format)"   => "tactics#edit",     :as => "edit_tactics"
+  patch "/tactics/update(.:format)"   => "tactics#update",     :as => "update_tactics"
+  post "/tactics/create(.:format)"   => "tactics#create",     :as => "create_tactics"
+
+  get "/tactics/tactic(.:format)"            => "tactics#tactic",    :as => "tactic_tactics"
+  get "/tactics/tacticthree(.:format)"            => "tactics#tactic_three",    :as => "tactic_tactics_three"
+  get "/tactics/tacticfour(.:format)"            => "tactics#tactic_four",    :as => "tactic_tactics_four"
+
+  #Baazaas tactics filterlej awah
+  post "/tactics_ajax"       => "tactics#tactics_ajax",        :as => "tactics_ajax"
+  #FILE-unshsan data-gaa data baazruu bicheh 
+  post "/tactics_update_ajax"       => "tactics#tactics_update_ajax",        :as => "tactics_update_ajax"
+
+  get "/problempanel(.:format)"            => "problempanel#index",    :as => "problempanel"
+  get "/problempanel/new(.:format)"        => "problempanel#new",      :as => "new_problempanel"
+  
+  get "/problempanel/:id/edit(.:format)"   => "problempanel#edit",     :as => "edit_problempanel"
+  patch "/problempanel/update(.:format)"   => "problempanel#update",     :as => "update_problempanel"
+  post "/problempanel/create(.:format)"   => "problempanel#create",     :as => "create_problempanel"
+  get "/problempanels/:id(.:format)"        => "problempanel#show",     :as => "show_problempanel"
+
+
   get "tournament" => "tournament#index", :as => "tournament_index"
   get "tournament/battle" => "tournament#battle", :as => "tournament_battle"
   
+
+  # resources :problempanel
   resources :problems
 
   resources :trains
 
   resources :comments
 
-  devise_for :users
-  resources :links do
-    member do
-      put "like", to: "links#upvote"
-      put "dislike", to: "links#downvote"
-    end
-    resources :comments
-  end
 
-  root to: "links#index"
+  root to: "problems#fenpuzzle"
   get "play" => "trains#computerplay", :as => "trains_computerplay"
+  get "playpiece" => "trains#computer_not_piece", :as => "trains_computer_not_piece"
   post "/playcenter(.:format)" => "trains#playcenter", :as => :trains_playcenter
   get "pgnviewer" => "trains#pgnviewer", :as => "trains_pgnviewer"
   get "fenpuzzle" => "problems#fenpuzzle", :as => "problems_fenpuzzle"
@@ -27,60 +53,13 @@ Reddit::Application.routes.draw do
   get "playgame" => "trains#playgame", :as => "trains_playgame"
 
   get "pgnanalyse" => "problems#pgnanalyse", :as => "problems_pgnanalyse"
+  get "mqtt" => "problems#mqtt", :as => "problems_mqtt"
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-  
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  get    'signup'  => 'users#new' , :as => "signup"
+  post  "/user/create(.:format)"   => "users#create",     :as => "create_user"
+  get    'login'   => 'sessions#new', :as => "users_login"
+  post   'login'   => 'sessions#create'
+  get    'logout'  => 'sessions#destroy',:as => "users_logout"
+  resources :users
 end
 

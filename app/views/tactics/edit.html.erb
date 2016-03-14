@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+ <script src="/assets/js/chess.min.js"></script>
+<script src="/assets/js/chessboard-0.3.0.min.js"></script>    
+
+  <style type="text/css">
+    .myfield {
+      width: 400px;
+    }
+  
+    .defaultInput
+        {
+         border:1px solid blue;
+        }
+
+    .error
+    {
+     border:1px solid red;
+    }
+</style>
+<div class="container-full">
+  <div class="row"> <!-- hoyor class="col-md-6" -g aguulsan row div -->
+    <div class="col-md-1" >
+ 
+    </div> 
+    <div class="col-md-5" >
+         <div id="board"></div>
+    </div> 
+ 
+    <div class="col-md-6" >  <!--class="col-md-6" 2dahi column div-n ehlel  -->
+    
+<%= form_for @tactic, :url => update_tactic_path do |f| %>
+ 
+<div class="field">
+    <%= f.label :id %><br>
+    <%= f.text_field :id, :readonly => true%>
+  </div>
+  <div class="field">
+    <%= f.label :fen %><br>
+    <%= f.text_area :fen, :id =>"inputFen"%>
+  </div>
+  <div class="field">
+    <%= f.label :fes %><br>
+    <%= f.text_area :fes %>
+  </div>
+ 
+  <div class="field">
+    <%= f.label :info %><br>
+    <%= f.text_area :info %>
+  </div>
+  <div class="field">
+    <%= f.label :short_info %><br>
+    <%= f.text_field :short_info %>
+  </div>
+  <div class="field">
+    <%= f.label :genre %><br>
+    <%= f.text_field :genre %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>
+<script type="text/javascript">
+// var tt= '<%=@objArray%>'
+ $(document).ready(function() {
+  var game,
+    cfg = {
+    position: '',
+  };
+      
+  var board = ChessBoard('board', cfg);      
+    $(window).resize();
+  game = new Chess();
+  
+  changeFENinput(); 
+  
+  $('#inputFen').on("change paste keyup", function() {
+      changeFENinput();
+  });
+
+  function changeFENinput() {
+      gg=$("#inputFen").val(); 
+      tt=game.validate_fen(gg);
+      fenValidate=tt.valid;
+    
+        if (fenValidate){
+          $('#inputFen').removeClass('error');
+           board.position(gg);
+        }
+        else
+          $('#inputFen').addClass('error');
+    
+    } // function changeFENinput()  end
+
+
+  }); //document ready
+</script>

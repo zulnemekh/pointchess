@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+
+<html>
+   <head>
+     
+<link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+ <link rel="stylesheet" href="/assets/css/design/buttons.css">
+ <script src="/assets/js/chess.min.js"></script>
+<script src="/assets/js/chessboard-0.3.0.min.js"></script>    
+
+</script>
+
+</script>
+
+   </head>
+   
+   <body>
+     <div class="row">
+     <div>  <%= link_to 'New', tactics_datainsert_path, class: "btn btn-lg btn-primary" %></div>
+      <h2>Problem Panel</h2>
+
+    
+     <% @tactics.each_with_index  do |tactic, index| %>
+            
+        <div class="col-xs-6 col-lg-4">
+              <div class="col-md-1">
+              </div>
+                <div class="col-md-10">
+                  <h2 style="color: #FF851B; 
+                  font-style: bold;"><%=index%></h2>
+                    <div id="board_<%=index%>" ></div>
+                    <span id="tactic_<%=index%>"><%= tactic.fen %></span>
+                  <p><a id="btn_board_<%=index%>"  class="btn btn-default"role="button">View details »</a></p>
+            <%= link_to 'Edit', edit_tactics_path(tactic) %>
+                  <!-- <a ui-sref="detail({id: i.FEN})">View details</a> -->
+                </div>
+              <div class="col-md-1">
+              </div>
+            </div><!--/.col-xs-6.col-lg-4-->     
+           
+        <% end %>
+</div> <!-- div.row -->
+      <script src="/assets/js/myjs/mate2.js"></script>  
+      <script src="/assets/js/tournament/data/mate3.js"></script>
+<script type="text/javascript">
+// var tt= '<%=@objArray%>'
+  // var tt= '<%=@objArray%>'
+  $(document).ready(function() {
+   var problems=[];
+   var tactics=[];
+  $('span[id^="tactic_"]').each(function(index, el) {
+    console.log($(el).html());
+    tactics.push($(el).html());
+  });
+
+ 
+       for (var i = 0; i < 2; i++) {
+          var g = new Chess();
+          g.load_pgn(mate3[i].join('\n'), {newline_char:'\n'});
+          var h = g.header();
+          problems[i] = h;
+        }
+    var boardname='board_';
+    console.log("length:"+tactics.length);
+      for (var i = 0; i < tactics.length; i++) {
+                  var board2 = ChessBoard(boardname+i, {
+                    position: tactics[i],
+                    showNotation: false
+                  });
+               console.log(tactics[i]);   
+      }
+
+  }); //document ready
+</script>
+   </body>
+</html>
