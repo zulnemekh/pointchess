@@ -32,7 +32,9 @@ Reddit::Application.routes.draw do
 
   get "tournament" => "tournament#index", :as => "tournament_index"
   get "tournament/battle" => "tournament#battle", :as => "tournament_battle"
-  
+  #dbSrvc.js ajax
+  get 'api/tournament/get_user'    => 'tournament#get_user'
+  get 'api/tournament/get_tactic'    => 'tournament#get_tactic'
 
   # resources :problempanel
   resources :problems

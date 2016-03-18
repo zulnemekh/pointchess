@@ -1,96 +1,132 @@
     
-         mainApp.controller("parentController", function($scope,$timeout,Service) {
-            $scope.message = "In parent controller";
-            $scope.tempPoint = Service.tempPoint;
+     mainApp.controller("parentController", function($scope,$timeout,sharedService) {
+        $scope.array = array;
+        $scope.problems = tactic_array;
+        $scope.users=[];
+        $scope.tmpUsers=[];
+         $scope.message = "In parent controller";
+            $scope.tempPoint = sharedService.tempPoint();
+            console.log("tempPoint:"+$scope.tempPoint);
+            $scope.allPoint = 0;
             $scope.timer = "";
             $scope.counter = 300;
-            $scope.problems =[];
-				    $scope.onTimeout = function(){
-				        if ($scope.counter == 0) {
-				        	console.log("Game Over");
-				        	return false;
-				        }
-				        var value = $scope.counter;
-				        var sec = $scope.counter;						        
-				        // total seconds
-							var seconds = $scope.counter;
-							 $scope.counter--;
-							// calculate seconds
-							var s = seconds % 60;
-							// add leading zero to seconds if needed
-							s = s < 10 ? "0" + s : s;
-							// calculate minutes
-							var m = Math.floor(seconds / 60) % 60;
-							// add leading zero to minutes if needed
-							m = m < 10 ? "0" + m : m;
-							// calculate hours
-							var h = Math.floor(seconds / 60 / 60);
-							var time = h + ":" + m + ":" + s
+            $scope.onTimeout = function(){
+                if ($scope.counter == 0) {
+                  console.log("Game Over");
+                  return false;
+                }
+                var value = $scope.counter;
+                var sec = $scope.counter;                   
+                // total seconds
+              var seconds = $scope.counter;
+               $scope.counter--;
+              // calculate seconds
+              var s = seconds % 60;
+              // add leading zero to seconds if needed
+              s = s < 10 ? "0" + s : s;
+              // calculate minutes
+              var m = Math.floor(seconds / 60) % 60;
+              // add leading zero to minutes if needed
+              m = m < 10 ? "0" + m : m;
+              // calculate hours
+              var h = Math.floor(seconds / 60 / 60);
+              var time = h + ":" + m + ":" + s
 
-										$scope.timer=time;
-						        mytimeout = $timeout($scope.onTimeout,1000);
-						    }
-						    var mytimeout = $timeout($scope.onTimeout,1000);
-						    
-						    $scope.stop = function(){
-						        $timeout.cancel(mytimeout);
-						    }
+                    $scope.timer=time;
+                    mytimeout = $timeout($scope.onTimeout,1000);
+                }
+                var mytimeout = $timeout($scope.onTimeout,1000);
+                
+                $scope.stop = function(){
+                    $timeout.cancel(mytimeout);
+                }
 
 
-			function getRandomSubarray(arr, size) {
-			    var shuffled = arr.slice(0), i = arr.length, temp, index;
-			    while (i--) {
-			        index = Math.floor((i + 1) * Math.random());
-			        temp = shuffled[index];
-			        shuffled[index] = shuffled[i];
-			        shuffled[i] = temp;
-			    }
-			    return shuffled.slice(0, size);
-			}
+      function getRandomSubarray(arr, size) {
+          var shuffled = arr.slice(0), i = arr.length, temp, index;
+          while (i--) {
+              index = Math.floor((i + 1) * Math.random());
+              temp = shuffled[index];
+              shuffled[index] = shuffled[i];
+              shuffled[i] = temp;
+          }
+          return shuffled.slice(0, size);
+      }
  
-      $scope.data = getRandomSubarray(Service.pgnData, 5);
-		    
- 				console.log("shapeController");
-         });
-         
-      
-         mainApp.controller("listController", function($scope,$timeout,Service) {
-            $scope.message = "In list controller";
-       
-            
-				    for (var i = 0; i < $scope.$parent.data.length; i++) {
-						  var g = new Chess();
-						  g.load_pgn($scope.$parent.data[i].join('\n'), {newline_char:'\n'});
-						  var h = g.header();
-							$scope.$parent.problems[i] = h;
-				
-						 }
-			
-					var boardname='board_';
-					 $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
-				  	for (var i = 0; i < $scope.$parent.problems.length; i++) {
-									var board2 = ChessBoard(boardname+i, {
-									  position: $scope.$parent.problems[i].FEN,
-									  showNotation: false
-									});
-								}
-				  });
+      // $scope.data = getRandomSubarray(Service.pgnData, 5);
+        
+     });
+     
+  
+   mainApp.controller("home", function($scope,$timeout) {
+        $scope.message = "In home controller";
+     
+     
+        $scope.goto_detail = function(id) {
+           current_tournament = $scope.$parent.array[id];
 
-			
-  
-		    $scope.goto_detail = function(id) {
-		       Service.id=id;
-		    };
-  
+         };
+
+      });
+     mainApp.controller("listController", function($scope,$timeout,sharedService) {
+        $scope.message = "In list controller";
+        $scope.$parent.tmpUsers.push(sharedService.getUser());
+         
+
+       // $scope.problems = sharedService.getTactic();
+
+       console.log("parent:"+ $scope.$parent.problems);
+      var boardname='board_';
+           $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+            for (var i = 0; i < $scope.$parent.problems.length; i++) {
+                  var board2 = ChessBoard(boardname+i, {
+                    position: $scope.$parent.problems[i].fen,
+                    showNotation: false
+                  });
+                }
+          });
 
       });
          
-         mainApp.controller("detailController", function($rootScope,$scope,Service, $stateParams,$window) {
-            $scope.message = "In detail controller";
-            $scope.type = "detail";
+ mainApp.controller("detailController", function($rootScope,$scope,sharedService,$timeout, msgService, dbSrvc, $stateParams,$window) {
+    $scope.message = "In detail controller";
+    $scope.type = "detail";
+    $scope.timer = "";
+    $scope.progress = 100;
+    $scope.counter = 0;
+    //point calculate begin
+    maxPoint=20;
+    masterDone=20;
+    tacticDone1=1;
+    tacticDone2=0.75;
+    tacticDone3=0.6;
+    tacticDone4=0.4;
+    currentCorrectMoveCount=0;
+    currentTacticIsDone=false;
+    //point calculate end
+  //timer for detail
+  $scope.onTimeout = function(){
+    // if ($scope.counter == 0) {
+    //   console.log("Game Over");
+    //   return false;
+    // }
+  valeur=$scope.progress-$scope.counter;
+  if (valeur > -1) 
+    $('.progress-bar').css('width', valeur+'%').attr('aria-valuenow', valeur);    
+    
+    $scope.counter++;
+    $scope.timer= $scope.counter;
+    mytimeout = $timeout($scope.onTimeout,1000);
+
+  }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+    
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
 
 
-	//detailProblem begin
+  //detailProblem begin
  //start doing stuff
 var board, //the chessboard
     game, //the current  game
@@ -98,10 +134,14 @@ var board, //the chessboard
     currentGame,
     currentGameSolution,
     solution=[],
+    squareToHighlight='e5',
+    boardEl = $('#board'),
+    myMove_from='e2',
+    myMove_to='e4';
     fen;
     
-    pgnData = $scope.$parent.data;
-		currentGame=Service.id;
+    pgnData = $scope.$parent.problems;
+    currentGame=sharedService.getId();
   
 
     var alertSuccess = document.getElementById('alertSuccess');
@@ -114,6 +154,66 @@ var board, //the chessboard
   pgnEl = $('#pgn');
   currentPuzzleEl = $('#currentPuzzle');
 
+  var removeHighlights = function(color) {
+        boardEl.find('.square-55d63')
+          .removeClass('highlight-' + color);
+
+  };
+var removeGreySquares = function() {
+  $('#board .square-55d63').css('background', '');
+};
+
+var greySquare = function(square) {
+  var squareEl = $('#board .square-' + square);
+  
+  var background = '#a9a9a9';
+  if (squareEl.hasClass('black-3c85d') === true) {
+    background = '#696969';
+  }
+
+  squareEl.css('background', background);
+};
+
+function pointCalculate() {
+  
+  if (currentCorrectMoveCount==0) return false
+  
+  perSec=$scope.counter/currentCorrectMoveCount;
+  tempPoint=maxPoint-perSec/2;
+  if (tempPoint < 1) tempPoint=0;
+  tempDone=0;
+  if (currentTacticIsDone) {
+    // if (perSec <= 5) {tempDone=masterDone*tacticDone1;}
+    //   if (perSec > 5 && perSec <=15) {tempDone=masterDone*tacticDone2;}
+    //     if (perSec > 15 && perSec <= 30) {tempDone=masterDone*tacticDone3;}
+    //       if (perSec > 30) {tempDone=masterDone*tacticDone4;}
+    var x = perSec;
+    switch (true) {
+        case (x < 5):
+            tempDone=masterDone*tacticDone1;
+            break;
+        case (perSec > 5 && perSec <=20):
+            tempDone=masterDone*tacticDone2;
+            break;
+        case (perSec > 20 && perSec <= 50):
+            tempDone=masterDone*tacticDone3;
+            break;
+        case (perSec > 50):
+            tempDone=masterDone*tacticDone4;
+            break;    
+        default:
+            tempDone=masterDone*tacticDone4;
+            break;
+    }
+  }
+
+  console.log("perSec:"+perSec);
+  console.log("tempDone:"+tempDone);
+  console.log("tempPoint:"+tempPoint);
+  $scope.$parent.allPoint=$scope.$parent.allPoint+tempPoint+tempDone;
+  $scope.$parent.tempPoint=tempPoint+tempDone;
+   sendAllPoint($scope.$parent.allPoint); //mqtt- msg-r oort bga pointoo oorchlolt orson uydee ywuulna
+}
 // do not pick up pieces if the game is over
 // only pick up pieces for the side to move
 var onDragStart = function(source, piece, position, orientation) {
@@ -122,9 +222,40 @@ var onDragStart = function(source, piece, position, orientation) {
       (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
     return false;
   }
+    removeGreySquares();
+    //removeHighlights('white');
+    greySquare(source);
+    //boardEl.find('.square-' + source).addClass('highlight-white');
+    myMove_from=source; //nuuh talin piece deer n darsan uyd ene uildel ajilna
 };
 
-var onDrop = function(source, target) {
+ //click to click move method
+//nuden deer daraad daraagiin nuuh nudruugee darahad nuune
+ function clicked_move() {
+  var move = game.move({
+            from: myMove_from,
+            to: myMove_to,
+            promotion: 'q' // NOTE: always promote to a queen for example simplicity
+          });
+
+  if (move === null) return 'snapback';
+    
+    removeGreySquares();
+  // removeHighlights('white');
+    greySquare(myMove_from);
+    greySquare(myMove_to);
+  // boardEl.find('.square-' + myMove_from).addClass('highlight-white');
+  // boardEl.find('.square-' + myMove_to).addClass('highlight-white');
+ 
+    onSnapEnd();
+    movingUser();
+ }
+  var onDrop = function(source, target) {
+    if (target==source) {
+        // clicked_move();
+        return false;
+  }
+
   // see if the move is legal
   var move = game.move({
     from: source,
@@ -132,10 +263,28 @@ var onDrop = function(source, target) {
     promotion: 'q' // NOTE: always promote to a queen for example simplicity
   });
 
+ // removeHighlights('white');
+  removeGreySquares();
   // illegal move
   if (move === null) return 'snapback';
   
-  currentPly++;
+   
+    greySquare(source);
+    greySquare(target);
+   // boardEl.find('.square-' + source).addClass('highlight-white');
+   // boardEl.find('.square-' + target).addClass('highlight-white');
+
+    // isDrop=false;  // drag drop-r amjilta nuutsen uyd click-r nuuhiig false bolgono
+    movingUser();
+
+};
+  //computer nuuj duusahad buusan buudaliig highlight bolgono
+  var onMoveEnd = function() {
+    boardEl.find('.square-' + squareToHighlight)
+      .addClass('highlight-black');
+  };
+function movingUser(){
+    currentPly++;
   //buruu nuusen esehiig shalgah
   hist=game.history();
   if (hist.length>0) {
@@ -144,6 +293,7 @@ var onDrop = function(source, target) {
     //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
     if (lastMove!=solution[currentPly]) {  
       alertFail.setAttribute('class', 'alert alert-danger visible');
+      pointCalculate();
     }else
     {  //suuliin nuusen nuudel zow uyd l daraagiin nuudelee nuune
       window.setTimeout(possibleMove, 500); 
@@ -151,7 +301,9 @@ var onDrop = function(source, target) {
       if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
           alertSuccess.setAttribute('class', 'alert alert-success visible');
         // $('#alertSuccess').show();
-         $scope.$parent.tempPoint=$scope.$parent.tempPoint+currentGameSolution.length;
+        currentTacticIsDone=true;
+        pointCalculate();
+         
       }   
     }
    
@@ -159,10 +311,7 @@ var onDrop = function(source, target) {
   
   // possibleMove();
   updateStatus();
-
-  // 
-};
-
+}
 // update the board position after the piece snap 
 // for castling, en passant, pawn promotion
 var onSnapEnd = function() {
@@ -177,7 +326,7 @@ var cfg = {
   onDrop: onDrop,
   onSnapEnd: onSnapEnd
 };
-board = ChessBoard('board', cfg);
+
 
 // User drag drop-r nuusenii daraa solution dotor bga nuudeliig 
 //nuuhed zow bwal daraagin nuudeliig nuune
@@ -185,8 +334,18 @@ var  possibleMove = function() {
    
    if (currentPly < solution.length - 1) {
     currentPly++;
-    game.move(solution[currentPly]);
+    movedObj=game.move(solution[currentPly]);
     board.position(game.fen());
+    //
+    currentCorrectMoveCount++;
+
+    //nuusen square-g highlight bolgoh
+    removeGreySquares();
+    greySquare(movedObj.from);
+    greySquare(movedObj.to);
+    // removeHighlights('white');
+    // boardEl.find('.square-' + movedObj.from).addClass('highlight-white');
+    // boardEl.find('.square-' + movedObj.to).addClass('highlight-white');
   }
    
 };
@@ -227,8 +386,8 @@ var updateStatus = function() {
 
 //bodlognii hariu boloh pgn file-g nuudel nuudeleer n zadalaad solutiond hiine
 //mon 
-function pgnMoveStringToArray(currentGameSolution,g) {
-  var h = g.header();
+function pgnMoveStringToArray(currentGameSolution) {
+  // var h = g.header();
   results = currentGameSolution.match(/\S+\s*/g);
   mymoveArray = currentGameSolution.split(/([0-9]+\.\s)/).filter(function(n) {return n;});
   for (var i = 0, l = mymoveArray.length; i < l; ++i) {
@@ -242,6 +401,7 @@ function pgnMoveStringToArray(currentGameSolution,g) {
     }
     mymoveArray[i] = s;
   }
+  console.log(solution);
 }
 function solutionParsing() {
     for (var i = 0; i < solution.length; i++) {
@@ -262,36 +422,40 @@ function goToMove(ply) {
   board.position(game.fen());
 }
 
-//pgnData-s FEN file-g tataj awah
-function getFenFromPgnData(g) {
-  var h = g.header();
-  fen=h.FEN;
-  currentGameSolution=h.FES; //[FES "1. Re8+ Kf7 2. R1e7#"] deerh format-r bichsen uyd ajilna
-
- }
-
+board = ChessBoard('board', cfg);
 function loadGame(i) {
+  $scope.counter = 0; // tur zuur 0 utgaar bichew
+  currentCorrectMoveCount=0; //zow nuusen nuudeluudiig tooloh
+  currentTacticIsDone=false;
+
   board.clear();
-  game1 = new Chess();
- 	game1.load_pgn(pgnData[i].join('\n'), {newline_char:'\n'});
-  getFenFromPgnData(game1);
-	solution.length=0;
+  removeGreySquares();
+  
+  fen=pgnData[i].fen;
+  currentGameSolution=pgnData[i].fes; 
+  solution.length=0;
 
   game = new Chess(fen);
-	goToMove(-1);
-  pgnMoveStringToArray(currentGameSolution,game1); 
+  goToMove(-1);
+  pgnMoveStringToArray(currentGameSolution); 
    if (game.turn() === 'b') {
-  	solutionParsing();
+    solutionParsing();
     if (board.orientation()=="white") board.flip();
       
   } else {  
     if (board.orientation()=="black") board.flip();
   }
- 	board.position(game.fen());
+  board.position(game.fen());
   currentGame = i;
   updateStatus();
- 
-  
+ tBoard=board;
+ tGame=game;
+  $("div[class^='square-']").on("click", function(){
+    
+    myMove_to=this.id.substring(0,2);
+      console.log(myMove_to);  
+        clicked_move();
+});
 }
 
   //problemsolve end
@@ -301,6 +465,9 @@ function loadGame(i) {
 //buttons
 // $(window).resize(board.resize);
 // $(window).resize(board.resize)
+
+//click selected square
+ 
 $('#btnNew').on('click', function() {
   min=0;
   max=pgnData.length;
@@ -318,18 +485,18 @@ $('#btnNextProb').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
     if (currentGame+1 < pgnData.length) 
-    	loadGame(currentGame+1);
+      loadGame(currentGame+1);
     else
-    	loadGame(currentGame=0);
+      loadGame(currentGame=0);
 });
 
 $('#arrow_btnStart').on('click', function() {
-		alertSuccess.setAttribute('class', 'hidden');
+    alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
     if (currentGame > 0) 
-    	loadGame(currentGame-1);
+      loadGame(currentGame-1);
     else
-    	loadGame(currentGame=pgnData.length-1);
+      loadGame(currentGame=pgnData.length-1);
 });
 
 $('#arrow_btnPrevious').on('click', function() {
@@ -353,12 +520,63 @@ $('#arrow_btnNextPuzzle').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
     if (currentGame+1 < pgnData.length) 
-    	loadGame(currentGame+1);
+      loadGame(currentGame+1);
     else
-    	loadGame(currentGame=0);
+      loadGame(currentGame=0);
 });
 
 
+
+    listenerMessageHandler = function(mqttMsg){
+      var topic = mqttMsg.destinationName;
+      var payload = mqttMsg.payloadString;
+
+      var msgObj = jQuery.parseJSON( payload );
+      var msgType = msgObj.msgtype;
+
+      switch (msgType){
+        case 'text': 
+          $('#messagelist').prepend('<li>'+msgObj.username+ '->' +msgObj.message+'</li>');
+         break;
+        case 'point': 
+          console.log("sendAllPoint1:"+msgObj.message);
+          console.log("user:"+$scope.$parent.tmpUsers.length);
+           for (var i = 0; i < $scope.$parent.tmpUsers.length; i++) {
+            if ($scope.$parent.tmpUsers[i]==msgObj.username){
+                $('#'+$scope.$parent.tmpUsers[i].id).html(msgObj.username+ '->' +msgObj.message);
+                break;
+              }
+
+             
+           };
+          
+         break; 
+       }
+    };
+
+  sendAllPoint = function(currentUserAllPoint){
+
+    msgService.sendPointMessage(current_tournament.id, currentUserAllPoint,listenerMessageHandler);
+  };
+
+    $(document).ready(function() {
+       
+       for (var i = 0; i < $scope.$parent.tmpUsers.length; i++) {
+        $('#userlist').prepend('<li id="'+$scope.$parent.tmpUsers[i].id+'">'+$scope.$parent.tmpUsers[i].name+ '->' +0+'</li>');       
+       }
+ 
+      $('#btnFlip').on('click', function() {          
+            var messageinput = $('#message');
+            msgService.sendChatMessage(current_tournament.id, messageinput.val(),listenerMessageHandler);
+        });
+        $(document).keypress(function(e) {
+            if(e.which == 13) {
+              var messageinput = $('#message');
+              msgService.sendChatMessage(current_tournament.id, messageinput.val(),listenerMessageHandler);
+            }
+        });
+
+    });
 
 
  //detailProblem end

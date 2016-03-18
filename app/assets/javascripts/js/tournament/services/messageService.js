@@ -1,66 +1,13 @@
-<html>
-    <head>
-        <title>MQTT over websockets</title>
-        <style type="text/css">
-            #status {
-                padding: 5px;
-                display: inline-block;
-            }
-            label, .label {
-                display: inline-block;
-                width: 100px;
-            }
-            li {
-                list-style: none;
 
-                background: #fff;
-                margin: 2px;
-            }
-            ul {
-                background: #eef;
-            }
-            .disconnected {
-                background-color: #f88;
-            }
-            input {
-                width: 400px;
-            }
-            .connected {
-                background-color: #8f8;
-            }
+mainApp.factory('msgService', function(dbSrvc, sharedService) {
 
-            #messagelist {
-                width: 600px;
-                height: 200px;
-                overflow-y: scroll;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Super simple chat</h1>
-        <span class='label'>Status</span> <div id="status" class="disconnected">Pending</div>
-        
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" width="40" value="anonymous"/> <br/>
-            <label for="message">Message</label>
-            <input id="message" name="message" type="text" width="200"/>
-            
-
-            <button id="btnFlip" name="computer" type="button" class="btn btn-primary">Send</button>
-        
-
-        <div id="messages"><ul id="messagelist">
-
-        </ul></div>
-
-    <script src="/assets/mqtt/amqttws31.js"></script>
-    
-    <script>
-  var DEFAULT_TOPIC = "public";
+        var DEFAULT_TOPIC = "public";
         var messageService = {};
 
         var reconnectTimeout = 2000;
-        var host = '54.250.120.152';   // hostname or IP addresszz
+        var host = '54.250.120.152';   // readmine hostname or IP address
+        // var host = '54.84.241.229';   //zukamazon hostname or IP address
+        // var host = 'test.c5729kvnntur.us-east-1.rds.amazonaws.com';
         var port = 61614;
         var topic = DEFAULT_TOPIC;        // topic to subscribe to
         var nickname = 'guest'
@@ -68,19 +15,9 @@
         var username = null;
         var password = null;
         var cleansession = true;
-/*
-        var mqtt;
-        var reconnectTimeout = 2000;
-        var host=""
-        var host = '192.168.100.215';   // hostname or IP address
-        var port = 61614;
-        var topic = 'public';        // topic to subscribe to
-        var nickname = 'guest'
-        var useTLS = false;
-        var username = null;
-        var password = null;
-        var cleansession = true;
-*/
+
+
+  
         var mqtt = new Paho.MQTT.Client(
             host,
             port,
@@ -107,9 +44,9 @@
             mqtt.connect(options);
         }
 
-		function onMessageArrived(message) {
-				console.log("gggg");
-		};
+    function onMessageArrived(message) {
+        console.log("gggg");
+    };
 
         messageService.sendDjMessage = function(cmd, media, duration) {//(cmd, media) {
             var duration = typeof duration !== 'undefined' ? duration : 0;
@@ -124,16 +61,51 @@
             mqtt.send(topic, str, 0, false);
         };
 
-        messageService.sendChatMessage = function(msg,handler) {
+        messageService.sendChatMessage = function(tournamentId, msg,handler) {
             // var userObj = cshellSharedService.getUser();
             // var msgObj = {msgtype:'text', username:userObj.nickname, message:msg};
             // var str = JSON.stringify(msgObj);
-		  // mqtt.onMessageArrived=handler;
+                  // console.log("gggg");
+            mqtt.onMessageArrived=handler;
 
-            mqtt.subscribe("/World");
-            message = new Paho.MQTT.Message(msg);
-            message.destinationName = "/World";
+            var userObj = sharedService.getUser();
+            
+            console.log(userObj.name);
+            var msgObj = {msgtype:'text', username:userObj.name, message:msg};
+            var str = JSON.stringify(msgObj);
+
+            mqtt.subscribe("/"+tournamentId);
+            message = new Paho.MQTT.Message(str);
+            message.destinationName = "/"+tournamentId;
             mqtt.send(message);
+            // console.log("handler:"+mqtt.onMessageArrived);
+        };
+         messageService.sendPointMessage = function(tournamentId, point,handler) {
+            // var userObj = cshellSharedService.getUser();
+            // var msgObj = {msgtype:'text', username:userObj.nickname, message:msg};
+            // var str = JSON.stringify(msgObj);
+                  // console.log("gggg");
+            mqtt.onMessageArrived=handler;
+
+            var userObj = sharedService.getUser();
+            
+            var msgObj = {msgtype:'point', username:userObj.name, message:point};
+            var str = JSON.stringify(msgObj);
+
+            mqtt.subscribe("/"+tournamentId);
+            message = new Paho.MQTT.Message(str);
+            message.destinationName = "/"+tournamentId;
+            mqtt.send(message);
+            // console.log("handler:"+mqtt.onMessageArrived);
+        };
+         messageService.joinRoom1 = function(roomId) {
+            
+            var tpc = "channel_"+roomId;
+            // mqtt.subscribe("/World");
+            mqtt.subscribe(tpc, {qos: 0});
+            // message = new Paho.MQTT.Message(msg);
+            // message.destinationName = tpc;
+            // mqtt.send(message);
             // console.log("handler:"+mqtt.onMessageArrived);
         };
 
@@ -183,28 +155,13 @@
             }
         };
 
-   		function onMessageArrived(message) {
-   			console.log("gggg");
-            $('#messagelist').prepend('<li>'+message.destinationName+ '->' +message.payloadString+'</li>');
-            //var form = document.getElementById("example");
-            //form.receiveMsg.value = message.payloadString;
-        }
+      // function onMessageArrived(message) {
+      //   console.log("gggg");
+      //       $('#messagelist').prepend('<li>'+message.destinationName+ '->' +message.payloadString+'</li>');
+      //       //var form = document.getElementById("example");
+      //       //form.receiveMsg.value = message.payloadString;
+      //   }
 
-			listenerMessageHandler = function(mqttMsg){
-			console.log("gggg");
-			};
+ return messageService;
+});
 
-    $(document).ready(function() {
-    	 
-
-	 		$('#btnFlip').on('click', function() {          
-            var messageinput = $('#message');
-            // messageService.joinRoom('1', listenerMessageHandler);
-            messageService.sendChatMessage(messageinput.val(),listenerMessageHandler);
-        });
-
-		});
-
-    </script>
-    </body>
-</html>

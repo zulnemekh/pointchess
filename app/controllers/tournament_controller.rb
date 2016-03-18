@@ -3,7 +3,21 @@ class TournamentController < ApplicationController
   end
 
   def battle
-  	  @problems_all=Base::MtbProblems.all
-  	  # @problem=Base::MtbProblems.select("fen").where('id=?',1).first
+  	  @tournament_all=Base::DtbTournament.all
+  	  @tactic_all=Base::MtbTactics.where("tactic_type = 2 and genre = 1")
+      .order("RAND()").limit(10)
+  	  # raise ApplicationHelper.current_user(session).name
+  end
+
+  def list
+ 		@tournament_all=Base::DtbTournament.all
+  end
+  def get_user
+  	render json: Base::DtbUserInfo.find_by_id(session[:id])
+  end
+
+  def get_tactic
+  	render json: Base::MtbTactics.where("tactic_type = 2 and genre = 1")
+      .order("RAND()").limit(10)
   end
 end

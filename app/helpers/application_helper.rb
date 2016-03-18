@@ -9,6 +9,10 @@ module ApplicationHelper
         user = Base::DtbUserInfo.find_by_id(session[:id])
         return user
     end
+    def self.current_user_name()
+        user = Base::DtbUserInfo.find_by_id(session[:id]).name
+        return user
+    end
 
   
     # ================= Encryption and Decryption =======================================

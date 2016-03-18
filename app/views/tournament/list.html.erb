@@ -1,6 +1,6 @@
 <html ng-app = "mainApp">
    <head>
-      <title>Angular JS Forms</title>
+      <title>Tournament list</title>
 <link rel="stylesheet" href="/assets/css/chessboard-0.3.0.min.css" />
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
  <link rel="stylesheet" href="/assets/css/design/buttons.css">
@@ -14,10 +14,6 @@
 
   <script src="/assets/js/tournament/mainapp.js"></script>
   <script src="/assets/js/tournament/controllers.js"></script>
-  <script src="/assets/js/tournament/services/dbSrvc.js"></script>
-    <script src="/assets/js/tournament/services/sharedService.js"></script>
-  <script src="/assets/js/tournament/services/messageService.js"></script>
-
    </head>
    
    <body>
@@ -33,14 +29,9 @@
     
 <script type="text/javascript">
 
-  var array=<%= raw @tournament_all.to_json%>
-  var tactic_array=<%= raw @tactic_all.to_json%>
-  var username= '<%= ApplicationHelper.current_user(session).name%>'
 
 </script>
-      <script src="/assets/mqtt/amqttws31.js"></script>
-      <script src="/assets/js/myjs/mate2.js"></script>  
-      <script src="/assets/js/tournament/data/mate3.js"></script>
+      
 
    </body>
 </html>

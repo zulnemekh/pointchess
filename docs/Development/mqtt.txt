@@ -1,0 +1,6 @@
+activemqt-g tatah holboos
+wget http://archive.apache.org/dist/activemq/5.11.1/apache-activemq-5.11.1-bin.tar.gz
+
+ashiglah sites
+http://janvanoverveld.blogspot.com/2015/04/installation-apache-active-mq-on-ubuntu.html
+https://docs.wso2.com/display/BAM200/Installing+Apache+ActiveMQ+on+Linux
