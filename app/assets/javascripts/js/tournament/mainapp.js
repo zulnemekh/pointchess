@@ -21,6 +21,11 @@ mainApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
 		templateUrl: "/assets/js/tournament/views/home.html",
 		controller: "home"
 	});
+  $stateProvider.state("room", {
+    url: "/room",
+    templateUrl: "/assets/js/tournament/views/room.html",
+    controller: "roomController"
+  });
   $stateProvider.state("list", {
     url: "/list",
     templateUrl: "/assets/js/tournament/views/list.html",

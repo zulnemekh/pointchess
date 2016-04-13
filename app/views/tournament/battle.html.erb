@@ -14,6 +14,8 @@
 
   <script src="/assets/js/tournament/mainapp.js"></script>
   <script src="/assets/js/tournament/controllers.js"></script>
+  <script src="/assets/js/tournament/roomcontroller.js"></script>
+  <script src="/assets/js/tournament/homecontroller.js"></script>
   <script src="/assets/js/tournament/services/dbSrvc.js"></script>
     <script src="/assets/js/tournament/services/sharedService.js"></script>
   <script src="/assets/js/tournament/services/messageService.js"></script>
@@ -21,7 +23,6 @@
    </head>
    
    <body>
-      <h2>Problem solve tournament</h2>
        <div ng-controller = "parentController">
         <h2>{{timer}}</h2>
         
@@ -32,7 +33,7 @@
       </div>
     
 <script type="text/javascript">
-
+  var _AUTH_TOKEN = <%= raw form_authenticity_token.inspect if protect_against_forgery? %>
   var array=<%= raw @tournament_all.to_json%>
   var tactic_array=<%= raw @tactic_all.to_json%>
   var username= '<%= ApplicationHelper.current_user(session).name%>'

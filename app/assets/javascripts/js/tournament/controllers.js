@@ -1,45 +1,46 @@
     
-     mainApp.controller("parentController", function($scope,$timeout,sharedService) {
+     mainApp.controller("parentController", function($rootScope,$scope,$timeout,sharedService) {
         $scope.array = array;
         $scope.problems = tactic_array;
-        $scope.users=[];
+        // $scope.users=[];
+        $rootScope.users = [];
         $scope.tmpUsers=[];
-         $scope.message = "In parent controller";
-            $scope.tempPoint = sharedService.tempPoint();
-            console.log("tempPoint:"+$scope.tempPoint);
-            $scope.allPoint = 0;
-            $scope.timer = "";
-            $scope.counter = 300;
-            $scope.onTimeout = function(){
-                if ($scope.counter == 0) {
-                  console.log("Game Over");
-                  return false;
-                }
-                var value = $scope.counter;
-                var sec = $scope.counter;                   
-                // total seconds
-              var seconds = $scope.counter;
-               $scope.counter--;
-              // calculate seconds
-              var s = seconds % 60;
-              // add leading zero to seconds if needed
-              s = s < 10 ? "0" + s : s;
-              // calculate minutes
-              var m = Math.floor(seconds / 60) % 60;
-              // add leading zero to minutes if needed
-              m = m < 10 ? "0" + m : m;
-              // calculate hours
-              var h = Math.floor(seconds / 60 / 60);
-              var time = h + ":" + m + ":" + s
+        $scope.message = "In parent controller";
+        $scope.tempPoint = sharedService.tempPoint();
+        console.log("tempPoint:"+$scope.tempPoint);
+        $scope.allPoint = 0;
+        $scope.timer = "";
+        $scope.counter = 300;
+        $scope.onTimeout = function(){
+        if ($scope.counter == 0) {
+              console.log("Game Over");
+              return false;
+            }
+          var value = $scope.counter;
+          var sec = $scope.counter;                   
+            // total seconds
+          var seconds = $scope.counter;
+           $scope.counter--;
+          // calculate seconds
+          var s = seconds % 60;
+          // add leading zero to seconds if needed
+          s = s < 10 ? "0" + s : s;
+          // calculate minutes
+          var m = Math.floor(seconds / 60) % 60;
+          // add leading zero to minutes if needed
+          m = m < 10 ? "0" + m : m;
+          // calculate hours
+          var h = Math.floor(seconds / 60 / 60);
+          var time = h + ":" + m + ":" + s
 
-                    $scope.timer=time;
-                    mytimeout = $timeout($scope.onTimeout,1000);
-                }
-                var mytimeout = $timeout($scope.onTimeout,1000);
-                
-                $scope.stop = function(){
-                    $timeout.cancel(mytimeout);
-                }
+                $scope.timer=time;
+                mytimeout = $timeout($scope.onTimeout,1000);
+            }
+            // var mytimeout = $timeout($scope.onTimeout,1000);
+            
+            $scope.stop = function(){
+                $timeout.cancel(mytimeout);
+            }
 
 
       function getRandomSubarray(arr, size) {
@@ -57,17 +58,7 @@
         
      });
      
-  
-   mainApp.controller("home", function($scope,$timeout) {
-        $scope.message = "In home controller";
-     
-     
-        $scope.goto_detail = function(id) {
-           current_tournament = $scope.$parent.array[id];
 
-         };
-
-      });
      mainApp.controller("listController", function($scope,$timeout,sharedService) {
         $scope.message = "In list controller";
         $scope.$parent.tmpUsers.push(sharedService.getUser());
@@ -94,6 +85,7 @@
     $scope.timer = "";
     $scope.progress = 100;
     $scope.counter = 0;
+console.log(JSON.stringify($rootScope.users));
     //point calculate begin
     maxPoint=20;
     masterDone=20;
@@ -525,8 +517,6 @@ $('#arrow_btnNextPuzzle').on('click', function() {
       loadGame(currentGame=0);
 });
 
-
-
     listenerMessageHandler = function(mqttMsg){
       var topic = mqttMsg.destinationName;
       var payload = mqttMsg.payloadString;
@@ -539,16 +529,22 @@ $('#arrow_btnNextPuzzle').on('click', function() {
           $('#messagelist').prepend('<li>'+msgObj.username+ '->' +msgObj.message+'</li>');
          break;
         case 'point': 
+          $rootScope.users
+          for (var i = 0; i < $rootScope.users.length; i++) {
+            if ($rootScope.users[i].user_name==msgObj.username){
+              $rootScope.users[i].point=$rootScope.users[i].point+msgObj.message;
+            }
+          };
           console.log("sendAllPoint1:"+msgObj.message);
-          console.log("user:"+$scope.$parent.tmpUsers.length);
-           for (var i = 0; i < $scope.$parent.tmpUsers.length; i++) {
-            if ($scope.$parent.tmpUsers[i]==msgObj.username){
-                $('#'+$scope.$parent.tmpUsers[i].id).html(msgObj.username+ '->' +msgObj.message);
-                break;
-              }
+          // console.log("user:"+$scope.$parent.tmpUsers.length);
+          //  for (var i = 0; i < $scope.$parent.tmpUsers.length; i++) {
+          //   if ($scope.$parent.tmpUsers[i]==msgObj.username){
+          //       $('#'+$scope.$parent.tmpUsers[i].id).html(msgObj.username+ '->' +msgObj.message);
+          //       break;
+          //     }
 
              
-           };
+          //  };
           
          break; 
        }
@@ -567,12 +563,12 @@ $('#arrow_btnNextPuzzle').on('click', function() {
  
       $('#btnFlip').on('click', function() {          
             var messageinput = $('#message');
-            msgService.sendChatMessage(current_tournament.id, messageinput.val(),listenerMessageHandler);
+            msgService.sendChatMessage1(current_tournament.id, messageinput.val(),listenerMessageHandler);
         });
         $(document).keypress(function(e) {
             if(e.which == 13) {
               var messageinput = $('#message');
-              msgService.sendChatMessage(current_tournament.id, messageinput.val(),listenerMessageHandler);
+              msgService.sendChatMessage1(current_tournament.id, messageinput.val(),listenerMessageHandler);
             }
         });
 

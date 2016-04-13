@@ -1,5 +1,5 @@
 
-mainApp.factory('msgService', function(dbSrvc, sharedService) {
+mainApp.factory('msgService', function($rootScope, dbSrvc, sharedService) {
 
         var DEFAULT_TOPIC = "public";
         var messageService = {};
@@ -44,9 +44,9 @@ mainApp.factory('msgService', function(dbSrvc, sharedService) {
             mqtt.connect(options);
         }
 
-    function onMessageArrived(message) {
-        console.log("gggg");
-    };
+        function onMessageArrived(message) {
+            console.log("gggg");
+        };
 
         messageService.sendDjMessage = function(cmd, media, duration) {//(cmd, media) {
             var duration = typeof duration !== 'undefined' ? duration : 0;
@@ -60,7 +60,14 @@ mainApp.factory('msgService', function(dbSrvc, sharedService) {
             var str = JSON.stringify(msgObj);
             mqtt.send(topic, str, 0, false);
         };
-
+        messageService.sendChatMessage1 = function(tournamentId, msg,handler) {
+            console.log("chat send zuk");
+            mqtt.onMessageArrived=handler;
+            var userObj =  sharedService.getUser();
+            var msgObj = {msgtype:'text', username:userObj.name, message:msg};
+            var str = JSON.stringify(msgObj);
+            mqtt.send(topic, str, 0, false);
+        };
         messageService.sendChatMessage = function(tournamentId, msg,handler) {
             // var userObj = cshellSharedService.getUser();
             // var msgObj = {msgtype:'text', username:userObj.nickname, message:msg};
@@ -81,28 +88,27 @@ mainApp.factory('msgService', function(dbSrvc, sharedService) {
             // console.log("handler:"+mqtt.onMessageArrived);
         };
          messageService.sendPointMessage = function(tournamentId, point,handler) {
-            // var userObj = cshellSharedService.getUser();
-            // var msgObj = {msgtype:'text', username:userObj.nickname, message:msg};
-            // var str = JSON.stringify(msgObj);
-                  // console.log("gggg");
+          
+             console.log("sendPointMessage");
             mqtt.onMessageArrived=handler;
-
-            var userObj = sharedService.getUser();
-            
+            var userObj =  sharedService.getUser();
             var msgObj = {msgtype:'point', username:userObj.name, message:point};
             var str = JSON.stringify(msgObj);
-
-            mqtt.subscribe("/"+tournamentId);
-            message = new Paho.MQTT.Message(str);
-            message.destinationName = "/"+tournamentId;
-            mqtt.send(message);
-            // console.log("handler:"+mqtt.onMessageArrived);
+            mqtt.send(topic, str, 0, false);
         };
-         messageService.joinRoom1 = function(roomId) {
+         messageService.joinRoom1 = function(roomId,tournamentId, handler) {
             
             var tpc = "channel_"+roomId;
             // mqtt.subscribe("/World");
-            mqtt.subscribe(tpc, {qos: 0});
+            mqtt.onMessageArrived=handler;
+            if(tpc != topic) {
+                mqtt.unsubscribe(topic, null);
+                topic = tpc;
+                mqtt.subscribe(tpc, {qos: 0});
+                messageService.sendRequestMessage();
+                dbSrvc.post("tournament/log", {authenticity_token: _AUTH_TOKEN, tournament_id: tournamentId, control_action: "join"}).then(function() {
+                });
+             }   
             // message = new Paho.MQTT.Message(msg);
             // message.destinationName = tpc;
             // mqtt.send(message);

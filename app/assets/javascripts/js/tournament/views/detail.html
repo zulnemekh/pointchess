@@ -1,5 +1,4 @@
-<style type="text/css">
-       
+<style type="text/css">     
       .highlight-white {
       -webkit-box-shadow: inset 0 0 3px 3px yellow;
       -moz-box-shadow: inset 0 0 3px 3px yellow;
@@ -9,19 +8,14 @@
         -webkit-box-shadow: inset 0 0 3px 3px black;
         -moz-box-shadow: inset 0 0 3px 3px black;
         box-shadow: inset 0 0 3px 3px black;  
-      }
-          
+      }         
 </style>
 
 
 <div class="container-full">
-
-
   <div class="row">
-  <div class="col-md-5" >
-
+  <div class="col-md-5">
   <div id="board"></div>
-
 </div>
 
 <!-- 
@@ -53,12 +47,10 @@
 
       <div id="alertSuccess" class="alert alert-success" role="alert">Well done! You successfully solve this problem.</div>
       <div id="alertFail" class="alert alert-danger" role="alert">Wrong move! try again.</div>
-     
-          <form class="form-horizontal" role="form">
-          
+    
+          <form class="form-horizontal" role="form">         
           </form>
           
-
             <div id="board-buttons">
             <button type="button" class="btn btn-default" id="arrow_btnStart"><i class="fa fa-fast-backward fa-lg"></i></button>
             <button type="button" class="btn btn-default" id="arrow_btnPrevious"><i class="fa fa-step-backward fa-lg"></i></button>
@@ -68,38 +60,40 @@
       <div><!-- buttons -->
         
         <button  id="btnRetry" type="button" class="button button-rounded button-flat-primary">Retry</button>
-          <button  id="btnNew" type="button" class="button button-rounded button-flat-primary">New Random</button>
-          
-          <button  id="btnNextProb" type="button" class="button button-rounded button-flat-primary">Next</button>
+        <button  id="btnNew" type="button" class="button button-rounded button-flat-primary">New Random</button>
+        
+        <button  id="btnNextProb" type="button" class="button button-rounded button-flat-primary">Next</button>
           
       </div>
-             <p>Status: <span id="status"></span></p>
-             <p>PuzzleNumber: <span id="currentPuzzle"></span></p>
-             <p>nextMove: <span id="nextmovie"></span></p>
-             <p>FEN: <span id="fen"></span></p>
-             <p>PGN: <span id="pgn"></span></p>
-     
+       <p>Status: <span id="status"></span></p>
+       <p>PuzzleNumber: <span id="currentPuzzle"></span></p>
+       <p>nextMove: <span id="nextmovie"></span></p>
+       <p>FEN: <span id="fen"></span></p>
+       <p>PGN: <span id="pgn"></span></p>
+
      <label for="message">Message</label>
-            <input id="message" name="message" type="text" width="200"/>
-            
+      <input id="message" name="message" type="text" width="200"/>
 
-            <button id="btnFlip" name="computer" type="button" class="btn btn-primary">Send</button>
+      <button id="btnFlip" name="computer" type="button" class="btn btn-primary">Send</button>
         
-
-        <div id="messages"><ul id="messagelist">
-          <!-- default -->
-          
-          <!-- dafualt end -->
+      <div id="messages">
+        <ul id="messagelist">
+        <!-- default -->
+        
+        <!-- dafualt end -->
       </div>  
-        <div class="col-md-2" style="background-color:lavenderblush;">
-          <div id="users"><ul id="userlist">
-                           
-            </div>  
-
-        </div>    <!--  <div class="col-md-2" -->
-
     </div>  <!--  <div class="col-md-5" -->
+     <!--  <div class="col-md-2" -->
+
   </div>
+    <div class="col-md-2" style="background-color:lavenderblush;"> 
+    <div class="block" ng-repeat="user in users track by $index">
+    <span id="username_{{user.id}}">{{user.user_name}}--></span><span id="userpoint_{{user.id}}">{{user.point}}</span>
+    </div>
+        <div id="userList">
+            <ul id="pointlist"></ul>
+        </div>
+    </div>    
 </div>
 <!-- <script src="/assets/js/tournament/problemsolve1125.js"></script>  -->
 

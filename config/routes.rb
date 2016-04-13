@@ -35,6 +35,9 @@ Reddit::Application.routes.draw do
   #dbSrvc.js ajax
   get 'api/tournament/get_user'    => 'tournament#get_user'
   get 'api/tournament/get_tactic'    => 'tournament#get_tactic'
+  post "api/tournament/log" => "tournament#log"
+  get "api/tournament/log" => "tournament#log"
+  post 'api/tournament/get_tournament_users'    => 'tournament#get_tournament_users'
 
   # resources :problempanel
   resources :problems

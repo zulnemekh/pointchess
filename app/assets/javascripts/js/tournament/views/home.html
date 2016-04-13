@@ -9,7 +9,7 @@
 		            	font-style: bold;">{{i.title}}</h2>
 		            	<p>{{i.description}}</p>
 										<div id="board_{{$index}}" >Owner {{i.user_id}}</div>
-		              <p><a id="btn_board_{{$index}}"  class="btn btn-default" ui-sref="list"  data-ng-click="goto_detail($index)" role="button">Join »</a></p>
+		              <p><a id="btn_board_{{$index}}"  class="btn btn-default" ui-sref="room"  data-ng-click="goto_detail($index,i.id)" role="button">Join »</a></p>
 
 		              <!-- <a ui-sref="detail({id: i.FEN})">View details</a> -->
 		            </div>

@@ -36,6 +36,21 @@ angular.module("mainApp").factory('sharedService', function(dbSrvc) {
       }
   }
    
+    var tournamentUsers = null;
+  var getTournamentUsers = function(){
+      if(tournamentUsers == null){
+          data = dbSrvc.get("tournament/get_tournament_users").then(function(data) {
+              tournamentUsers = data;
+              // console.log(currentTactic);
+              return tournamentUsers;
+          });
+      } else {
+         
+        return tournamentUsers;
+          
+      }
+  }
+   
  getUser();
  getTactic();
 	
@@ -43,6 +58,7 @@ angular.module("mainApp").factory('sharedService', function(dbSrvc) {
 		 	 getId: getId,
 		 	 tempPoint: tempPoint,
 		 	 getUser: getUser,
-		 	 getTactic: getTactic
+		 	 getTactic: getTactic,
+       getTournamentUsers: getTournamentUsers
 		 };
 });

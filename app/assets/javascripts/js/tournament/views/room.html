@@ -1,0 +1,11 @@
+  <div class="row">
+  <h1>Room</h1>
+   <div class="col-md-2" style="background-color:lavenderblush;"> 
+    <div class="block" ng-repeat="user in users track by $index">
+    <span id="username_{{user.id}}">{{user.user_name}}--></span><span id="userpoint_{{user.id}}">{{user.point}}</span>
+    </div>
+ <p><a id="btn_start"  class="btn btn-default" ui-sref="list"  data-ng-click="goto_init()" role="button">Start »</a></p>
+    </div>  
+ </div>  
+
+ 
