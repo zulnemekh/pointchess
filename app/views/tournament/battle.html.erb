@@ -16,6 +16,7 @@
   <script src="/assets/js/tournament/controllers.js"></script>
   <script src="/assets/js/tournament/roomcontroller.js"></script>
   <script src="/assets/js/tournament/homecontroller.js"></script>
+  <script src="/assets/js/tournament/detailcontroller.js"></script>
   <script src="/assets/js/tournament/services/dbSrvc.js"></script>
     <script src="/assets/js/tournament/services/sharedService.js"></script>
   <script src="/assets/js/tournament/services/messageService.js"></script>
@@ -23,10 +24,9 @@
    </head>
    
    <body>
-       <div ng-controller = "parentController">
+       <div ng-controller = "parentController" >
         <h2>{{timer}}</h2>
         
-       
           <div ui-view>
           </div>
 
