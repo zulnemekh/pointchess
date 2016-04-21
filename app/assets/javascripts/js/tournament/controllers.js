@@ -4,6 +4,7 @@
         $scope.problems = tactic_array;
         // $scope.users=[];
         $rootScope.users = [];
+        $rootScope.isMqttConnected;
         $scope.tmpUsers=[];
         $scope.message = "In parent controller";
         $scope.tempPoint = sharedService.tempPoint();
@@ -36,7 +37,7 @@
                 $scope.timer=time;
                 mytimeout = $timeout($scope.onTimeout,1000);
             }
-            // var mytimeout = $timeout($scope.onTimeout,1000);
+            var mytimeout = $timeout($scope.onTimeout,1000);
             
             $scope.stop = function(){
                 $timeout.cancel(mytimeout);

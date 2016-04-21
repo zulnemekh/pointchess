@@ -12,4 +12,13 @@ class ApplicationController < ActionController::Base
  #  end
  protect_from_forgery with: :exception
   include SessionsHelper
+
+
+  def check_login
+  	if ApplicationHelper.user_logged?(session)
+  		return 
+  	else
+			redirect_to users_login_path
+  	end	
+	end
 end

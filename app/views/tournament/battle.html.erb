@@ -26,7 +26,7 @@
    <body>
        <div ng-controller = "parentController" >
         <h2>{{timer}}</h2>
-        
+        <h3>{{$root.isMqttConnected}}</h3>
           <div ui-view>
           </div>
 
@@ -36,7 +36,7 @@
   var _AUTH_TOKEN = <%= raw form_authenticity_token.inspect if protect_against_forgery? %>
   var array=<%= raw @tournament_all.to_json%>
   var tactic_array=<%= raw @tactic_all.to_json%>
-  var username= '<%= ApplicationHelper.current_user(session).name%>'
+  var usernameaaa= '<%= ApplicationHelper.current_user(session).name%>'
 
 </script>
       <script src="/assets/mqtt/amqttws31.js"></script>

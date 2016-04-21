@@ -24,28 +24,41 @@ mainApp.factory('msgService', function($rootScope, dbSrvc, sharedService) {
             "web_" + parseInt(Math.random() * 100,
                 10));
 
-        if(!mqtt.isConnected()){
-            console.log("MQTT connecting");
-            var options = {
-                timeout: 3,
-                useSSL: useTLS,
-                cleanSession: cleansession,
-                onSuccess: function () {
-                    console.log('Connected to MQTT');
-                },
-                onFailure: function (message) {
-                    console.log("Connection failed: " + message.errorMessage + "Retrying");
-                    setTimeout(mqtt.connect(options), reconnectTimeout);
-                }
-            };
-            mqtt.onMessageArrived = onMessageArrived;
-            options.userName = '';
-            options.password = '';
-            mqtt.connect(options);
-        }
+     //holbolt hiideg connection function bolgoj ashiglay  
+    function onConnection(){
+      console.log("messageService onConnection()");
+    
+      if(!mqtt.isConnected()){
+        $rootScope.mqttStatus="connecting";
+        console.log("MQTT connecting");
+        var options = {
+            timeout: 3,
+            useSSL: useTLS,
+            cleanSession: cleansession,
+            onSuccess: function () {
+                $rootScope.isMqttConnected=true;
+                $rootScope.mqttStatus="success";
+                console.log('Connected to MQTT');
+            },
+            onFailure: function (message) {
+                $rootScope.mqttStatus="success";
+                $rootScope.isMqttConnected=false;
+                onConnection();
+                console.log("Connection failed: " + message.errorMessage + "Retrying");
+                setTimeout(mqtt.connect(options), reconnectTimeout);
+            }
+        };
+        mqtt.onMessageArrived = onMessageArrived;
+        options.userName = '';
+        options.password = '';
+        mqtt.connect(options);
+      }
+    }
+
+    onConnection();
 
         function onMessageArrived(message) {
-            console.log("gggg");
+            console.log("messageService onMessageArrived()");
         };
 
         messageService.sendDjMessage = function(cmd, media, duration) {//(cmd, media) {

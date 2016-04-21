@@ -10,7 +10,7 @@ mainApp.controller("home", function($rootScope,$scope,$timeout,sharedService,msg
 		dbSrvc.post("tournament/get_tournament_users", {authenticity_token: _AUTH_TOKEN, tournament_id: current_tournament.id}).then(function(data) {
          console.log("tournamentdata:"+JSON.stringify(data)); 
          $rootScope.users=data;
-         $scope.$parent.mytimeout = $timeout($scope.onTimeout,1000);
+         // $scope.$parent.mytimeout = $timeout($scope.onTimeout,1000);
          for (var i = 0; i < $rootScope.users.length; i++) {
         	$rootScope.users[i].point=0;
       	 }
