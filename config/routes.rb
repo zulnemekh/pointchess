@@ -6,11 +6,11 @@ Reddit::Application.routes.draw do
   # get "problempanel/index"
   # get "problempanel/edit"
 
-  get "/tactics(.:format)"            => "tactics#index",    :as => "tactics"
-  get "/tactics/datainsert(.:format)"        => "tactics#datainsert",      :as => "tactics_datainsert"
-  get "/tactics/:id/edit(.:format)"   => "tactics#edit",     :as => "edit_tactics"
-  patch "/tactics/update(.:format)"   => "tactics#update",     :as => "update_tactics"
-  post "/tactics/create(.:format)"   => "tactics#create",     :as => "create_tactics"
+  get "/admin/tactics(.:format)"            => "tactics#index",    :as => "tactics"
+  get "/admin/tactics/datainsert(.:format)"        => "tactics#datainsert",      :as => "tactics_datainsert"
+  get "/admin/tactics/:id/edit(.:format)"   => "tactics#edit",     :as => "edit_tactics"
+  patch "/admin/tactics/update(.:format)"   => "tactics#update",     :as => "update_tactics"
+  post "/admin/tactics/create(.:format)"   => "tactics#create",     :as => "create_tactics"
 
   get "/tactics/tactic(.:format)"            => "tactics#tactic",    :as => "tactic_tactics"
   get "/tactics/tacticthree(.:format)"            => "tactics#tactic_three",    :as => "tactic_tactics_three"

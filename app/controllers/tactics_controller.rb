@@ -15,18 +15,32 @@ class TacticsController < ApplicationController
   end
 
   def tactic
-    b=params[:type].to_i
 
-    if b.is_a? Integer
-      @tactics = Base::MtbTactics.where("tactic_type = #{b
-        } and genre = 1")
+    if params[:type].blank?
+       @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 1")
       .order("RAND()").limit(10)
-      
     else
-      @tactics = Base::MtbTactics.where("tactic_type = 2 and genre = 1")
-      .order("RAND()").limit(10)
-      # raise params[:type].to_s
-    end  
+      if is_number params[:type]
+        @tactics = Base::MtbTactics.where("tactic_type = #{params[:type]
+          } and genre = 1")
+        .order("RAND()").limit(10)
+      elsif params[:type].to_s=='puzzle'
+          @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 2")
+        .order("RAND()").limit(10)
+      else 
+        
+        @tactics = Base::MtbTactics.where("tactic_type = 2 and genre = 1")
+        .order("RAND()").limit(10)
+      end  
+    end
+
+  end
+
+  def is_number(val)
+    if val.to_f.to_s == val.to_s || val.to_i.to_s == val.to_s
+      return true
+    end
+    return false
   end
 
   def tactic_ajax

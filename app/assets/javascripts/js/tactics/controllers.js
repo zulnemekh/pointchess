@@ -1,42 +1,11 @@
     
-         mainApp.controller("parentController", function($scope,$timeout,Service) {
-            $scope.message = "In parent controller";
-            $scope.tempPoint = Service.tempPoint;
-            $scope.allPoint = 0;
-            $scope.timer = "";
-            $scope.counter = 300;
-            $scope.problems =array;
-				    $scope.onTimeout = function(){
-				        if ($scope.counter == 0) {
-				        	console.log("Game Over");
-				        	return false;
-				        }
-				        var value = $scope.counter;
-				        var sec = $scope.counter;						        
-				        // total seconds
-							var seconds = $scope.counter;
-							 $scope.counter--;
-							// calculate seconds
-							var s = seconds % 60;
-							// add leading zero to seconds if needed
-							s = s < 10 ? "0" + s : s;
-							// calculate minutes
-							var m = Math.floor(seconds / 60) % 60;
-							// add leading zero to minutes if needed
-							m = m < 10 ? "0" + m : m;
-							// calculate hours
-							var h = Math.floor(seconds / 60 / 60);
-							var time = h + ":" + m + ":" + s
-
-										$scope.timer=time;
-						        mytimeout = $timeout($scope.onTimeout,1000);
-						    }
-						    var mytimeout = $timeout($scope.onTimeout,1000);
-						    
-						    $scope.stop = function(){
-						        $timeout.cancel(mytimeout);
-						    }
-
+     mainApp.controller("parentController", function($scope,$timeout,Service) {
+        $scope.message = "In parent controller";
+        $scope.tempPoint = Service.tempPoint;
+        $scope.allPoint = 0;
+        $scope.timer = "";
+        $scope.problems =array;
+		 
 
 			function getRandomSubarray(arr, size) {
 			    var shuffled = arr.slice(0), i = arr.length, temp, index;
@@ -55,26 +24,19 @@
          });
          
       
-         mainApp.controller("listController", function($scope,$timeout,Service) {
-            $scope.message = "In list controller";
-  
-            
-					var boardname='board_';
-					 $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
-				  	for (var i = 0; i < $scope.$parent.problems.length; i++) {
-									var board2 = ChessBoard(boardname+i, {
-									  position: $scope.$parent.problems[i].fen,
-									  showNotation: false
-									});
-								}
-				  });
+      mainApp.controller("listController", function($scope,$timeout,Service) {
+        $scope.message = "In list controller";
 
-//			console.log(JSON.stringify($scope.$parent.problems));
+  			var boardname='board_';
+  			 $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+  		  	for (var i = 0; i < $scope.$parent.problems.length; i++) {
+  							var board2 = ChessBoard(boardname+i, {
+  							  position: $scope.$parent.problems[i].fen,
+  							  showNotation: false
+  							});
+  						}
+  		  });
 
-		    // $scope.goto_detail = function(id) {
-		    //    Service.id=id;
-		    // };
-  
 
       });
          
@@ -84,6 +46,8 @@
     $scope.timer = "";
     $scope.progress = 100;
     $scope.counter = 0;
+    $scope.firstMove = '';
+    $scope.tacticType = '';
     //point calculate begin
     maxPoint=20;
     masterDone=20;
@@ -400,7 +364,22 @@ function solutionParsing() {
         }
     }
 }
-
+function setTacticStatus(type){
+    switch (true) {
+        case (type == 2):
+            $scope.tacticType='Mate in 2';
+            break;
+        case (type == 3):
+            $scope.tacticType='Mate in 3';
+            break;
+        case (type == 2):
+            $scope.tacticType='Mate in 4';
+            break;
+        default:
+            $scope.tacticType='Find best move';
+            break;
+    }
+}
 function goToMove(ply) {
  
   if (ply > solution.length - 1) ply = solution.length - 1;
@@ -421,17 +400,21 @@ function loadGame(i) {
   removeGreySquares();
   
   fen=pgnData[i].fen;
-  currentGameSolution=pgnData[i].fes; 
+  currentGameSolution=pgnData[i].fes;
 	solution.length=0;
 
   game = new Chess(fen);
 	goToMove(-1);
   pgnMoveStringToArray(currentGameSolution); 
-   if (game.turn() === 'b') {
+  //tactic type-g display deer haragduulah
+  setTacticStatus(pgnData[i].tactic_type);
+  if (game.turn() === 'b') {
   	solutionParsing();
+    $scope.firstMove = 'Black to move';
     if (board.orientation()=="white") board.flip();
       
   } else {  
+    $scope.firstMove = 'White to move';
     if (board.orientation()=="black") board.flip();
   }
  	board.position(game.fen());

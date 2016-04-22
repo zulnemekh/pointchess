@@ -1,0 +1,9 @@
+mtb_tactics
+  tactics
+	   211 mate in 2
+	   483 mate in 3
+	   459 mate in 4
+	   total 1153
+	problems /etude buyu zohoimol bodloguud/   
+		 4703 mate in 2	 /active/
+		 131279 all problems /gartsaagui neg nuudel hiigeed duusah bodloguud bga mon fes dotor = () temdegtuud bga bodlog/
