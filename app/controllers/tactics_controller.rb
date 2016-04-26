@@ -56,7 +56,9 @@ class TacticsController < ApplicationController
   def datainsert
   		@tactic = Base::MtbTactics.new
   end
-	
+	def elo_rating
+    
+  end
 	#ajax-r tactics-tableruu data bicheh
 	def tactics_update_ajax
 	

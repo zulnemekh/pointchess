@@ -16,6 +16,7 @@ Reddit::Application.routes.draw do
   get "/tactics/tacticthree(.:format)"            => "tactics#tactic_three",    :as => "tactic_tactics_three"
   get "/tactics/tacticfour(.:format)"            => "tactics#tactic_four",    :as => "tactic_tactics_four"
 
+  get "/tactics/elo_rating"            => "tactics#elo_rating",    :as => "tactic_elo_rating"
   #Baazaas tactics filterlej awah
   post "/tactics_ajax"       => "tactics#tactics_ajax",        :as => "tactics_ajax"
   #FILE-unshsan data-gaa data baazruu bicheh 

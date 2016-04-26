@@ -372,7 +372,7 @@ function setTacticStatus(type){
         case (type == 3):
             $scope.tacticType='Mate in 3';
             break;
-        case (type == 2):
+        case (type == 4):
             $scope.tacticType='Mate in 4';
             break;
         default:
