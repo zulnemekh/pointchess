@@ -1,24 +1,24 @@
     
      mainApp.controller("parentController", function($scope,$timeout,Service) {
         $scope.message = "In parent controller";
-        $scope.tempPoint = Service.tempPoint;
+        $scope.tempPoint = 0;
         $scope.allPoint = 0;
         $scope.timer = "";
         $scope.problems =array;
 		 
 
-			function getRandomSubarray(arr, size) {
-			    var shuffled = arr.slice(0), i = arr.length, temp, index;
-			    while (i--) {
-			        index = Math.floor((i + 1) * Math.random());
-			        temp = shuffled[index];
-			        shuffled[index] = shuffled[i];
-			        shuffled[i] = temp;
-			    }
-			    return shuffled.slice(0, size);
-			}
+			// function getRandomSubarray(arr, size) {
+			//     var shuffled = arr.slice(0), i = arr.length, temp, index;
+			//     while (i--) {
+			//         index = Math.floor((i + 1) * Math.random());
+			//         temp = shuffled[index];
+			//         shuffled[index] = shuffled[i];
+			//         shuffled[i] = temp;
+			//     }
+			//     return shuffled.slice(0, size);
+			// }
  
-      $scope.data = getRandomSubarray(Service.pgnData, 5);
+   //    $scope.data = getRandomSubarray(Service.pgnData, 5);
 		    
  				// console.log("shapeController");
          });
@@ -40,7 +40,7 @@
 
       });
          
- mainApp.controller("detailController", function($rootScope,$scope,$timeout,Service, $stateParams,$window) {
+ mainApp.controller("detailController", function($rootScope,$scope,$timeout,Service, dbSrvc, $stateParams,$window) {
     $scope.message = "In detail controller";
     $scope.type = "detail";
     $scope.timer = "";
@@ -48,6 +48,9 @@
     $scope.counter = 0;
     $scope.firstMove = '';
     $scope.tacticType = '';
+    $scope.user_rating =user_rating;
+    $scope.roundStrRating= Math.round($scope.user_rating.rating);
+    $scope.currenGame_id = 1;
     //point calculate begin
     maxPoint=20;
     masterDone=20;
@@ -94,8 +97,8 @@ var board, //the chessboard
     myMove_to='e4';
     fen;
     
-    pgnData = array;
-		currentGame=Service.id;
+    $scope.pgnData = array;
+		currentGame=1;
   
 
     var alertSuccess = document.getElementById('alertSuccess');
@@ -128,9 +131,46 @@ var greySquare = function(square) {
   squareEl.css('background', background);
 };
 
-function pointCalculate() {
+function pointCalculate(isSuccess) {
+   var settings = {
+      // tau : "Reasonable choices are between 0.3 and 1.2, though the system should
+      //      be tested to decide which value results in greatest predictive accuracy."
+      tau : 0.5,
+      // rating : default rating
+      rating : 1500,
+      //rd : Default rating deviation 
+      //     small number = good confidence on the rating accuracy
+      rd : 200,
+      //vol : Default volatility (expected fluctation on the player rating)
+      vol : 0.06
+    };
+    var ranking = new glicko2.Glicko2(settings);
+
+    // Create players
+    i=$scope.currenGame_id;
+    var Zulaa = ranking.makePlayer($scope.user_rating.rating, 
+      $scope.user_rating.rd, $scope.user_rating.vol);
+    var puzzle = ranking.makePlayer($scope.pgnData[i].rating,
+     $scope.pgnData[i].rd, $scope.pgnData[i].vol);
+    var matches = [];
+    //Bodlogoo bodson bol hugatsaanaas hamaaraad amjiltaas n % hasana
+    if (isSuccess==1) {
+      result1 = isSuccess-0.1;
+      result2 = isSuccess-0.2;
+      result3 = isSuccess-0.3;
+      result4 = isSuccess-0.4;
+    }else{  
+      //bodoj chadaagui uyd hugatsaa hamaarahgui bugd '0'
+      result1 = 0;
+      result2 = 0;
+      result3 = 0;
+      result4 = 0;
+    }
   
-  if (currentCorrectMoveCount==0) return false
+   var user_add_point=0;
+  if (currentCorrectMoveCount==0) {
+    matches.push([Zulaa, puzzle, result1]);
+  }else{
   
   perSec=$scope.counter/currentCorrectMoveCount;
   tempPoint=maxPoint-perSec/2;
@@ -145,28 +185,71 @@ function pointCalculate() {
     switch (true) {
         case (x < 5):
             tempDone=masterDone*tacticDone1;
+            matches.push([Zulaa, puzzle, isSuccess]);
             break;
         case (perSec > 5 && perSec <=20):
             tempDone=masterDone*tacticDone2;
+            matches.push([Zulaa, puzzle, result1]);
             break;
         case (perSec > 20 && perSec <= 50):
             tempDone=masterDone*tacticDone3;
+            matches.push([Zulaa, puzzle, result2]);
             break;
         case (perSec > 50):
             tempDone=masterDone*tacticDone4;
+            matches.push([Zulaa, puzzle, result3]);
             break;    
         default:
             tempDone=masterDone*tacticDone4;
+            matches.push([Zulaa, puzzle, result4]);
             break;
     }
-  }
 
-  console.log("perSec:"+perSec);
-  console.log("tempDone:"+tempDone);
-  console.log("tempPoint:"+tempPoint);
-  $scope.$parent.allPoint=$scope.$parent.allPoint+tempPoint+tempDone;
-  $scope.$parent.tempPoint=tempPoint+tempDone;
+   } // if (currentTacticIsDone)  end
+      // console.log("perSec:"+perSec);
+      // console.log("tempDone:"+tempDone);
+      // console.log("tempPoint:"+tempPoint);
+      $scope.$parent.allPoint=$scope.$parent.allPoint+tempPoint+tempDone;
+      $scope.$parent.tempPoint=Math.floor(tempPoint+tempDone);
+      user_add_point = $scope.$parent.tempPoint;
+  }// if (currentCorrectMoveCount==0) end
+   
+ ranking.updateRatings(matches);
+
+    dbSrvc.post("tactics/update_rating", {authenticity_token: _AUTH_TOKEN,
+                  is_success: isSuccess,
+                  user_rating: Zulaa.getRating(), 
+                  user_rd: Zulaa.getRd(),
+                  user_vol: Zulaa.getVol(),
+                  user_point: user_add_point,
+                  puzzle_id: $scope.pgnData[i].id,
+                  puzzle_rating: puzzle.getRating(), 
+                  puzzle_rd: puzzle.getRd(),
+                  puzzle_vol: puzzle.getVol()}).then(function(data) {
+              // console.log(JSON.stringify(data));      
+
+    });
+
+    // console.log("Zulaa new rating: " + Zulaa.getRating());
+    // console.log("Zulaa new rating deviation: " + Zulaa.getRd());
+    // console.log("Zulaa new volatility: " + Zulaa.getVol());
+    // console.log("====================");
+    // console.log("Puzzle new rating: " + puzzle.getRating());
+    // console.log("Puzzle new rating deviation: " + puzzle.getRd());
+    // console.log("Puzzle new volatility: " + puzzle.getVol());
+
+    $scope.user_rating.rating = Zulaa.getRating();
+    $scope.user_rating.point = $scope.user_rating.point + user_add_point;
+    $scope.roundStrRating= Math.round($scope.user_rating.rating);
+    $scope.user_rating.rd=Zulaa.getRd();
+    $scope.user_rating.vol=Zulaa.getVol();
+    $scope.pgnData[i].rating=puzzle.getRating();
+    $scope.pgnData[i].rd=puzzle.getRd();
+    $scope.pgnData[i].vol=puzzle.getVol();
+
 }
+
+
 // do not pick up pieces if the game is over
 // only pick up pieces for the side to move
 var onDragStart = function(source, piece, position, orientation) {
@@ -246,7 +329,8 @@ function movingUser(){
     //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
     if (lastMove!=solution[currentPly]) {  
       alertFail.setAttribute('class', 'alert alert-danger visible');
-      pointCalculate();
+      pointCalculate(0);
+      // ratingCalculate(0);
     }else
     {  //suuliin nuusen nuudel zow uyd l daraagiin nuudelee nuune
       window.setTimeout(possibleMove, 500); 
@@ -255,7 +339,8 @@ function movingUser(){
           alertSuccess.setAttribute('class', 'alert alert-success visible');
         // $('#alertSuccess').show();
         currentTacticIsDone=true;
-        pointCalculate();
+        pointCalculate(1);
+        // ratingCalculate(1);
          
       }   
     }
@@ -334,7 +419,7 @@ var updateStatus = function() {
   statusEl.html(status);
   fenEl.html(game.fen());
   pgnEl.html(game.pgn());
-  currentPuzzleEl.html(""+currentGame+"/"+pgnData.length);
+  currentPuzzleEl.html(""+currentGame+"/"+$scope.pgnData.length);
 };
 
 //bodlognii hariu boloh pgn file-g nuudel nuudeleer n zadalaad solutiond hiine
@@ -354,7 +439,7 @@ function pgnMoveStringToArray(currentGameSolution) {
     }
     mymoveArray[i] = s;
   }
-  console.log(solution);
+  // console.log(solution);
 }
 function solutionParsing() {
     for (var i = 0; i < solution.length; i++) {
@@ -392,6 +477,7 @@ function goToMove(ply) {
 
 board = ChessBoard('board', cfg);
 function loadGame(i) {
+  $scope.currenGame_id = i;
   $scope.counter = 0; // tur zuur 0 utgaar bichew
   currentCorrectMoveCount=0; //zow nuusen nuudeluudiig tooloh
   currentTacticIsDone=false;
@@ -399,15 +485,15 @@ function loadGame(i) {
   board.clear();
   removeGreySquares();
   
-  fen=pgnData[i].fen;
-  currentGameSolution=pgnData[i].fes;
+  fen=$scope.pgnData[i].fen;
+  currentGameSolution=$scope.pgnData[i].fes;
 	solution.length=0;
 
   game = new Chess(fen);
 	goToMove(-1);
   pgnMoveStringToArray(currentGameSolution); 
   //tactic type-g display deer haragduulah
-  setTacticStatus(pgnData[i].tactic_type);
+  setTacticStatus($scope.pgnData[i].tactic_type);
   if (game.turn() === 'b') {
   	solutionParsing();
     $scope.firstMove = 'Black to move';
@@ -425,7 +511,6 @@ function loadGame(i) {
   $("div[class^='square-']").on("click", function(){
     
     myMove_to=this.id.substring(0,2);
-      console.log(myMove_to);  
         clicked_move();
 });
 }
@@ -442,7 +527,7 @@ function loadGame(i) {
  
 $('#btnNew').on('click', function() {
   min=0;
-  max=pgnData.length;
+  max=$scope.pgnData.length;
   currentGame=Math.floor(Math.random() * (max - min + 1)) + min;
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
@@ -456,7 +541,7 @@ $('#btnRetry').on('click', function() {
 $('#btnNextProb').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
-    if (currentGame+1 < pgnData.length) 
+    if (currentGame+1 < $scope.pgnData.length) 
     	loadGame(currentGame+1);
     else
     	loadGame(currentGame=0);
@@ -468,7 +553,7 @@ $('#arrow_btnStart').on('click', function() {
     if (currentGame > 0) 
     	loadGame(currentGame-1);
     else
-    	loadGame(currentGame=pgnData.length-1);
+    	loadGame(currentGame=$scope.pgnData.length-1);
 });
 
 $('#arrow_btnPrevious').on('click', function() {
@@ -484,14 +569,14 @@ $('#arrow_btnNext').on('click', function() {
   if (currentPly < solution.length - 1) {
     currentPly++;
     game.move(solution[currentPly]);
-    console.log(solution[currentPly]);
+    // console.log(solution[currentPly]);
     board.position(game.fen());
   }
 });
 $('#arrow_btnNextPuzzle').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
-    if (currentGame+1 < pgnData.length) 
+    if (currentGame+1 < $scope.pgnData.length) 
     	loadGame(currentGame+1);
     else
     	loadGame(currentGame=0);

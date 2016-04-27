@@ -5,8 +5,8 @@ https://github.com/nmrugg/kingdom    //score-n talaar medeh ym
 https://github.com/lukasmonk/lucaschess //Fen file puzzle support
 https://github.com/duilio/smashpy		//Fen file puzzle support
 
-
-
+//rating calculate
+https://github.com/mmai/glicko2js
 
 Programming Language
 

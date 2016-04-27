@@ -1,6 +1,8 @@
 class TacticsController < ApplicationController
+  before_filter :check_login
+
   def index
-    	@tactics = Base::MtbTactics.all.limit(100)
+    @tactics = Base::MtbTactics.all.limit(100)
   end
   
   def edit
@@ -33,7 +35,7 @@ class TacticsController < ApplicationController
         .order("RAND()").limit(10)
       end  
     end
-
+    @user_rating = ApplicationHelper.current_user_rating(session)
   end
 
   def is_number(val)
@@ -41,6 +43,45 @@ class TacticsController < ApplicationController
       return true
     end
     return false
+  end
+
+  def update_rating
+    # is_success:
+    # user_rating:
+    # user_rd:
+    # user_vol:
+    # puzzle_id:
+    # puzzle_rating:
+    # puzzle_rd: 
+    # puzzle_vol:
+    # raise params.to_json
+    data = Hash.new
+    data["result"] = "fail"
+    data["result_tactic"] = "fail"
+
+    user_rating = ApplicationHelper.current_user_rating(session)
+    if user_rating.present?
+      user_rating.rating = params[:user_rating]
+      user_rating.rd = params[:user_rd]
+      user_rating.vol = params[:user_vol]
+      user_rating.point = user_rating.point + params[:user_point]
+      if user_rating.save!
+        data["result"] = "success"
+      end
+    end
+
+    tactic = Base::MtbTactics.find(params[:puzzle_id])
+    if tactic.present?
+      tactic.rating = params[:puzzle_rating]
+      tactic.rd = params[:puzzle_rd]
+      tactic.vol = params[:puzzle_vol]
+      tactic.success_count = tactic.success_count + params[:is_success]
+      tactic.try_count = tactic.try_count + 1
+      if tactic.save!
+        data["result_tactic"] = "success"
+      end
+    end
+    render :json => data
   end
 
   def tactic_ajax

@@ -18,7 +18,6 @@ mainApp.factory('Service', function() {
 
  var Service = {
     tempPoint: 0,  //tuhain temtseenees awah point
-    pgnData: mate3,
     id: 1
 
   };
@@ -28,7 +27,7 @@ mainApp.factory('Service', function() {
 
 
 mainApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
- $urlRouterProvider.otherwise('/home');
+ $urlRouterProvider.otherwise('/detail/');
 	$stateProvider.state("list", {
 		url: "/home",
 		templateUrl: "/assets/js/tactics/views/list.html",

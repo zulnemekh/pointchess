@@ -39,7 +39,9 @@ Reddit::Application.routes.draw do
   post "api/tournament/log" => "tournament#log"
   get "api/tournament/log" => "tournament#log"
   post 'api/tournament/get_tournament_users'    => 'tournament#get_tournament_users'
-
+  
+  #dbSrvc.js ajax for tactics
+  post "api/tactics/update_rating" => "tactics#update_rating"
   # resources :problempanel
   resources :problems
 
@@ -48,7 +50,7 @@ Reddit::Application.routes.draw do
   resources :comments
 
 
-  root to:  "tactics#tactic"
+  root to:  "trains#computerplay"
   get "play" => "trains#computerplay", :as => "trains_computerplay"
   get "playpiece" => "trains#computer_not_piece", :as => "trains_computer_not_piece"
   post "/playcenter(.:format)" => "trains#playcenter", :as => :trains_playcenter

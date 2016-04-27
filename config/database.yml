@@ -5,6 +5,10 @@ development:
   host: test.c5729kvnntur.us-east-1.rds.amazonaws.com
   username: masteruser
   password: masteruser
+  # database: titan_clan
+  # host: 127.0.0.1
+  # username: root
+  # password: root
   socket: /tmp/mysql.sock
   reconnect: true
 

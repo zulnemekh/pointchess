@@ -9,6 +9,7 @@ class Base::DtbUserInfo < ActiveRecord::Base
 # ======================= Validation ================================================
   # Validates whether mail address is entered or not
   validates_presence_of :email, :message => "not match"
+  
   # Validates whether password is entered or not
   validates_presence_of :password, :message => "inCorrect password"
 # ===================================================================================

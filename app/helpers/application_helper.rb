@@ -9,11 +9,22 @@ module ApplicationHelper
         user = Base::DtbUserInfo.find_by_id(session[:id])
         return user
     end
+
     def self.current_user_name()
         user = Base::DtbUserInfo.find_by_id(session[:id]).name
         return user
     end
 
+    def self.current_user_rating(session)
+        user = Base::DtbUserRating
+         .where("user_id = ?", session[:id]).first
+        if user.blank?
+            user = Base::DtbUserRating.new
+            user.user_id = session[:id]
+            user.save!
+        end
+      return user
+    end
   
     # ================= Encryption and Decryption =======================================
     require 'openssl'
