@@ -332,6 +332,7 @@ function movingUser(){
     //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
     if (lastMove!=solution[currentPly]) {  
       alertFail.setAttribute('class', 'alert alert-danger visible');
+      $('#btnRetry').show();
       pointCalculate(0);
       // ratingCalculate(0);
     }else
@@ -493,6 +494,9 @@ function goToMove(ply) {
 
 board = ChessBoard('board', cfg);
 function loadGame(i) {
+  
+
+
   $scope.currenGame_id = i;
   $scope.counter = 0; // tur zuur 0 utgaar bichew
   currentCorrectMoveCount=0; //zow nuusen nuudeluudiig tooloh
@@ -553,14 +557,19 @@ $('#btnPlayAI').on('click', function() {
 $('#btnGiveUp').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'alert alert-danger visible');
+  $('#btnRetry').show();
   $('#buttonSolution').show();
+  loadGame(currentGame);
 });
 $('#btnRetry').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
+  $('#btnRetry').hide();
   loadGame(currentGame);
 });
 $('#btnNextProb').on('click', function() {
+    $('#buttonSolution').hide();
+    $('#btnRetry').hide();
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
     if (currentGame+1 < $scope.pgnData.length) 
