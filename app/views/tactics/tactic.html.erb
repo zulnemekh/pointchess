@@ -16,8 +16,15 @@
    <body>
        <div ng-controller = "parentController">
           <div ui-view>
+            <!-- end form -->
           </div>
+    
+        <%= form_tag trains_playcenter_path,
+            :method => 'POST', :target => "_blank", :id => "play_with_ai" do |f| %>
+             <input type="hidden" name="fendata" id="fenValid" value="{{current_fen}}">
+             <input type="hidden" name="plColor" id="plColor" value="{{pl_color}}">
 
+          <% end %> 
       </div>
     
 <script type="text/javascript">

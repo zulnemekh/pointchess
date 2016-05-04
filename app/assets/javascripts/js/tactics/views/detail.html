@@ -49,26 +49,27 @@
    </div>
   
      
-          <form class="form-horizontal" role="form">
-          
-          </form>
-          
+      
+        
 
-            <div id="board-buttons" style="display: none;">
-            <button type="button" class="btn btn-default" id="arrow_btnStart"><i class="fa fa-fast-backward fa-lg"></i></button>
-            <button type="button" class="btn btn-default" id="arrow_btnPrevious"><i class="fa fa-step-backward fa-lg"></i></button>
-            <button type="button" class="btn btn-default" id="arrow_btnNext"><i class="fa fa-step-forward fa-lg"></i></button>
-            <button type="button" class="btn btn-default" id="arrow_btnNextPuzzle"><i class="fa fa-fast-forward fa-lg"></i></button>
-          </div>
+      <div id="buttonSolution" style="display: none;">
+
+          <button id="arrow_btnPrevious" class="btn btn-default" type="button"><i class="fa fa-arrow-left"></i></button>
+
+          <button id="arrow_btnNext" class="btn btn-default" type="button"><i class="fa fa-arrow-right"></i></button>
+      
+      </div>
       
       <div><!-- buttons -->
-        <button  id="btnRetry" type="button" class="btn btn-primary">Retry</button>
-          <button  id="btnNew" type="button" class="btn btn-primary">New Random</button>
+        <button style="display: none;" id="btnRetry" type="button" class="btn btn-primary">Retry</button>
+        <button  id="btnGiveUp" type="button" class="btn btn-primary">Give up</button>
+        <button id="btnPlayAI" type="submit" class="btn btn-primary">Play computer</button>
         <button  id="btnNextProb" type="button" class="btn btn-primary">Next</button>
       </div>
              
        <p>PuzzleNumber: <span id="currentPuzzle"></span></p>
-       <p>FEN: <span id="fen"></span></p>
+       <p>FEN: <span id="fen">{{$parent.current_fen}}</span></p>
+       <p>SHARE: <span id="share_url">{{share_url}}</span></p>
 
           <!-- default -->
           

@@ -5,7 +5,8 @@
         $scope.allPoint = 0;
         $scope.timer = "";
         $scope.problems =array;
-		 
+		    $scope.current_fen = "";
+        $scope.pl_color = "white";
 
 			// function getRandomSubarray(arr, size) {
 			//     var shuffled = arr.slice(0), i = arr.length, temp, index;
@@ -44,6 +45,7 @@
     $scope.message = "In detail controller";
     $scope.type = "detail";
     $scope.timer = "";
+    $scope.share_url = "";
     $scope.progress = 100;
     $scope.counter = 0;
     $scope.firstMove = '';
@@ -51,13 +53,7 @@
     $scope.user_rating =user_rating;
     $scope.roundStrRating= Math.round($scope.user_rating.rating);
     $scope.currenGame_id = 1;
-    //point calculate begin
-    maxPoint=20;
-    masterDone=20;
-    tacticDone1=1;
-    tacticDone2=0.75;
-    tacticDone3=0.6;
-    tacticDone4=0.4;
+   
     currentCorrectMoveCount=0;
     currentTacticIsDone=false;
     //point calculate end
@@ -95,10 +91,9 @@ var board, //the chessboard
     boardEl = $('#board'),
     myMove_from='e2',
     myMove_to='e4';
-    fen;
     
     $scope.pgnData = array;
-		currentGame=1;
+		currentGame=0;
   
 
     var alertSuccess = document.getElementById('alertSuccess');
@@ -132,6 +127,14 @@ var greySquare = function(square) {
 };
 
 function pointCalculate(isSuccess) {
+   //point calculate begin
+    maxPoint=20;
+    masterDone=20;
+    tacticDone1=1;
+    tacticDone2=0.75;
+    tacticDone3=0.6;
+    tacticDone4=0.4;
+
    var settings = {
       // tau : "Reasonable choices are between 0.3 and 1.2, though the system should
       //      be tested to decide which value results in greatest predictive accuracy."
@@ -155,10 +158,10 @@ function pointCalculate(isSuccess) {
     var matches = [];
     //Bodlogoo bodson bol hugatsaanaas hamaaraad amjiltaas n % hasana
     if (isSuccess==1) {
-      result1 = isSuccess-0.1;
-      result2 = isSuccess-0.2;
-      result3 = isSuccess-0.3;
-      result4 = isSuccess-0.4;
+      result1 = isSuccess-0.05;
+      result2 = isSuccess-0.1;
+      result3 = isSuccess-0.2;
+      result4 = isSuccess-0.25;
     }else{  
       //bodoj chadaagui uyd hugatsaa hamaarahgui bugd '0'
       result1 = 0;
@@ -195,7 +198,7 @@ function pointCalculate(isSuccess) {
             tempDone=masterDone*tacticDone3;
             matches.push([Zulaa, puzzle, result2]);
             break;
-        case (perSec > 50):
+        case (perSec > 50 && perSec <= 100):
             tempDone=masterDone*tacticDone4;
             matches.push([Zulaa, puzzle, result3]);
             break;    
@@ -417,8 +420,8 @@ var updateStatus = function() {
   }
 
   statusEl.html(status);
-  fenEl.html(game.fen());
   pgnEl.html(game.pgn());
+  $scope.$parent.current_fen = game.fen();
   currentPuzzleEl.html(""+currentGame+"/"+$scope.pgnData.length);
 };
 
@@ -465,6 +468,19 @@ function setTacticStatus(type){
             break;
     }
 }
+
+
+// generate url with params 
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  } 
+  } 
 function goToMove(ply) {
  
   if (ply > solution.length - 1) ply = solution.length - 1;
@@ -485,11 +501,12 @@ function loadGame(i) {
   board.clear();
   removeGreySquares();
   
-  fen=$scope.pgnData[i].fen;
+  $scope.$parent.current_fen = $scope.pgnData[i].fen;
+
   currentGameSolution=$scope.pgnData[i].fes;
 	solution.length=0;
 
-  game = new Chess(fen);
+  game = new Chess($scope.$parent.current_fen);
 	goToMove(-1);
   pgnMoveStringToArray(currentGameSolution); 
   //tactic type-g display deer haragduulah
@@ -503,6 +520,10 @@ function loadGame(i) {
     $scope.firstMove = 'White to move';
     if (board.orientation()=="black") board.flip();
   }
+  $scope.$parent.pl_color = board.orientation();
+  $scope.share_url = window.location.protocol + "//" + window.location.host + "/"
+  + "tactics/tactic?tactic=" + $scope.pgnData[i].id + "&type=puzzle" ;
+
  	board.position(game.fen());
   currentGame = i;
   updateStatus();
@@ -524,14 +545,15 @@ function loadGame(i) {
 // $(window).resize(board.resize)
 
 //click selected square
- 
-$('#btnNew').on('click', function() {
-  min=0;
-  max=$scope.pgnData.length;
-  currentGame=Math.floor(Math.random() * (max - min + 1)) + min;
+
+
+$('#btnPlayAI').on('click', function() {
+  $("#play_with_ai").submit();
+});
+$('#btnGiveUp').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
-    alertFail.setAttribute('class', 'hidden');
-  loadGame(currentGame);
+    alertFail.setAttribute('class', 'alert alert-danger visible');
+  $('#buttonSolution').show();
 });
 $('#btnRetry').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
@@ -547,14 +569,14 @@ $('#btnNextProb').on('click', function() {
     	loadGame(currentGame=0);
 });
 
-$('#arrow_btnStart').on('click', function() {
-		alertSuccess.setAttribute('class', 'hidden');
-    alertFail.setAttribute('class', 'hidden');
-    if (currentGame > 0) 
-    	loadGame(currentGame-1);
-    else
-    	loadGame(currentGame=$scope.pgnData.length-1);
-});
+// $('#arrow_btnStart').on('click', function() {
+// 		alertSuccess.setAttribute('class', 'hidden');
+//     alertFail.setAttribute('class', 'hidden');
+//     if (currentGame > 0) 
+//     	loadGame(currentGame-1);
+//     else
+//     	loadGame(currentGame=$scope.pgnData.length-1);
+// });
 
 $('#arrow_btnPrevious').on('click', function() {
   if (currentPly >= 0) {
@@ -573,14 +595,14 @@ $('#arrow_btnNext').on('click', function() {
     board.position(game.fen());
   }
 });
-$('#arrow_btnNextPuzzle').on('click', function() {
-    alertSuccess.setAttribute('class', 'hidden');
-    alertFail.setAttribute('class', 'hidden');
-    if (currentGame+1 < $scope.pgnData.length) 
-    	loadGame(currentGame+1);
-    else
-    	loadGame(currentGame=0);
-});
+// $('#arrow_btnNextPuzzle').on('click', function() {
+//     alertSuccess.setAttribute('class', 'hidden');
+//     alertFail.setAttribute('class', 'hidden');
+//     if (currentGame+1 < $scope.pgnData.length) 
+//     	loadGame(currentGame+1);
+//     else
+//     	loadGame(currentGame=0);
+// });
 
 
 

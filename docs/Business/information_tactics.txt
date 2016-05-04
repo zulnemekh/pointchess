@@ -7,3 +7,17 @@ mtb_tactics
 	problems /etude buyu zohoimol bodloguud/   
 		 4703 mate in 2	 /active/
 		 131279 all problems /gartsaagui neg nuudel hiigeed duusah bodloguud bga mon fes dotor = () temdegtuud bga bodlog/
+
+genre
+	1: toglolt deer orson nohtsol 
+	2: zohoimol bodlog
+
+tactic_type
+	-1: odoogoor solution n formataar zorson
+	-2: fes dotor (  
+	-3: fes dotor =  
+	 1: neg nuudeliin mad 
+	 2: hoyor nuudliin mad 
+	 3: gurawan nuudeliin mad 
+	 4: duruwen nuudeliin mad 
+	 11: best one move

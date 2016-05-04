@@ -3,25 +3,130 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
 
-<%= form_for @user, :url => create_user_path do |f| %>
+<%= form_for @user, :id =>"contactForm", :url => create_user_path do |f| %>
  
   <div class="field">
     <%= f.label :email %><br>
-    <%= f.text_field :email, class: 'form-control' %>
+    <%= f.text_field :email, class: 'form-control', :id=> "val-email" %>
+    <span id="msg_email" class="help-block animated fadeInDown"></span>
   </div>
   <div class="field">
     <%= f.label :password %><br>
-    <%= f.password_field :password, class: 'form-control' %>
+    <%= f.password_field :password, class: 'form-control', :id=> "val-password" %>
+    <span id="msg_password" class="help-block animated fadeInDown"></span>
   </div>
  
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name, class: 'form-control'%>
+    <%= f.text_field :name, class: 'form-control', :id=> "val-name"%>
+    <span id="msg_name" class="help-block animated fadeInDown"></span>
   </div>
  
   <div class="actions">
-    <%= f.submit "Create account", class: "btn btn-primary"%>
+    <%= f.submit "Create account", :id=>"btnSubmit", class: "btn btn-primary"%>
   </div>
 <% end %>
 </div>
-</div
+</div>
+
+<script type="text/javascript">
+//Zulaa 2016/05/04
+  function validatePassword(id){
+    if($("#"+id).val().length < 5){
+    var div = $("#"+id).closest("div");
+    div.removeClass("has-success");
+    $("#glypcn"+id).remove();
+    div.addClass("has-error has-feedback");
+    div.append('<span id="glypcn'+id+'" class="glyphicon glyphicon-remove form-control-feedback"></span>');  
+    $("#msg_password").html("Your password must be at least 5 characters long");
+    return false;
+    }
+  else{
+      var div = $("#"+id).closest("div");
+      div.removeClass("has-error");
+      $("#glypcn"+id).remove();
+      div.addClass("has-success has-feedback");
+      div.append('<span id="glypcn'+id+'" class="glyphicon glyphicon-ok form-control-feedback"></span>');
+      $("#msg_password").html("");
+          return true;
+      }
+  }
+
+  function validateEmail(id){
+    var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+    
+    if(!email_regex.test($("#"+id).val())){
+      var div = $("#"+id).closest("div");
+      div.removeClass("has-success");
+      $("#glypcn"+id).remove();
+      div.addClass("has-error has-feedback");
+      div.append('<span id="glypcn'+id+'" class="glyphicon glyphicon-remove form-control-feedback"></span>'); 
+      $("#msg_email").html("Please enter a valid email address");
+      return false;
+      }
+    else{
+      var div = $("#"+id).closest("div");
+      div.removeClass("has-error");
+        $("#glypcn"+id).remove();
+        div.addClass("has-success has-feedback");
+        div.append('<span id="glypcn'+id+'" class="glyphicon glyphicon-ok form-control-feedback"></span>');
+        $("#msg_email").html("");
+            return true;
+        }
+  }
+
+  function validateName(id){
+    if($("#"+id).val().length < 3){
+      var div = $("#"+id).closest("div");
+      div.removeClass("has-success");
+      $("#glypcn"+id).remove();
+      div.addClass("has-error has-feedback");
+      div.append('<span id="glypcn'+id+'" class="glyphicon glyphicon-remove form-control-feedback"></span>');  
+      $("#msg_name").html("Your username must consist of at least 3 characters");
+      return false;
+      }
+    else{
+      var div = $("#"+id).closest("div");
+      div.removeClass("has-error");
+      $("#glypcn"+id).remove();
+      div.addClass("has-success has-feedback");
+      div.append('<span id="glypcn'+id+'" class="glyphicon glyphicon-ok form-control-feedback"></span>');
+      $("#msg_name").html("");
+          return true;
+      }
+  }
+  $(document).ready(function(){
+
+    $('#val-email').change(function(){
+       validateEmail("val-email");
+    });
+
+    $('#val-password').change(function(){
+       validatePassword("val-password");
+    }); 
+
+    $('#val-name').change(function(){
+       validateName("val-name");
+    });
+
+  $("#btnSubmit").click(function(event)
+  {
+    if(!validateForm())
+    event.preventDefault(); // cancel default behavior
+
+  });
+  function validateForm() {
+     if(!validateName("val-name")){
+        return false;
+     }
+     if(!validateEmail("val-email")){
+        return false;
+     }
+     if(!validatePassword("val-password")){
+        return false;
+     }
+    
+      return true;
+    }
+  });
+</script>

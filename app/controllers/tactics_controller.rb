@@ -35,6 +35,14 @@ class TacticsController < ApplicationController
         .order("RAND()").limit(10)
       end  
     end
+    # 
+    if params[:tactic].present?
+      if is_number params[:tactic]
+        @tactics = Base::MtbTactics.where("id = #{params[:tactic]
+          } ")
+      end
+    end
+
     @user_rating = ApplicationHelper.current_user_rating(session)
   end
 
@@ -65,6 +73,8 @@ class TacticsController < ApplicationController
       user_rating.rd = params[:user_rd]
       user_rating.vol = params[:user_vol]
       user_rating.point = user_rating.point + params[:user_point]
+      user_rating.puzzle_count = user_rating.puzzle_count + 1
+      user_rating.puzzle_success_count = user_rating.puzzle_success_count + params[:is_success]
       if user_rating.save!
         data["result"] = "success"
       end
@@ -84,15 +94,15 @@ class TacticsController < ApplicationController
     render :json => data
   end
 
-  def tactic_ajax
-    raise params.to_s
-      @tactics = Base::MtbTactics.where("tactic_type = 3 and genre = 1")
-      .order("RAND()").limit(10)
-  end
-  def tactic_four
-      @tactics = Base::MtbTactics.where("tactic_type = 4 and genre = 1")
-      .order("RAND()").limit(10)
-  end
+  # def tactic_ajax
+  #   raise params.to_s
+  #     @tactics = Base::MtbTactics.where("tactic_type = 3 and genre = 1")
+  #     .order("RAND()").limit(10)
+  # end
+  # def tactic_four
+  #     @tactics = Base::MtbTactics.where("tactic_type = 4 and genre = 1")
+  #     .order("RAND()").limit(10)
+  # end
 
   def datainsert
   		@tactic = Base::MtbTactics.new

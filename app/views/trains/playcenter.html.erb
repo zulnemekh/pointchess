@@ -108,12 +108,11 @@
       <p>nextMove: <span id="nextmovie"></span></p>
       <p>FEN: <span id="fen"></span></p>
       <p>PGN: <span id="pgn1"></span></p>
-      <a href="#" class="button button-rounded button-flat-primary">press me</a>
+
       <button type="button" id="start_btn" class="btn btn-primary">New Game</button>
       <button type="button" id="undo_btn" class="btn btn-primary">Undo</button>
       <button type="button" id="flip_btn" class="btn btn-primary">Flip</button>
       <button type="button" id="flipcolor_btn" class="btn btn-primary">FlipColor</button>
-<a href="#" class="button button-pill button-flat-primary">press me</a>
 
  <canvas id="myChart" width="400" height="200"></canvas>
      
@@ -133,7 +132,7 @@
         function newGame() {
         	    var fen = '<%= params[:fendata] %>';
               var playerColor = '<%= params[:plColor] %>';
- 
+
             var game = myEngineGame(fen, {book: '/assets/book.bin'});
             my_game=game;
             var baseTime = parseFloat($('#timeBase').val()) * 60;

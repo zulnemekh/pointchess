@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="Keywords" content="chess puzzle,chess problem,chess tactic,chess analyse,chess computer play" />
     <meta name="Description" content="Chess puzzle,chess problem, chess tactic, chess training, chess engine analyse" />
   <title>Point Chess</title>
@@ -59,6 +59,7 @@
               <ul class="dropdown-menu">
                 <li><%= link_to 'Tactics', tactic_tactics_path %></li>
                 <li><%= link_to 'Puzzle', tactic_tactics_path(:type => 'puzzle') %></li>
+                <li><%= link_to 'PuzzleID', tactic_tactics_path(:type => 'puzzle', :tactic => '33') %></li>
                 <li><%= link_to 'Mate in 2', tactic_tactics_path(:type => '2') %></li>
                 <li><%= link_to 'Mate in 3', tactic_tactics_path(:type => '3') %></li>
                 <li><%= link_to 'Mate in 4', tactic_tactics_path(:type => '4') %></li>
