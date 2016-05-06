@@ -59,7 +59,6 @@
               <ul class="dropdown-menu">
                 <li><%= link_to 'Tactics', tactic_tactics_path %></li>
                 <li><%= link_to 'Puzzle', tactic_tactics_path(:type => 'puzzle') %></li>
-                <li><%= link_to 'PuzzleID', tactic_tactics_path(:type => 'puzzle', :tactic => '33') %></li>
                 <li><%= link_to 'Mate in 2', tactic_tactics_path(:type => '2') %></li>
                 <li><%= link_to 'Mate in 3', tactic_tactics_path(:type => '3') %></li>
                 <li><%= link_to 'Mate in 4', tactic_tactics_path(:type => '4') %></li>
@@ -86,9 +85,8 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="color: white;"><%= ApplicationHelper.current_user(session).name %></span>
            <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><%= link_to 'Puzzle', problems_fenpuzzle_path %></li>
-              
-                <li><%= link_to('Logout', users_logout_path, :method => :delete) %>        
+             
+                <li><%= link_to('Logout', users_logout_path, :method => :delete) %>     
                 </li>
               </ul>
              <% else %>

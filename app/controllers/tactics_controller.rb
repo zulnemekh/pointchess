@@ -1,5 +1,5 @@
 class TacticsController < ApplicationController
-  before_filter :check_login
+  # before_filter :check_login
 
   def index
     @tactics = Base::MtbTactics.all.limit(100)
@@ -66,32 +66,36 @@ class TacticsController < ApplicationController
     data = Hash.new
     data["result"] = "fail"
     data["result_tactic"] = "fail"
-
-    user_rating = ApplicationHelper.current_user_rating(session)
-    if user_rating.present?
-      user_rating.rating = params[:user_rating]
-      user_rating.rd = params[:user_rd]
-      user_rating.vol = params[:user_vol]
-      user_rating.point = user_rating.point + params[:user_point]
-      user_rating.puzzle_count = user_rating.puzzle_count + 1
-      user_rating.puzzle_success_count = user_rating.puzzle_success_count + params[:is_success]
-      if user_rating.save!
-        data["result"] = "success"
+    if session[:id].present?
+      user_rating = ApplicationHelper.current_user_rating(session)
+      if user_rating.present?
+        user_rating.rating = params[:user_rating]
+        user_rating.rd = params[:user_rd]
+        user_rating.vol = params[:user_vol]
+        user_rating.point = user_rating.point + params[:user_point]
+        user_rating.puzzle_count = user_rating.puzzle_count + 1
+        user_rating.puzzle_success_count = user_rating.puzzle_success_count + params[:is_success]
+        if user_rating.save!
+          data["result"] = "success"
+        end
       end
-    end
 
-    tactic = Base::MtbTactics.find(params[:puzzle_id])
-    if tactic.present?
-      tactic.rating = params[:puzzle_rating]
-      tactic.rd = params[:puzzle_rd]
-      tactic.vol = params[:puzzle_vol]
-      tactic.success_count = tactic.success_count + params[:is_success]
-      tactic.try_count = tactic.try_count + 1
-      if tactic.save!
-        data["result_tactic"] = "success"
+      tactic = Base::MtbTactics.find(params[:puzzle_id])
+      if tactic.present?
+        tactic.rating = params[:puzzle_rating]
+        tactic.rd = params[:puzzle_rd]
+        tactic.vol = params[:puzzle_vol]
+        tactic.success_count = tactic.success_count + params[:is_success]
+        tactic.try_count = tactic.try_count + 1
+        if tactic.save!
+          data["result_tactic"] = "success"
+        end
       end
-    end
-    render :json => data
+    else
+      data["result"] = "guest"
+      data["result_tactic"] = "guest"
+    end #session[:id] nil
+      render :json => data
   end
 
   # def tactic_ajax

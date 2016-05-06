@@ -16,6 +16,17 @@ module ApplicationHelper
     end
 
     def self.current_user_rating(session)
+        if session[:id].blank?
+            guestuser = Base::DtbUserInfo.where("email = ?", 'guest_gmail.com').first
+            user = Base::DtbUserRating
+             .where("user_id = ?", guestuser.id).first
+            if user.blank?
+                user = Base::DtbUserRating.new
+                user.user_id = guestuser.id
+                user.save!
+            end
+          return user
+        end    
         user = Base::DtbUserRating
          .where("user_id = ?", session[:id]).first
         if user.blank?

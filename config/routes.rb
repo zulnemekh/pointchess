@@ -50,7 +50,7 @@ Reddit::Application.routes.draw do
   resources :comments
 
 
-  root to:  "trains#computerplay"
+  root to:  "tactics#tactic"
   get "play" => "trains#computerplay", :as => "trains_computerplay"
   get "playpiece" => "trains#computer_not_piece", :as => "trains_computer_not_piece"
   post "/playcenter(.:format)" => "trains#playcenter", :as => :trains_playcenter
