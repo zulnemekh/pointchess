@@ -29,8 +29,10 @@ class TacticsController < ApplicationController
       elsif params[:type].to_s=='puzzle'
           @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 2")
         .order("RAND()").limit(10)
+      elsif params[:type].to_s=='tactic'
+          @tactics = Base::MtbTactics.where("tactic_type = 11 and genre = 3")
+        .order("RAND()").limit(10) 
       else 
-        
         @tactics = Base::MtbTactics.where("tactic_type = 2 and genre = 1")
         .order("RAND()").limit(10)
       end  
@@ -116,14 +118,14 @@ class TacticsController < ApplicationController
   end
 	#ajax-r tactics-tableruu data bicheh
 	def tactics_update_ajax
-	
     if params[:fen].present?
 		  tactic = Base::MtbTactics.new
       tactic.fen =params[:fen]
       tactic.fes =params[:fes]
       tactic.info=params[:info]
-      tactic.genre=1
-      tactic.tactic_type=4
+      tactic.rd=200
+      tactic.genre=3
+      tactic.tactic_type=11
       tactic.save!
       render :text => tactic.fen.to_s+" | "+tactic.fen.to_s+" | "+tactic.fen.to_s
     else

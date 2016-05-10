@@ -73,6 +73,13 @@
 <script type="text/javascript">
 // var tt= '<%=@objArray%>'
 var objArray=[];
+var objArrayParrent=[];
+var objArrayChild=[];
+var uniqObjArray=[];
+var uniqObjArray1=[];
+var str;
+var old_arr,new_arr;
+var a = [], b = [];
  var openFile = function(event) {
 		    var input = event.target;
 
@@ -86,15 +93,31 @@ var enteredText = text;
 // var characterCount = enteredText.length + numberOfLineBreaks;
 // enteredText.replace( /\n/g, "|" );
 
-var str = enteredText.split("\n");
+str = enteredText.split("SPLIT");
 for (var i=0; i < str.length; i++) {
   objArray.push(str[i].split("|"));
     	// $.post('/tactics_update_ajax', {fen: fen, fes: fes, info: info}, function(data) {
 
      //      });
 };
+uniqObjArray=eliminateDuplicates(objArray);
+for (var i = 0; i < objArray.length; i++) {
+    objArrayChild.push(objArray[i].toString());
+  }
 
 
+
+uniqObjArray1=eliminateDuplicates(objArrayChild);
+// var sorted_arr = objArrayChild.slice().sort(); // You can define the comparing 
+// var results = [];
+// for (var i = 0; i < objArrayChild.length - 1; i++) {
+//     if (sorted_arr[i + 1] == sorted_arr[i]) {
+//         results.push(sorted_arr[i]);
+//     }
+// }
+
+
+// new_arr=eliminateDuplicates(objArrayParrent);
 // alert('Number of breaks:  ' + numberOfLineBreaks);
 
 			    // var check_temp_name_array = [];
@@ -115,6 +138,36 @@ for (var i=0; i < str.length; i++) {
 		    };
 		    reader.readAsText(input.files[0]);
 		  };
+function eliminateDuplicates(arr) {
+  var i,
+      len=arr.length,
+      out=[],
+      obj={};
+
+  for (i=0;i<len;i++) {
+    obj[arr[i]]=0;
+  }
+  for (i in obj) {
+    out.push(i);
+  }
+  return out;
+}
+function foo(arr) {
+    var prev;
+
+    arr.sort();
+    for ( var i = 0; i < arr.length; i++ ) {
+        if ( arr[i] !== prev ) {
+            a.push(arr[i]);
+            b.push(1);
+        } else {
+            b[b.length-1]++;
+        }
+        prev = arr[i];
+    }
+
+    return [a, b];
+}
 
  $(document).ready(function() {
   var game,
@@ -132,13 +185,50 @@ for (var i=0; i < str.length; i++) {
       changeFENinput();
   });
    $('#btnStart').on('click', function() {  
-       insertdata1();
+       insertdata2();
         // $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, note: "str", id: "userId"}, function(data) {
         //       console.log(data);
         //   });
       
   });
 
+
+// for (var i = 0; i < uniqObjArray1.length; i++) {
+var i = 0;
+//mate2 mate3 mate4-n data-g baazruu bicheh function
+function insertdata2(){
+  // objArrayParrent.push(objArray[i].split("\n"))
+  // uniqObjArray1.length
+  if ( i >= uniqObjArray1.length ) {
+    return true;
+  }
+  tmpStr=uniqObjArray1[i];
+  info_start = tmpStr.indexOf('INFO:');
+  fes_start = tmpStr.indexOf('FES:');
+  fen_start = tmpStr.indexOf('FEN:');
+
+  fen_text = tmpStr.substring(fen_start, fes_start);
+  fes_text = tmpStr.substring(fes_start, info_start);
+  info_text = tmpStr.substring(info_start, tmpStr.length);
+  //cut prefix
+  fen_text=fen_text.substring('FEN:'.length, fen_text.length);
+  fes_text=fes_text.substring('FES:'.length, fes_text.length);
+  info_text=info_text.substring('INFO:'.length, info_text.length);
+  //trim 
+  fen_text=fen_text.trim();
+  fes_text=fes_text.trim();
+  info_text=info_text.trim();
+  console.log(i);
+  objArrayParrent.push(fen_text);
+  
+    $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, fen: fen_text, fes: fes_text, info: info_text}, function(data) {
+          i++;
+          console.log(data);
+          insertdata2();
+    });
+
+};
+console.log("last:"+uniqObjArray1.length);
 var counter1 = 0;
 //mate2 mate3 mate4-n data-g baazruu bicheh function
 function insertdata1(){

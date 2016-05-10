@@ -27,4 +27,6 @@ Reddit::Application.configure do
   # number of complex assets.
   config.assets.debug = true
   
+  config.logger = Logger.new("#{Rails.root.to_s}/log/dev.log", 20, 5*1024*1024)
+  config.logger.level = Logger::DEBUG #debug|info|warn|error|fatal
 end

@@ -330,7 +330,8 @@ function movingUser(){
     lastMove = hist[hist.length - 1];
     //history-s awsan suuliin nuudel solution dotor bga suuliin 
     //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
-    if (lastMove!=solution[currentPly]) {  
+    var moveLast=solution[currentPly].indexOf("#");
+    if (lastMove!=solution[currentPly] && moveLast == -1) {
       alertFail.setAttribute('class', 'alert alert-danger visible');
       $('#btnRetry').show();
       pointCalculate(0);
@@ -338,8 +339,8 @@ function movingUser(){
     }else
     {  //suuliin nuusen nuudel zow uyd l daraagiin nuudelee nuune
       window.setTimeout(possibleMove, 500); 
-      var moveLast=solution[currentPly].indexOf("#");
       if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
+          console.log("else"+solution[currentPly+1]);
           alertSuccess.setAttribute('class', 'alert alert-success visible');
         // $('#alertSuccess').show();
         currentTacticIsDone=true;

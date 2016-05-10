@@ -77,4 +77,9 @@ Reddit::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+   
+  config.logger = Logger.new("#{Rails.root.to_s}/log/prod.log", 20, 5*1024*1024)
+  config.logger.level = Logger::WARN #debug|info|warn|error|fatal
+  
+  config.threadsafe! unless $rails_rake_task
 end
