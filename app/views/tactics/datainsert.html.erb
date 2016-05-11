@@ -220,12 +220,15 @@ function insertdata2(){
   info_text=info_text.trim();
   console.log(i);
   objArrayParrent.push(fen_text);
-  
-    $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, fen: fen_text, fes: fes_text, info: info_text}, function(data) {
+
           i++;
-          console.log(data);
           insertdata2();
-    });
+
+    // $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, fen: fen_text, fes: fes_text, info: info_text}, function(data) {
+    //       i++;
+    //       console.log(data);
+    //       insertdata2();
+    // });
 
 };
 console.log("last:"+uniqObjArray1.length);

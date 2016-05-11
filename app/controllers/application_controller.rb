@@ -21,4 +21,10 @@ class ApplicationController < ActionController::Base
 			redirect_to users_login_path
   	end	
 	end
+
+  #when routing error occurs show 404 page
+  def routing_error
+    flash.now[:notice] = 'We couldn\'t find it'
+    render(:file => "#{Rails.root.to_s}/public/404.html", :status => 404)    
+  end
 end

@@ -69,5 +69,10 @@ Reddit::Application.routes.draw do
   post   'login'   => 'sessions#create'
   get    'logout'  => 'sessions#destroy',:as => "users_logout"
   resources :users
+
+  #when routing error occurs show 404 page
+  get "*a", :to => "application#routing_error"
+  # get '404', :to => 'application#routing_error'
+  # get '/404', :to => 'application#routing_error'
 end
 

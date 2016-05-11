@@ -1,1 +1,4 @@
-1. Qd2 Rf2 2. Nbd7# 1-0
+-- dawhartasan tactics-g FEN file-r shalgah
+select * from (SELECT id, fen, count(fen) as count FROM titan_clan.mtb_tactics group by fen) q where count > 1;
+
+
