@@ -42,6 +42,9 @@ Reddit::Application.routes.draw do
   
   #dbSrvc.js ajax for tactics
   post "api/tactics/update_rating" => "tactics#update_rating"
+  post "api/tactics/get_tactic" => "tactics#get_tactic"
+  get "api/tactics/get_user_rating" => "tactics#get_user_rating"
+  
   # resources :problempanel
   resources :problems
 

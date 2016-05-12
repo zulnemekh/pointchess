@@ -4,7 +4,7 @@
         $scope.tempPoint = 0;
         $scope.allPoint = 0;
         $scope.timer = "";
-        $scope.problems =array;
+        // $scope.problems =array;
 		    $scope.current_fen = "";
         $scope.pl_color = "white";
 
@@ -50,8 +50,9 @@
     $scope.counter = 0;
     $scope.firstMove = '';
     $scope.tacticType = '';
-    $scope.user_rating =user_rating;
-    $scope.roundStrRating= Math.round($scope.user_rating.rating);
+    $scope.user_rating =null;
+    $scope.roundStrRating= null;
+    $scope.pgnData=null;
     $scope.currenGame_id = 1;
    
     currentCorrectMoveCount=0;
@@ -92,7 +93,7 @@ var board, //the chessboard
     myMove_from='e2',
     myMove_to='e4';
     
-    $scope.pgnData = array;
+    // $scope.pgnData = array;
 		currentGame=0;
   
 
@@ -106,6 +107,24 @@ var board, //the chessboard
   pgnEl = $('#pgn');
   currentPuzzleEl = $('#currentPuzzle');
 
+  function initVar(){
+    //   var array=<%= raw @tactics.to_json%>
+  // var user_rating=<%= raw @user_rating.to_json%>
+
+    dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type})
+    .then(function(data) {
+      $scope.pgnData = data;
+      // console.log($scope.pgnData);
+        dbSrvc.get("tactics/get_user_rating").then(function(data) {
+          $scope.user_rating =data;
+          $scope.roundStrRating= Math.round($scope.user_rating.rating);
+            loadGame(currentGame);
+     
+        });
+    });
+   
+  }
+  initVar();
   var removeHighlights = function(color) {
         boardEl.find('.square-55d63')
           .removeClass('highlight-' + color);
@@ -125,7 +144,17 @@ var greySquare = function(square) {
 
   squareEl.css('background', background);
 };
-
+function updateTactic(){
+//   var array=<%= raw @tactics.to_json%>
+// var user_rating=<%= raw @user_rating.to_json%>
+  dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type})
+    .then(function(data) {
+      $scope.pgnData = data;
+      // console.log($scope.pgnData);
+    });
+ 
+    
+}
 function pointCalculate(isSuccess) {
    //point calculate begin
     maxPoint=20;
@@ -219,7 +248,7 @@ function pointCalculate(isSuccess) {
    
  ranking.updateRatings(matches);
 
-    dbSrvc.post("tactics/update_rating", {authenticity_token: _AUTH_TOKEN,
+    dbSrvc.post("tactics/update_rating", {authenticity_token: _nuuts_ug,
                   is_success: isSuccess,
                   user_rating: Zulaa.getRating(), 
                   user_rd: Zulaa.getRd(),
@@ -424,7 +453,7 @@ var updateStatus = function() {
   statusEl.html(status);
   pgnEl.html(game.pgn());
   $scope.$parent.current_fen = game.fen();
-  currentPuzzleEl.html(""+currentGame+"/"+$scope.pgnData.length);
+  // currentPuzzleEl.html(""+currentGame+"/"+$scope.pgnData.length);
 };
 
 //bodlognii hariu boloh pgn file-g nuudel nuudeleer n zadalaad solutiond hiine
@@ -543,8 +572,7 @@ function loadGame(i) {
 
   //problemsolve end
   //load the first game
-  loadGame(currentGame);
- 
+
 //buttons
 // $(window).resize(board.resize);
 // $(window).resize(board.resize)
@@ -566,6 +594,7 @@ $('#btnRetry').on('click', function() {
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
   $('#btnRetry').hide();
+  $('#buttonSolution').hide();
   loadGame(currentGame);
 });
 $('#btnNextProb').on('click', function() {
@@ -573,10 +602,13 @@ $('#btnNextProb').on('click', function() {
     $('#btnRetry').hide();
     alertSuccess.setAttribute('class', 'hidden');
     alertFail.setAttribute('class', 'hidden');
+
     if (currentGame+1 < $scope.pgnData.length) 
     	loadGame(currentGame+1);
-    else
+    else {
     	loadGame(currentGame=0);
+      updateTactic();
+    }
 });
 
 // $('#arrow_btnStart').on('click', function() {

@@ -48,6 +48,36 @@ class TacticsController < ApplicationController
     @user_rating = ApplicationHelper.current_user_rating(session)
   end
 
+  def get_user_rating
+      @user_rating = ApplicationHelper.current_user_rating(session)
+      render json: @user_rating
+  end
+
+  def get_tactic
+    
+    if params[:type].blank?
+       @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 1")
+      .order("RAND()").limit(10)
+    else
+      if is_number params[:type]
+        @tactics = Base::MtbTactics.where("tactic_type = #{params[:type]
+          } and genre = 1")
+        .order("RAND()").limit(10)
+      elsif params[:type].to_s=='puzzle'
+          @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 2")
+        .order("RAND()").limit(10)
+      elsif params[:type].to_s=='tactic'
+          @tactics = Base::MtbTactics.where("tactic_type = 11 and genre = 3")
+        .order("RAND()").limit(10) 
+      else 
+        @tactics = Base::MtbTactics.where("tactic_type = 2 and genre = 1")
+        .order("RAND()").limit(10)
+      end  
+    end
+
+    render json: @tactics
+  end
+
   def is_number(val)
     if val.to_f.to_s == val.to_s || val.to_i.to_s == val.to_s
       return true
@@ -100,6 +130,7 @@ class TacticsController < ApplicationController
       render :json => data
   end
 
+  
   # def tactic_ajax
   #   raise params.to_s
   #     @tactics = Base::MtbTactics.where("tactic_type = 3 and genre = 1")
