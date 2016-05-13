@@ -1,4 +1,4 @@
-    
+
      mainApp.controller("parentController", function($scope,$timeout,Service) {
         $scope.message = "In parent controller";
         $scope.tempPoint = 0;
@@ -51,10 +51,12 @@
     $scope.firstMove = '';
     $scope.tacticType = '';
     $scope.user_rating =null;
-    $scope.roundStrRating= null;
+    $scope.roundStrRating= null;  //User-n rating-g view deer haruulahad ashigalaw
+    $scope.roundStrTacticRating= null; //Tactic-n rating-g view deer haruulahad ashigalaw
     $scope.pgnData=null;
     $scope.currenGame_id = 1;
-   
+    $scope.currentTactic=null;
+
     currentCorrectMoveCount=0;
     currentTacticIsDone=false;
     //point calculate end
@@ -111,7 +113,7 @@ var board, //the chessboard
     //   var array=<%= raw @tactics.to_json%>
   // var user_rating=<%= raw @user_rating.to_json%>
 
-    dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type})
+    dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type, rat: 1})
     .then(function(data) {
       $scope.pgnData = data;
       // console.log($scope.pgnData);
@@ -147,10 +149,11 @@ var greySquare = function(square) {
 function updateTactic(){
 //   var array=<%= raw @tactics.to_json%>
 // var user_rating=<%= raw @user_rating.to_json%>
-  dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type})
+  dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type, rat: $scope.user_rating.rating})
     .then(function(data) {
       $scope.pgnData = data;
-      // console.log($scope.pgnData);
+      loadGame(currentGame=0);
+      console.log($scope.pgnData);
     });
  
     
@@ -273,6 +276,7 @@ function pointCalculate(isSuccess) {
     $scope.user_rating.rating = Zulaa.getRating();
     $scope.user_rating.point = $scope.user_rating.point + user_add_point;
     $scope.roundStrRating= Math.round($scope.user_rating.rating);
+    $scope.roundStrTacticRating= Math.round($scope.currentTactic.rating);
     $scope.user_rating.rd=Zulaa.getRd();
     $scope.user_rating.vol=Zulaa.getVol();
     $scope.pgnData[i].rating=puzzle.getRating();
@@ -369,7 +373,7 @@ function movingUser(){
     {  //suuliin nuusen nuudel zow uyd l daraagiin nuudelee nuune
       window.setTimeout(possibleMove, 500); 
       if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
-          console.log("else"+solution[currentPly+1]);
+
           alertSuccess.setAttribute('class', 'alert alert-success visible');
         // $('#alertSuccess').show();
         currentTacticIsDone=true;
@@ -526,7 +530,8 @@ board = ChessBoard('board', cfg);
 function loadGame(i) {
   
 
-
+  $scope.currentTactic=$scope.pgnData[i];
+  $scope.roundStrTacticRating= Math.round($scope.currentTactic.rating);
   $scope.currenGame_id = i;
   $scope.counter = 0; // tur zuur 0 utgaar bichew
   currentCorrectMoveCount=0; //zow nuusen nuudeluudiig tooloh
@@ -606,7 +611,7 @@ $('#btnNextProb').on('click', function() {
     if (currentGame+1 < $scope.pgnData.length) 
     	loadGame(currentGame+1);
     else {
-    	loadGame(currentGame=0);
+    	
       updateTactic();
     }
 });

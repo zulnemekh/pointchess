@@ -18,23 +18,28 @@ class TacticsController < ApplicationController
 
   def tactic
 
+    @user_rating = ApplicationHelper.current_user_rating(session)
+    rangeMax=@user_rating.rating.to_i+150
+    rangeMin=@user_rating.rating.to_i-150
+    sql='and rating BETWEEN '+rangeMin.to_s+' and '+rangeMax.to_s
+    tactic_limit=5
     if params[:type].blank?
        @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 1")
-      .order("RAND()").limit(10)
+      .order("RAND()").limit(tactic_limit)
     else
       if is_number params[:type]
         @tactics = Base::MtbTactics.where("tactic_type = #{params[:type]
           } and genre = 1")
-        .order("RAND()").limit(10)
+        .order("RAND()").limit(tactic_limit)
       elsif params[:type].to_s=='puzzle'
           @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 2")
-        .order("RAND()").limit(10)
+        .order("RAND()").limit(tactic_limit)
       elsif params[:type].to_s=='tactic'
-          @tactics = Base::MtbTactics.where("tactic_type = 11 and genre = 3")
-        .order("RAND()").limit(10) 
+          @tactics = Base::MtbTactics.where("tactic_type = 11 and genre = 3 "+sql)
+        .order("RAND()").limit(tactic_limit) 
       else 
         @tactics = Base::MtbTactics.where("tactic_type = 2 and genre = 1")
-        .order("RAND()").limit(10)
+        .order("RAND()").limit(tactic_limit)
       end  
     end
     # 
@@ -45,7 +50,6 @@ class TacticsController < ApplicationController
       end
     end
 
-    @user_rating = ApplicationHelper.current_user_rating(session)
   end
 
   def get_user_rating
@@ -54,24 +58,36 @@ class TacticsController < ApplicationController
   end
 
   def get_tactic
-    
+    sql=''
+
+    if params[:rat].to_s == '1'
+      user_rating = ApplicationHelper.current_user_rating(session)
+      rangeMax=user_rating.rating.to_i+150
+      rangeMin=user_rating.rating.to_i-150
+      sql='and rating BETWEEN '+rangeMin.to_s+' and '+rangeMax.to_s
+    else
+      rangeMax=params[:rat].to_i+150
+      rangeMin=params[:rat].to_i-150
+      sql='and rating BETWEEN '+rangeMin.to_s+' and '+rangeMax.to_s
+    end
+    tactic_limit=5
     if params[:type].blank?
        @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 1")
-      .order("RAND()").limit(10)
+      .order("RAND()").limit(tactic_limit)
     else
       if is_number params[:type]
         @tactics = Base::MtbTactics.where("tactic_type = #{params[:type]
           } and genre = 1")
-        .order("RAND()").limit(10)
+        .order("RAND()").limit(tactic_limit)
       elsif params[:type].to_s=='puzzle'
           @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 2")
-        .order("RAND()").limit(10)
+        .order("RAND()").limit(tactic_limit)
       elsif params[:type].to_s=='tactic'
-          @tactics = Base::MtbTactics.where("tactic_type = 11 and genre = 3")
-        .order("RAND()").limit(10) 
+          @tactics = Base::MtbTactics.where("tactic_type = 11 and genre = 3 "+sql)
+        .order("RAND()").limit(tactic_limit) 
       else 
         @tactics = Base::MtbTactics.where("tactic_type = 2 and genre = 1")
-        .order("RAND()").limit(10)
+        .order("RAND()").limit(tactic_limit)
       end  
     end
 
@@ -112,6 +128,12 @@ class TacticsController < ApplicationController
         end
       end
 
+ 
+    else
+      data["result"] = "guest"
+      data["result_tactic"] = "guest"
+    end #session[:id] nil
+      
       tactic = Base::MtbTactics.find(params[:puzzle_id])
       if tactic.present?
         tactic.rating = params[:puzzle_rating]
@@ -123,10 +145,7 @@ class TacticsController < ApplicationController
           data["result_tactic"] = "success"
         end
       end
-    else
-      data["result"] = "guest"
-      data["result_tactic"] = "guest"
-    end #session[:id] nil
+
       render :json => data
   end
 
@@ -154,7 +173,9 @@ class TacticsController < ApplicationController
       tactic.fen =params[:fen]
       tactic.fes =params[:fes]
       tactic.info=params[:info]
-      tactic.rd=200
+      tactic.rd =params[:rd]
+      tactic.rating = params[:elo]
+      tactic.level = params[:level]
       tactic.genre=3
       tactic.tactic_type=11
       tactic.save!

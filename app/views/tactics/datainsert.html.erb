@@ -206,29 +206,74 @@ function insertdata2(){
   info_start = tmpStr.indexOf('INFO:');
   fes_start = tmpStr.indexOf('FES:');
   fen_start = tmpStr.indexOf('FEN:');
+  elo_start = tmpStr.indexOf('ELO:');
+  rd_start = tmpStr.indexOf('RD:');
+  id_start = tmpStr.indexOf('ID:');
 
   fen_text = tmpStr.substring(fen_start, fes_start);
   fes_text = tmpStr.substring(fes_start, info_start);
-  info_text = tmpStr.substring(info_start, tmpStr.length);
+  info_text = tmpStr.substring(info_start, elo_start);
+  elo_text = tmpStr.substring(elo_start, rd_start);
+  rd_text = tmpStr.substring(rd_start, id_start);
+  id_text = tmpStr.substring(id_start, tmpStr.length);
   //cut prefix
   fen_text=fen_text.substring('FEN:'.length, fen_text.length);
   fes_text=fes_text.substring('FES:'.length, fes_text.length);
   info_text=info_text.substring('INFO:'.length, info_text.length);
+  elo_text=elo_text.substring('ELO:'.length, elo_text.length);
+  rd_text=rd_text.substring('RD:'.length, rd_text.length);
   //trim 
   fen_text=fen_text.trim();
   fes_text=fes_text.trim();
   info_text=info_text.trim();
+  elo_text=elo_text.trim();
+  rd_text=rd_text.trim();
+
+  // console.log(fen_text);
+  //   console.log(fes_text);
+  //     console.log(elo_text);
+  //     console.log(rd_text);
+  //     console.log("==========");
   console.log(i);
   objArrayParrent.push(fen_text);
 
-          i++;
-          insertdata2();
+      var x = parseInt(elo_text);
+      var level=2;
+    switch (true) {
+        case (x < 1000):
+            level=1;
+            break;
+        case (x > 1000 && x <=1300):
+            level=2;
+            break;
+        case (x > 1300 && x <=1600):
+            level=3;
+            break;
+        case (x > 1600 && x <=1900):
+            level=4;
+            break;    
+        case (x > 1900 && x <=2100):
+            level=5;
+            break;        
+        case (x > 2100 && x <=2400):
+            level=6;
+            break;     
+        case (x > 2400):
+            level=7;
+            break;               
+        default:
+            
+            break;
+    }
 
-    // $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, fen: fen_text, fes: fes_text, info: info_text}, function(data) {
-    //       i++;
-    //       console.log(data);
-    //       insertdata2();
-    // });
+          // i++;
+          // insertdata2();
+    $.post('/tactics_update_ajax', {authenticity_token: _AUTH_TOKEN, fen: fen_text, fes: fes_text, info: info_text, 
+      elo: elo_text, rd: rd_text, level: level}, function(data) {
+          i++;
+          console.log(data);
+          insertdata2();
+    });
 
 };
 console.log("last:"+uniqObjArray1.length);
