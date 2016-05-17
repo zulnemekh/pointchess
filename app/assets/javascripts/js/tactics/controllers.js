@@ -637,7 +637,7 @@ $('#arrow_btnNext').on('click', function() {
  console.log(solution[currentPly]);
   if (currentPly < solution.length - 1) {
     currentPly++;
-    moveLast=solution[currentPly].indexOf("#");
+    moveLast=solution[currentPly].indexOf("&");
      if (moveLast!=-1) {
         solution[currentPly]=solution[currentPly].substring(0,moveLast);
      }
