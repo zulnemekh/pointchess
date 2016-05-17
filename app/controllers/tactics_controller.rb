@@ -91,6 +91,14 @@ class TacticsController < ApplicationController
       end  
     end
 
+    # 
+    if params[:tactic].present?
+      if is_number params[:tactic]
+        @tactics = Base::MtbTactics.where("id = #{params[:tactic]
+          } ")
+      end
+    end
+
     render json: @tactics
   end
 
@@ -130,6 +138,14 @@ class TacticsController < ApplicationController
 
  
     else
+      user_rating = ApplicationHelper.current_user_rating(session)
+      if user_rating.present?
+        user_rating.puzzle_count = user_rating.puzzle_count + 1
+        user_rating.puzzle_success_count = user_rating.puzzle_success_count + params[:is_success]
+        if user_rating.save!
+          data["result"] = "success"
+        end
+      end
       data["result"] = "guest"
       data["result_tactic"] = "guest"
     end #session[:id] nil

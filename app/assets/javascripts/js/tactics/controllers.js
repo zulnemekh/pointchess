@@ -112,8 +112,7 @@ var board, //the chessboard
   function initVar(){
     //   var array=<%= raw @tactics.to_json%>
   // var user_rating=<%= raw @user_rating.to_json%>
-
-    dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type, rat: 1})
+    dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type, tactic: _tactic, rat: 1})
     .then(function(data) {
       $scope.pgnData = data;
       // console.log($scope.pgnData);
@@ -149,7 +148,7 @@ var greySquare = function(square) {
 function updateTactic(){
 //   var array=<%= raw @tactics.to_json%>
 // var user_rating=<%= raw @user_rating.to_json%>
-  dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type, rat: $scope.user_rating.rating})
+  dbSrvc.post("tactics/get_tactic", {authenticity_token: _nuuts_ug, type: _type, tactic: '', rat: $scope.user_rating.rating})
     .then(function(data) {
       $scope.pgnData = data;
       loadGame(currentGame=0);
@@ -160,8 +159,8 @@ function updateTactic(){
 }
 function pointCalculate(isSuccess) {
    //point calculate begin
-    maxPoint=20;
-    masterDone=20;
+    maxPoint=10;
+    masterDone=10;
     tacticDone1=1;
     tacticDone2=0.75;
     tacticDone3=0.6;
@@ -189,11 +188,11 @@ function pointCalculate(isSuccess) {
      $scope.pgnData[i].rd, $scope.pgnData[i].vol);
     var matches = [];
     //Bodlogoo bodson bol hugatsaanaas hamaaraad amjiltaas n % hasana
-    if (isSuccess==1) {
-      result1 = isSuccess-0.05;
-      result2 = isSuccess-0.1;
-      result3 = isSuccess-0.2;
-      result4 = isSuccess-0.25;
+    if (isSuccess>0) {
+      result1 = isSuccess-0.1;
+      result2 = isSuccess-0.2;
+      result3 = isSuccess-0.3;
+      result4 = isSuccess-0.4;
     }else{  
       //bodoj chadaagui uyd hugatsaa hamaarahgui bugd '0'
       result1 = 0;
@@ -264,14 +263,6 @@ function pointCalculate(isSuccess) {
               // console.log(JSON.stringify(data));      
 
     });
-
-    // console.log("Zulaa new rating: " + Zulaa.getRating());
-    // console.log("Zulaa new rating deviation: " + Zulaa.getRd());
-    // console.log("Zulaa new volatility: " + Zulaa.getVol());
-    // console.log("====================");
-    // console.log("Puzzle new rating: " + puzzle.getRating());
-    // console.log("Puzzle new rating deviation: " + puzzle.getRd());
-    // console.log("Puzzle new volatility: " + puzzle.getVol());
 
     $scope.user_rating.rating = Zulaa.getRating();
     $scope.user_rating.point = $scope.user_rating.point + user_add_point;
@@ -363,8 +354,15 @@ function movingUser(){
     lastMove = hist[hist.length - 1];
     //history-s awsan suuliin nuudel solution dotor bga suuliin 
     //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
-    var moveLast=solution[currentPly].indexOf("#");
-    if (lastMove!=solution[currentPly] && moveLast == -1) {
+    var moveLast=solution[currentPly].indexOf("&");
+    var checkMate=solution[currentPly].indexOf("#");
+    moveLastPgn=lastMove; // user-n hamgiin suuliin nuudeliig hadgalj awaad hamgiin suuliin nuudel 
+                           //deer # temdegiig cut hiij awaad shalgahad taarch bh ystoi
+                          
+     if (moveLast!=-1) {
+        moveLastPgn=solution[currentPly].substring(0,moveLast);
+     }
+    if (lastMove!=solution[currentPly] && moveLast == -1 || moveLastPgn != lastMove) {
       alertFail.setAttribute('class', 'alert alert-danger visible');
       $('#btnRetry').show();
       pointCalculate(0);
@@ -372,12 +370,12 @@ function movingUser(){
     }else
     {  //suuliin nuusen nuudel zow uyd l daraagiin nuudelee nuune
       window.setTimeout(possibleMove, 500); 
-      if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || moveLast!=-1) {
+      if (solution[currentPly+1]=='1-0' || solution[currentPly+2]=='0-1' || checkMate!=-1 || moveLast!=-1) {
 
           alertSuccess.setAttribute('class', 'alert alert-success visible');
         // $('#alertSuccess').show();
         currentTacticIsDone=true;
-        pointCalculate(1);
+        pointCalculate(1.2);
         // ratingCalculate(1);
          
       }   
@@ -635,8 +633,14 @@ $('#arrow_btnPrevious').on('click', function() {
 });
 $('#arrow_btnNext').on('click', function() {
  
+
+ console.log(solution[currentPly]);
   if (currentPly < solution.length - 1) {
     currentPly++;
+    moveLast=solution[currentPly].indexOf("#");
+     if (moveLast!=-1) {
+        solution[currentPly]=solution[currentPly].substring(0,moveLast);
+     }
     game.move(solution[currentPly]);
     // console.log(solution[currentPly]);
     board.position(game.fen());

@@ -108,10 +108,10 @@
 var ranking1 = new glicko2.Glicko2(settings1);
 
 // Create players
-var Zulaa = ranking1.makePlayer(1583, 155, 0.06);
-var puzzle = ranking1.makePlayer(1315, 155, 0.06);
+var Zulaa = ranking1.makePlayer(1200, 155, 0.06);
+var puzzle = ranking1.makePlayer(1200, 155, 0.06);
 var matches1 = [];
-matches1.push([Zulaa, puzzle, 1]);
+matches1.push([Zulaa, puzzle, 1.2]);
 ranking1.updateRatings(matches1);
 console.log("Zulaa new rating: " + Zulaa.getRating());
 console.log("Zulaa new rating deviation: " + Zulaa.getRd());
