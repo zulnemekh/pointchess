@@ -354,7 +354,7 @@ function movingUser(){
     lastMove = hist[hist.length - 1];
     //history-s awsan suuliin nuudel solution dotor bga suuliin 
     //nuudeltei adilhan uyd tsaashid urgeljile buruu nuudel bol WRONG MOVE
-    var moveLast=solution[currentPly].indexOf("&");
+    var moveLast=solution[currentPly].indexOf("@");
     var checkMate=solution[currentPly].indexOf("#");
     moveLastPgn=lastMove; // user-n hamgiin suuliin nuudeliig hadgalj awaad hamgiin suuliin nuudel 
                            //deer # temdegiig cut hiij awaad shalgahad taarch bh ystoi
@@ -637,7 +637,7 @@ $('#arrow_btnNext').on('click', function() {
  console.log(solution[currentPly]);
   if (currentPly < solution.length - 1) {
     currentPly++;
-    moveLast=solution[currentPly].indexOf("&");
+    moveLast=solution[currentPly].indexOf("@");
      if (moveLast!=-1) {
         solution[currentPly]=solution[currentPly].substring(0,moveLast);
      }
