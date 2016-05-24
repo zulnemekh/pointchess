@@ -34,6 +34,9 @@ class TacticsController < ApplicationController
       elsif params[:type].to_s=='puzzle'
           @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 2")
         .order("RAND()").limit(tactic_limit)
+      elsif params[:type].to_s=='checkmate'
+          @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 4")
+        .order("RAND()").limit(tactic_limit)    
       elsif params[:type].to_s=='tactic'
           @tactics = Base::MtbTactics.where("tactic_type = 11 and genre = 3 "+sql)
         .order("RAND()").limit(tactic_limit) 
@@ -82,6 +85,9 @@ class TacticsController < ApplicationController
       elsif params[:type].to_s=='puzzle'
           @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 2")
         .order("RAND()").limit(tactic_limit)
+      elsif params[:type].to_s=='checkmate'
+          @tactics = Base::MtbTactics.where("tactic_type > 0 and genre = 4")
+        .order("RAND()").limit(tactic_limit)  
       elsif params[:type].to_s=='tactic'
           @tactics = Base::MtbTactics.where("tactic_type = 11 and genre = 3 "+sql)
         .order("RAND()").limit(tactic_limit) 
@@ -131,6 +137,7 @@ class TacticsController < ApplicationController
         user_rating.point = user_rating.point + params[:user_point]
         user_rating.puzzle_count = user_rating.puzzle_count + 1
         user_rating.puzzle_success_count = user_rating.puzzle_success_count + params[:is_success]
+        user_rating.modify_time = Time.now
         if user_rating.save!
           data["result"] = "success"
         end
@@ -142,6 +149,7 @@ class TacticsController < ApplicationController
       if user_rating.present?
         user_rating.puzzle_count = user_rating.puzzle_count + 1
         user_rating.puzzle_success_count = user_rating.puzzle_success_count + params[:is_success]
+        user_rating.modify_time = Time.now
         if user_rating.save!
           data["result"] = "success"
         end
@@ -192,8 +200,8 @@ class TacticsController < ApplicationController
       tactic.rd =params[:rd]
       tactic.rating = params[:elo]
       tactic.level = params[:level]
-      tactic.genre=3
-      tactic.tactic_type=11
+      tactic.genre=4
+      tactic.tactic_type=16
       tactic.save!
       render :text => tactic.fen.to_s+" | "+tactic.fen.to_s+" | "+tactic.fen.to_s
     else

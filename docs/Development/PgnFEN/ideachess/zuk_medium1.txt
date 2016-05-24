@@ -1,0 +1,240 @@
+
+FEN: 4b1k1/1p3pp1/p3n2p/q3B3/4Q3/bP2P3/P1r1N1PP/1B1N3K w - - 0 1
+FES: 1. Bxc2 Qe1+ 2. Ng1#
+INFO: - - 1990.??.?? Pula | 1990.??.?? | Basagic, Vesna - Botsari, Anna | 1-0
+
+
+FEN: r3k2r/pp1q1p2/2n2b2/4p1pp/3pP1P1/P2P3Q/1P1NNPKP/2R2R2 b - - 0 1
+FES: 1... hxg4 Qg3 2. Rh3#
+INFO: kq - 2011.02.05 Kemer-Antalya TUR | 2011.02.10 | Ulas,S - Topac,Cihan | 0-1
+
+
+FEN: 8/5rpk/6p1/3Q4/2N1p1qP/1P2B3/1K6/8 w - - 0 1
+FES: 1. Qxf7#
+INFO: - - 2012.03.06 Tashkent UZB | 2012.03.11 | Mchedlishvili,M - Kvon,A | 1-0
+
+
+FEN: 2k1r3/1pp5/p3ppp1/1nP1N1P1/1P4P1/1K3P2/P7/3R4 w - - 0 1
+FES: 1. gxf6 Rd8 2. Rxd8+#
+INFO: - - 2011.11.18 Caldas Novas BRA | 2011.11.18 | Tantsiura,M - Prado,A | 1-0
+
+
+FEN: 3rnnk1/4q1b1/1p4Qp/pBp1p3/P7/1PP1N3/5P1P/2BR2K1 w - - 0 1
+FES: 1. Rxd8 Nxg6 2. Rxe8+ Qxe8 3. Bxe8#
+INFO: - - 1993.??.?? Florida VALLE | 1993.??.?? | Biagi, Eduardo - Opychaneyj, German | 1-0
+
+
+FEN: r1b2rk1/pp1n1ppp/2p1pn2/1q6/1bNP4/6P1/PPQBPPBP/RN3RK1 w - - 0 1
+FES: 1. a4#
+INFO: - - 1993.??.?? Lansing ch-MI amateur | 1993.??.?? | Collins, C. - Vangilder, W. | 1-0
+
+
+FEN: 8/2R2rkp/2pbp3/p1p1P1p1/8/P1P1P3/6KP/8 w - - 0 1
+FES: 1. exd6 Kf6 2. d7 Rxd7 3. Rxd7#
+INFO: - - 1946.??.?? Groningen | 1946.08.?? | Botvinnik, M. - O'Kelly de Galway, A. | 1-0
+
+
+FEN: 3r2k1/1b3p1p/1pq2bp1/1N2p3/1BP1P3/P3Q1P1/5P1P/3R2K1 b - - 0 1
+FES: 1... Rxd1+ Be1 2. Qxc4 Nd6 3. Rxd6 f3 4. Be7#
+INFO: - - Moscow Moscow | 1975.??.?? | Kholmov, Ratmir D - Beliavsky, Alexander G | 1-0
+
+
+FEN: 5r1k/1p3p2/p2p1p2/4pP2/4q3/5R2/1P2B2P/6QK w - - 0 1
+FES: 1. Qg2#
+INFO: - - 1963.??.?? Buenos Aires ch-ARG | 1963.??.?? | Herrera, F. - Garcia, H. | 1-0
+
+
+FEN: r1bqk2r/ppp2pb1/3pn1p1/8/2n1P3/2N1B1PP/PPQ1N1B1/2KR3R w - - 0 1
+FES: 1. Qa4+ Bd7 2. Qxc4#
+INFO: kq - 1990.??.?? Warsaw Legion op | 1990.??.?? | Berkovich, M. - Malishauskas, Vidman | 1-0
+
+
+FEN: 2r2rk1/1b2b1pp/p1n5/1p1N1p2/8/P3PN1P/1P4P1/1BR2RK1 w - - 0 1
+FES: 1. Rxc6#
+INFO: - - 1992.??.?? cr. | 1992.??.?? | Krulisch, C. - Nowak, I. | 1-0
+
+
+FEN: 1K6/7r/P2k4/1R6/8/8/8/8 w - - 0 1
+FES: 1. a7 Rh8+ 2. Kb7 Rh7+ 3. Ka6#
+INFO: - - team Fuerstenfeld AUT | 2012.04.28 | Knoll,H - Schriebl,A | 1-0
+
+
+FEN: r5k1/pp1bbN2/8/3p3p/3Pp3/4B3/P5PP/5RK1 w - - 0 1
+FES: 1. Nh6+ Kg7 2. Rf7+ Kg6 3. Rxe7#
+INFO: - - 2011.07.02 Piestany SVK | 2011.07.07 | Koszela,S - Chalukhin,Anatoly | 0-1
+
+
+FEN: r1b2rk1/p1qn3p/4p1p1/1pppPpP1/3n1B2/2NP2P1/PPP3BP/R2QR1K1 w - b - - 0 1
+FES: 1... Nxd5#
+INFO: 
+
+
+FEN: 4q1k1/p2p2pp/brpb4/2N2p2/1P1P1P2/2Q2BP1/P4RKP/8 w - - 0 1
+FES: 1. Nxa6#
+INFO: - - 2012.07.21 Zwettl AUT | 2012.07.21 | Denk,A - Fruehauf,N | 1-0
+
+
+FEN: r3kb1r/pppb1ppp/2nq4/3n4/3N4/2P5/PP2BPPP/RNBQ1RK1 w - - 0 1
+FES: 1. Nb5#
+INFO: kq - 1995.??.?? corr IECG Cat-C | 1995.??.?? | Klausner, Sherman - Sylvia, Aaron | 1-0
+
+
+FEN: 4r3/p4R2/4n3/4b1P1/1P4RP/3kB3/5K2/3b4 w - - 0 1
+FES: 1. Rd7+ Kc2 2. Rd2+ Kb3 3. Rxd1#
+INFO: - - 1994.??.?? Usti | 1994.??.?? | Jacek, Martin - Chochol, Libor | 1-0
+
+
+FEN: 4k3/7p/3Pqb1Q/pp3N2/4p3/6P1/6KP/8 w - - 0 1
+FES: 1. Ng7+ Kf7 2. Nxe6 Kxe6 3. d7#
+INFO: - - 2012.07.23 Biel SUI | 2012.08.01 | Cebalo,M - Burnier,D | 1-0
+
+
+FEN: 4rrk1/3n2p1/p6p/1p2qP2/2p5/P4R2/1PB1QPPP/4R1K1 w - - 0 1
+FES: 1. Re3 Qxe3 2. fxe3#
+INFO: - - 2011.07.17 Balaguer ESP | 2011.07.25 | Flotats Ardiaca,Sergi - Cruz Farre,Miquel | 1-0
+
+
+FEN: r1bq1rk1/ppp1bppp/4p3/8/3PB3/3Q1N2/PPP2PPP/R3K2R b - - 0 1
+FES: 1... f5#
+INFO: KQ - 2010.09.20 Batumi GEO | 2010.09.20 | Soukup,Vaclav - Madoyan,Vazgen | 1-0
+
+
+FEN: r3rnk1/ppq2ppp/2p5/3b1P2/4N2b/1P6/PBP1Q1BP/R4R1K w - - 0 1
+FES: 1. Qg4 f6 2. Qxh4 Bxe4 3. Bxe4#
+INFO: - - 1986.??.?? Chicago | 1986.??.?? | Ardaman, Miles - Colias, Billy | 1-0
+
+
+FEN: 2rq1rk1/p3ppbp/1p1p2p1/2nn4/3BP3/2N5/PP1NQPPP/R2R2K1 w - - 0 1
+FES: 1. Bxg7#
+INFO: - - 1992.??.?? Oviedo rapid | 1992.12.?? | Conquest, S. - Guerra, S. | 1-0
+
+
+FEN: 2r2r1k/2pq2p1/bpNP1p1p/p7/8/PQ2P2P/1PP2RP1/3R2K1 w - - 0 1
+FES: 1. Ne7#
+INFO: - - 2011.08.06 Lakitelek HUN | 2011.08.09 | Kovacs,Milan - Bodnar,Ge | 1-0
+
+
+FEN: 1R6/1P3k2/6pK/3r4/8/8/8/8 w - - 0 1
+FES: 1. Rf8+ Kxf8 2. b8=Q+#
+INFO: - - CCM4 Ordix Open Mainz GER | 2004.08.07 | Bologan,V - Naiditsch,A | 1-0
+
+
+FEN: 4b1R1/4k1p1/3p4/Nrp1p1Pn/1pN1P3/3PKP2/8/8 w - - 0 1
+FES: 1. Rxe8+ Kxe8 2. Nxd6+ Ke7 3. Nxb5#
+INFO: - - 1992.??.?? Manila olm | 1992.06.?? | Al Modiahki, M. - Dutreeuw, M. | 0-1
+
+
+FEN: 6k1/4q2p/3pb1pb/Q1p1p3/2PnP3/2N3PP/1r1B1RBK/8 w - - 0 1
+FES: 1. Qa8+ Kg7 2. Bxh6+ Kxh6 3. Rxb2#
+INFO: - - 1992.??.?? Manila olm | 1992.06.?? | Khechen, N. - Cheah, E. | 0-1
+
+
+FEN: 8/2n1nkp1/2rbpp2/p1Np2p1/Pp1P2P1/1P2PP1P/1B2BK2/2R5 w - - 0 1
+FES: 1. Nb7 Rb6 2. Nxd6+ Rxd6 3. Rxc7 Rc6 4. Rxc6#
+INFO: - - 2012.07.23 North Shields ENG | 2012.07.27 | Chapman,T - Walker,Nicholas P | 1-0
+
+
+FEN: 5r2/1b2k2p/p2b1pp1/1p1p4/3P4/BP2N1P1/P4P1P/2R2K2 w - - 0 1
+FES: 1. Rc7+ Ke6 2. Bxd6#
+INFO: - - 2011.04.16 Barcelona ESP | 2011.04.21 | Roche Peris,E - Lago Tort,Adrian | 1/2-1/2
+
+
+FEN: 4r1k1/pppq1p2/5P2/3p3p/3P2p1/2P1r3/PP3Q1P/R5RK w - - 0 1
+FES: 1. Qf4 Qf5 2. Qxf5 R8e6 3. Qxh5#
+INFO: - - 1994.??.?? Nashua,NH | 1994.??.?? | Aulson, Bill - Spector | 1/2-1/2
+
+
+FEN: 1r3r2/1P2pp1k/pq1p1b1p/5P2/4B1Qp/1P6/P5P1/1K1R3R w - - 0 1
+FES: 1. Rxh4#
+INFO: - - 2012.08.04 Vlissingen NED | 2012.08.05 | Zwirs,Nico - Bollen,G | 1-0
+
+
+FEN: 2b2rk1/2pq2bn/n1pp4/3Pp2p/1P2Ppp1/2N2P2/3NBBPP/1Q3RK1 w - - 0 1
+FES: 1. dxc6#
+INFO: - - 1996.??.?? Paris Disney U14g rapid | 1996.??.?? | Krush, Irina - Bardachewa, A. | 1-0
+
+
+FEN: r5rk/ppp2pbp/2n1p3/3qPp2/3P1B2/2P2N2/PP2Q1PP/R4RK1 w - - 0 1
+FES: 1. Ng5#
+INFO: - - 1996.??.?? corr IECG Class 2 | 1996.??.?? | Anasetti, Alberto - Solin, Dan | 1-0
+
+
+FEN: 5R1r/1k5p/5p2/1pn3pb/1N1r4/2K5/1P3PPP/5B1R w - - 0 1
+FES: 1. Rxh8#
+INFO: - - 1993.??.?? Cattolica | 1993.??.?? | Kaganovskaya, Polina - Pancras, Adrie | 1-0
+
+
+FEN: 6k1/1p3ppp/p1q1bb2/3p4/N3n3/1P1QPP2/PB2B1PP/6K1 w - - 0 1
+FES: 1. fxe4#
+INFO: - - 2012.05.12 Hradec Kralove CZE | 2012.05.15 | Rosko,L - Pulpan,J | 1-0
+
+
+FEN: r1b1n1rk/pq2pp1p/1pp2npb/4P3/2P5/2N2N1P/PP1QBPP1/2RR2K1 w - - 0 1
+FES: 1. Qxh6#
+INFO: - - 1993.??.?? N Zamky-Cadca | 1993.??.?? | Juhasz, L. - Vojvodik, V. | 1-0
+
+
+FEN: 6k1/p4pp1/7p/P2p1Q2/1P1q4/8/5PPP/3rR1K1 w - - 0 1
+FES: 1. Qc8+ Kh7 2. Qc2+ Rd3 3. Rd1 Qxb4 4. Qxd3+ Kg8 5. Qxd5#
+INFO: - - 2013.01.19 Catalonia ESP | 2013.02.09 | Dominguez Pons,E - Fernandez Aguado,E | 1-0
+
+
+FEN: 2k4r/1ppr1p2/p2b1q2/4RQpp/3P1p2/2P4P/PP3PP1/R4NK1 b - - 0 1
+FES: 1... Bxe5 Qxe5 2. Qxe5 dxe5 3. Rhd8#
+INFO: - - 2011.08.13 Berlin GER | 2011.08.20 | Schueler,W - Lagunov,El | 0-1
+
+
+FEN: 4r3/5k2/3q2pQ/3N1pP1/2P5/1P6/4r2P/5R1K w - - 0 1
+FES: 1. Rxf5+ gxf5 2. Qxd6#
+INFO: - - 2010.09.20 Batumi GEO | 2010.09.24 | Givon,A - Orujov,S | 1-0
+
+
+FEN: rnb1kbnr/pp2pppp/8/3q4/1P6/8/2PP1PPP/RNBQKBNR b - - 0 1
+FES: 1... Qe5+ Be2 2. Qxa1#
+INFO: KQkq - 2010.12.04 Budapest HUN | 2010.12.09 | Horvath,Il - Kiss,Pe2 | 1-0
+
+
+FEN: 2r3k1/7p/6p1/8/R2b1P2/p5BN/1r1R2PP/5K2 b - - 0 1
+FES: 1... Rxd2#
+INFO: - - 1990.??.?? Moscow | 1990.??.?? | Kiselev, S. - Yuferov, S. | 0-1
+
+
+FEN: r4rk1/pp3p1p/3nq3/2pNn2p/5R2/1P1PP2Q/P1P3PP/5RK1 w - - 0 1
+FES: 1. Nf6+ Qxf6 2. Rxf6#
+INFO: - - 1967.??.?? Vejle | 1967.??.?? | Blom, Kaj - Kolbak, Jens | 1-0
+
+
+FEN: 3r2k1/pp3ppp/8/2b1Bb2/Q6P/6P1/P3PPBK/2r5 w - - 0 1
+FES: 1. Qf4 Rcd1 2. Qxf5#
+INFO: - - 1989.??.?? RLN/S | 1989.??.?? | Behn, C. - Steinhardt, L. | 1-0
+
+
+FEN: 2krbbnr/ppp4p/5pp1/3PpP2/1qP3P1/4PN1P/P3Q3/RNB2RK1 w - - 0 1
+FES: 1. Ba3 Qa4 2. Bxf8#
+INFO: - - 1994.??.?? Fowlerville Jun mini | 1994.??.?? | Burris, D. - Palmerton, W. | 1-0
+
+
+FEN: r3nrk1/p1q1Q1bp/1pp2pp1/4p1B1/4P3/2N4P/PPP2PP1/R2R2K1 w - - 0 1
+FES: 1. Rd7 Qxd7 2. Qxd7#
+INFO: - - 1995.??.?? Australia jr op | 1995.??.?? | Coventry, J. - Wilkins, M. | 1-0
+
+
+FEN: 5k2/1P3p2/3qb2p/6p1/4P2P/6P1/4Q2K/8 w - - 0 1
+FES: 1. Qb2#
+INFO: - - 2012.05.18 Tirupati IND | 2012.05.26 | Swayams,M - Dhar,R | 1-0
+
+
+FEN: r1b1kb1r/pp2nppp/1q2p3/3pP3/3n4/1P1B1N2/P4PPP/RNBQK2R w - - 0 1
+FES: 1. Nxd4#
+INFO: KQkq - 1974.??.?? Pennsylvania | 1974.??.?? | Bigler, J. - Beidel, G. | 1-0
+
+
+FEN: 2r2bk1/7p/2b3p1/q2p1p2/P7/5B1P/2Q2BP1/3R3K w - - 0 1
+FES: 1. Bxd5+ Bxd5 2. Qxc8#
+INFO: - - 1983.??.?? Ann Arbor ch-MI op | 1983.??.?? | Beydoun, N. - Fuller, W. | 1-0
+
+
+FEN: 4r1k1/p4b1p/2p3p1/8/1PqP2B1/2P1Q3/5P1P/4R1K1 w - - 0 1
+FES: 1. Qxe8+ Bxe8 2. Be6+ Bf7 3. Bxc4#
+INFO: - - 1993.??.?? Pardubice | 1993.??.?? | Hracek, Z. - Donchev, D. | 1-0
+

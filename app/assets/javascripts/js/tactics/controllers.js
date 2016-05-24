@@ -118,6 +118,10 @@ var board, //the chessboard
       // console.log($scope.pgnData);
         dbSrvc.get("tactics/get_user_rating").then(function(data) {
           $scope.user_rating =data;
+          if ($scope.user_rating.user_id == 14) {
+            $scope.user_rating.puzzle_success_count = 0;
+          }
+          
           $scope.roundStrRating= Math.round($scope.user_rating.rating);
             loadGame(currentGame);
      
@@ -273,7 +277,11 @@ function pointCalculate(isSuccess) {
     $scope.pgnData[i].rating=puzzle.getRating();
     $scope.pgnData[i].rd=puzzle.getRd();
     $scope.pgnData[i].vol=puzzle.getVol();
-
+    
+    if ($scope.user_rating.id != 14) {
+      $scope.user_rating.puzzle_success_count++;
+    }
+    
 }
 
 
@@ -487,6 +495,9 @@ function solutionParsing() {
 }
 function setTacticStatus(type){
     switch (true) {
+        case (type == 1):
+            $scope.tacticType='Mate in 1';
+            break;
         case (type == 2):
             $scope.tacticType='Mate in 2';
             break;
