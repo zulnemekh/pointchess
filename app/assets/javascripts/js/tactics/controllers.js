@@ -483,7 +483,7 @@ function pgnMoveStringToArray(currentGameSolution) {
     }
     mymoveArray[i] = s;
   }
-  // console.log(solution);
+   // console.log(solution);
 }
 function solutionParsing() {
     for (var i = 0; i < solution.length; i++) {
@@ -593,7 +593,30 @@ function loadGame(i) {
 
 //click selected square
 
+$('#btnHelp').on('click', function() {
+  
+  if (currentPly < solution.length - 1) {
+    // neg nuudel nuulgeh
+    currentPly++;
+    moveLast=solution[currentPly].indexOf("@");
+     if (moveLast!=-1) {
+        solution[currentPly]=solution[currentPly].substring(0,moveLast);
+     }
+    game.move(solution[currentPly]);
+    board.position(game.fen());
 
+    // neg nuudel butsaah
+      setTimeout(function(){
+      if (currentPly >= 0) {
+        game.undo();
+        currentPly--;
+        board.position(game.fen());
+      }
+    }, 500);
+ 
+  } //if end
+  
+});
 $('#btnPlayAI').on('click', function() {
   $("#play_with_ai").submit();
 });
@@ -609,7 +632,12 @@ $('#btnRetry').on('click', function() {
     alertFail.setAttribute('class', 'hidden');
   $('#btnRetry').hide();
   $('#buttonSolution').hide();
-  loadGame(currentGame);
+   if (currentPly >= 0) {
+    game.undo();
+    currentPly--;
+    board.position(game.fen());
+  }
+  // loadGame(currentGame);
 });
 $('#btnNextProb').on('click', function() {
     $('#buttonSolution').hide();
