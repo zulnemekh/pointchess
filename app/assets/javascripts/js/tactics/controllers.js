@@ -600,9 +600,11 @@ $('#btnHelp').on('click', function() {
     currentPly++;
     moveLast=solution[currentPly].indexOf("@");
      if (moveLast!=-1) {
-        solution[currentPly]=solution[currentPly].substring(0,moveLast);
+        game.move(solution[currentPly].substring(0,moveLast));
+     }else{
+        game.move(solution[currentPly]);  
      }
-    game.move(solution[currentPly]);
+    
     board.position(game.fen());
 
     // neg nuudel butsaah
